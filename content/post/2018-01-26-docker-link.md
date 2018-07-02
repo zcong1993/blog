@@ -17,6 +17,7 @@ web:
   links:
    - db
 ```
+
 `web`容器就能直接访问 `db` 容器中的端口了, `db` 容器都不用暴露相应的端口, 显得更加安全.
 
 ## 原理
@@ -36,6 +37,7 @@ docker 每运行一个容器就会分配一个 IP 地址, 可以使用
 $ docker run -it --link mongo:mongo ubuntu bash
 $ cat /etc/hosts
 ```
+
 ![hosts](/docker2.png)
 
-可以看到 `hosts` 中有一条 `172.17.0.3	mongo ff0e5c7e86d3`, 所以在此容器中, 使用 `mongo` 就可以访问到 `172.17.0.3`, 所以容器中 `mongo:27017`就可以连接到 mongo 容器中的 mongodb 服务.
+可以看到 `hosts` 中有一条 `172.17.0.3 mongo ff0e5c7e86d3`, 所以在此容器中, 使用 `mongo` 就可以访问到 `172.17.0.3`, 所以容器中 `mongo:27017`就可以连接到 mongo 容器中的 mongodb 服务.

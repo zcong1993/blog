@@ -9,13 +9,13 @@ categories:
 draft: false
 ---
 
-> 如果不熟悉dataloader和graphql，请看之前的两篇文章。
+> 如果不熟悉 dataloader 和 graphql，请看之前的两篇文章。
 
 dataloader 配合 graphql 使用会使得 schema 定义变得非常简洁清晰。
 
 <!--more-->
 
-## 定义dataloader服务
+## 定义 dataloader 服务
 
 首先需要定义一个 koa-graphql 服务，和之前文章的有些许不同， 之前是使用一个 object 当做数据 store 存在内存， 这次我们使用 sqlite 数据库。
 
@@ -29,25 +29,31 @@ const router = new Router()
 app.use(bodyParser())
 
 router.get('/graphql', graphiqlKoa({ endpointURL: '/graphql' }))
-router.post('/graphql', graphqlKoa({
-  schema,
-  // 上下文，所有的resolver均可拿到
-  context: {
-    user,
-    post
-  }
-}))
+router.post(
+  '/graphql',
+  graphqlKoa({
+    schema,
+    // 上下文，所有的resolver均可拿到
+    context: {
+      user,
+      post
+    }
+  })
+)
 
 app.use(router.routes())
 app.listen(3000, () => console.log(`listening on port 3000`))
 ```
+
 将 dataloader 实例传入上下文，可供 resolver 使用，如果不使用 dataloader 也可以传入 db model。
 
-## 定义schema
+## 定义 schema
+
 ```js
 // schema.js
 const { makeExecutableSchema } = require('graphql-tools')
-const rootSchema = [`
+const rootSchema = [
+  `
 type User {
   id: Int
   username: String
@@ -62,7 +68,8 @@ type Query {
   user(id: Int!): User
   post(id: Int!): Post
 }
-`]
+`
+]
 const rootResolvers = {
   Query: {
     // 参数1为前一个对象，此处为Query， 参数2为查询输入参数， 参数3为自定义上下文对象
@@ -82,11 +89,13 @@ module.exports = makeExecutableSchema({
   resolvers: rootResolvers
 })
 ```
+
 可以看到使用 dataloader 可以将数据查询逻辑放在 dataloader 中，使得 schema 非常简洁清晰。
 
 ## 使用
 
 启动服务，打开[http://localhost:3000/graphql](http://localhost:3000/graphql)， 输入：
+
 ```
 {
   user(id: 15) {
@@ -104,7 +113,9 @@ module.exports = makeExecutableSchema({
   }
 }
 ```
+
 可得到结果
+
 ```json
 {
   "data": {

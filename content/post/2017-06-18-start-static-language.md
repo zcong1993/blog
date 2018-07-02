@@ -8,7 +8,7 @@ categories:
 draft: false
 ---
 
-> 静态语言和动态语言差别远远没有有无type那么简单
+> 静态语言和动态语言差别远远没有有无 type 那么简单
 
 接触编程一年多一点，最早的时候只会`PHP`，接着学了`JavaScript`写了些`nodejs`，看了看前端的框架，了解了了解前端的构建工具（深坑）。最终成功将最熟悉的语言编程了 JavaScript，虽然现在的工作还是 PHP，但是下一个工作将是 nodejs。
 
@@ -44,8 +44,8 @@ nodejs 就算是 cli 工具也没什么特殊的，只是装在了全局的 node
 
 这个问题解决了，就可以写写简单的 cli 工具了。
 
-## cli工具
+## cli 工具
 
-- [gcommitter](https://github.com/zcong1993/gcommitter) 将 git 基本的几条命令封装成一条
-- [gist](https://github.com/zcong1993/gist) github gist 服务的 cli
-- [git-release](https://github.com/zcong1993/git-release) 根据 git commit 历史信息生成 release 信息的 cli
+* [gcommitter](https://github.com/zcong1993/gcommitter) 将 git 基本的几条命令封装成一条
+* [gist](https://github.com/zcong1993/gist) github gist 服务的 cli
+* [git-release](https://github.com/zcong1993/git-release) 根据 git commit 历史信息生成 release 信息的 cli

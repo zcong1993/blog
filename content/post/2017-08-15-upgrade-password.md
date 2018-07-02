@@ -8,7 +8,7 @@ categories:
 draft: false
 ---
 
-> 由于工作的原因，没想到又开始使用PHP了。。。稍微说一下密码加密吧。
+> 由于工作的原因，没想到又开始使用 PHP 了。。。稍微说一下密码加密吧。
 
 只要有登录系统，就会有密码加密。之前的加密惯用 md5，随着计算机性能的提高 md5 早已不是安全的加密算法了，比如某些网站就 md5 到源字符串查询的功能，简单的单词都可以查出来。当然，也有自造盐值 md5 加密，但是复杂度决定了它还是不够安全，为何不用 bcrypt 呢？虽然慢，但是网站的注册量并发量不会很大的，所以完全没压力。
 
@@ -16,7 +16,7 @@ draft: false
 
 <!--more-->
 
-#### 学习WordPress
+#### 学习 WordPress
 
 早先使用 WordPress 时，发现它既支持 md5 又支持 bcrypt，而且在数据库插入的 md5 密码，可以登录，但在登录之后会变成 bcrypt 加密，很好奇，而且之前工作迁移用户到 WordPress 时也修改了 WordPress 登录验证的代码。
 
@@ -24,10 +24,9 @@ draft: false
 
 此处的逻辑更改为自己的加密逻辑就可以给用户一个更安全的体验了。
 
-#### laravel框架该怎么做？
+#### laravel 框架该怎么做？
 
 当然也是这种思路。开始我的想法是改写 laravel 的 Auth，最后感觉没有必要，这里只是 Hash 的工作，加一个自己的 Hash 就行了。
-
 
 ```php
 // app/Libiraries/CustomHasher.php
@@ -86,6 +85,7 @@ class HashServiceProvider extends Provider
     }
 }
 ```
+
 ```php
 // config/app.php
 <?php
@@ -96,4 +96,5 @@ class HashServiceProvider extends Provider
 ]
 ...
 ```
+
 现在，我们自己的 Hash 会替代原来的工作，用户的密码会在第一次登录时被更新。

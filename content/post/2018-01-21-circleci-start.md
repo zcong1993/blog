@@ -21,6 +21,7 @@ draft: false
 > 举个简单的例子, node 项目每次提交代码自动执行测试
 
 circleci 需要你在项目中包含一个 `circle.yml` 配置文件, 上面的需求可以这样定义:
+
 ```yaml
 # 使用 2.0 版本
 version: 2
@@ -55,6 +56,7 @@ jobs:
 写过 node 项目的人基本都知道 `node_modules` 的威力, 尽管 circleci 的服务器在国外而且网络很好, 但是还是没必要在可以使用缓存节约时间的情况下浪费那些时间.
 
 所以我们需要为上面配置的`steps`增加缓存配置:
+
 ```yaml
 # ...
 steps:
@@ -77,10 +79,11 @@ steps:
     name: run test
     command: yarn test
 ```
+
 于是我们增加了两个步骤, 安装依赖之前取出缓存, 安装依赖之后更新缓存. 这里主要注意的是 `key`, 这个值控制着改不改使用缓存, `{{ checksum "package.json" }}` 这部分的意思是该文件的哈希值, 也就是文件改变就丢弃缓存, 不变就一直使用, 所以我们使用`yarn`或者`npm5`最好使用`lockfile`作为标识, 也就是`yarn.lock`或者`package.lock`, 保证镜像源之类的更新不会受到缓存的影响.
 
 这样我们的 `circleci` 执行任务时间就省了不少.
 
-*注意:* 缓存的 `save` 和 `restore` 其实是上传下载同步到 circleci 自己的服务器上, 走的是`https`, 所以应该有一部分人为了节约`docker`镜像拉取时间, 而使用相应镜像的 `alpine` 版本, 确实 `alpine` 版本的镜像会小很多, 但是此版本默认都不会安装 `ca-certificates` 这将导致发送 `https` 请求收到影响, 会使得缓存拉取和上传都不正常, 所以如果要做这方面的优化最好自己构建安装了`ca-certificates` 的 docker 镜像.
+_注意:_ 缓存的 `save` 和 `restore` 其实是上传下载同步到 circleci 自己的服务器上, 走的是`https`, 所以应该有一部分人为了节约`docker`镜像拉取时间, 而使用相应镜像的 `alpine` 版本, 确实 `alpine` 版本的镜像会小很多, 但是此版本默认都不会安装 `ca-certificates` 这将导致发送 `https` 请求收到影响, 会使得缓存拉取和上传都不正常, 所以如果要做这方面的优化最好自己构建安装了`ca-certificates` 的 docker 镜像.
 
 例子请看 [https://github.com/zcong1993/circleci-samples/tree/master/demos/start](https://github.com/zcong1993/circleci-samples/tree/master/demos/start)

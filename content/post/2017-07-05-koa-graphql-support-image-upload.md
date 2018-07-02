@@ -18,6 +18,7 @@ graphql 一般都是以`application/json`和`application/graphql`的形式请求
 设计一个中间件处理`multipart/form-data`请求，将文件保存在临时文件夹，然后将文件信息整合到请求上下文，供 graphql 解析。
 
 首先，定义一个简单的`schema`：
+
 ```js
 type Query {
   hello: String
@@ -38,6 +39,7 @@ type Mutation {
   uploadImg(name: String!, img: Upload!): Img
 }
 ```
+
 `img`就是我们需要的传入的文件信息，所以我们中间件需要将文件保存然后得到这些信息，传入请求的`variables`中。
 
 ## 中间件
@@ -76,7 +78,9 @@ function processRequest(request, { uploadDir } = {}) {
   })
 }
 ```
+
 中间件
+
 ```js
 function uploadKoa(options) {
   return async function(ctx, next) {
@@ -91,6 +95,7 @@ function uploadKoa(options) {
 ```
 
 ## 使用中间件
+
 ```js
 const uploadKoa = require('./form-data')
 
@@ -127,14 +132,15 @@ const root = {
     const file = `${path}.${ext}`
     fs.renameSync(path, file)
     // 为文件增加后缀，然后返回处理后链接
-    return { url:  'http://localhost:3000/' + file.replace(/^static\//, '') }
+    return { url: 'http://localhost:3000/' + file.replace(/^static\//, '') }
   }
 }
 
 app.use(bodyParser())
 
 router.get('/graphql', graphiqlKoa({ endpointURL: '/graphql' }))
-router.post('/graphql',
+router.post(
+  '/graphql',
   uploadKoa({
     uploadDir: './static/imgs'
   }),

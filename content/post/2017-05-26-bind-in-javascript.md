@@ -12,7 +12,9 @@ draft: false
 <!--more-->
 
 ## 偏函数
+
 简单的例子：
+
 ```js
 function add(a, b) {
   return a + b
@@ -22,19 +24,22 @@ const addByOne = add.bind(null, 1)
 
 console.log(addByOne(2)) // 3
 ```
+
 其实，相当于封装一个参数有默认值得函数。
+
 ```js
 function addOne(a = 1, b) {
   return a + b
 }
 
-console.log(addOne(undefined, 2))// 3
+console.log(addOne(undefined, 2)) // 3
 ```
+
 可以看出上面的写法显然更好一点。
 
 特别是用在回调方法中， 例如：
 
-```js
+````js
 // express
 // app.use((req, res) => {...})
 function findById(DB, req, res) {
@@ -62,8 +67,10 @@ const addOne = base(1)
 console.log(addOne(2, 3)) // 6
 const addOneAddTwo = base(1, 2)
 console.log(addOneAddTwo(3)) // 6
-```
+````
+
 再复杂一点
+
 ```js
 function mapTo(keys, keyFn, rows) {
   if (!rows) return mapTo.bind(null, keys, keyFn)
@@ -98,6 +105,7 @@ console.log(arr1 === arr)
 //  { id: 2, name: 'hello' },
 //  { id: 3, name: 'world' } ]
 ```
+
 ---
 
 总之，使用 bind，会很容易写出别人一眼看不明白的代码（雾）。

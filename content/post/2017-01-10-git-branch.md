@@ -22,6 +22,7 @@ draft: false
 git 默认分支为`master`分支，使用`git init`命令创建会默认自动帮我们建立此分支。
 
 现在我们可以使用`git branch <name>`创建分支：
+
 ```sh
 $ git branch dev
 # 查看分支列表
@@ -30,7 +31,9 @@ dev
 * master
 # 显示我们有2个分支，并且当前在master分支
 ```
+
 此时我么可以使用`git checkout dev`切换到`dev`分支：
+
 ```sh
 $ git checkout dev
 Switched to branch 'dev'
@@ -44,6 +47,7 @@ Switched to branch 'dev'
 不同分支切换，你会发现工作区的文件也会改变成分支自己的状态，此时如果出现意外状态文件无法被修改，则切换分支会失败。
 
 #### 例子：在分支中提交一次版本
+
 ```sh
 # 切换到dev分支
 $ git checkout dev
@@ -55,6 +59,7 @@ $ git commit -m "dev commit"
 $ git checkout master
 # 此时我们会发现dev.txt消失了
 ```
+
 查看版本提交记录，发现没有这一次提交的记录，此时我们可以用`git log --all`来查看所有分支的记录。
 
 如果我们切换回 dev 分支，就会发现`dev.txt`又回来了。这样我们就可以在并行工作了。
@@ -64,12 +69,14 @@ $ git checkout master
 当然，我们在分支解决好问题之后需要把分支做的修改合并到主分支，使用的命令是`git merge <branch>`。
 
 合并分支一般只需要下面两步，复杂情况有第三步，也就是下节要讲的解决代码冲突问题。
+
 ```sh
 # 切换到主分支（接受分支代码的分支）
 $ git checkout master
 # 合并分支
 $ git merge dev
 ```
+
 这样我们分支的文件更改就合并到了主分支了。
 
 当然，真是合并时很可能会有冲突，下节会详细说明。
@@ -79,6 +86,7 @@ $ git merge dev
 许多分支的功能可能仅仅是修复某个 bug，它在修复 bug 之后便没有了价值，如果分支比较多时代码也会比较混乱，所以我们需要删除一些已经完成使命的无用分支。
 
 需要使用命令`git branch -d <branch>`。
+
 ```sh
 $ git branch --list
 dev

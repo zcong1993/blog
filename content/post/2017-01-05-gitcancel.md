@@ -34,6 +34,7 @@ draft: false
 假如我们修改了某文件，已经 add 到了暂存区，想要撤销怎么办呢？
 
 其实聪明的你会在发现如果在`git add <file>`之后输入`git status`就会看到以下提示:
+
 ```sh
 On branch master
 Changes to be committed:
@@ -41,6 +42,7 @@ Changes to be committed:
 
 modified: test.txt
 ```
+
 这里已经有了撤销操作了就是`git reset HEAD <file>`，这个命令和版本回退很相似，`HEAD`其实就表示距离我们最近的提交版本。
 
 这是我们就会退到添加之前了，也就是`git add`命令运行之前。此时，如果想要继续撤销就变成了添加前撤销的情况了。

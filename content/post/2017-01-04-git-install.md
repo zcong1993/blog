@@ -20,9 +20,11 @@ git 主要使用时主要依赖于命令行工具（虽然也有图形界面软�
 <!--more-->
 
 ### Linux
-> 以Ubuntu为例
+
+> 以 Ubuntu 为例
 
 打开 terminal，输入以下命令：
+
 ```sh
 # update apt-get
 $ sudo apt-get update
@@ -30,6 +32,7 @@ $ sudo apt-get upgrade
 # install git
 $ sudo apt-get install git
 ```
+
 安装完成可使用`$ git -v`查看版本。
 
 ## OSX
@@ -37,6 +40,7 @@ $ sudo apt-get install git
 首先，安装强大的`homebrew`[官网](http://brew.sh/index_zh-cn.html),根据页面提示操作。
 
 接下来就非常简单了。
+
 ```sh
 $ brew install git
 ```
@@ -54,10 +58,12 @@ $ brew install git
 ---
 
 最后，我们需要配置两个必要的身份标识：
+
 ```sh
 $ git config --global user.name "your username"
 $ git config --global user.email "your email"
 ```
+
 更多配置见下一篇。
 
 本系列文章使用`Gitbook`编写，并发布在 [http://gitstart.zcong.win](http://gitstart.zcong.win)

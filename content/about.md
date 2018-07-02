@@ -3,7 +3,6 @@ title: "About"
 date: 2018-07-02
 menu: "main"
 weight: 50
-
 ---
 
 西安交大学渣一枚, 半路出家 PHP。

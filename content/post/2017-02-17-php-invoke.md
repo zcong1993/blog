@@ -7,7 +7,7 @@ categories:
 draft: false
 ---
 
-> php 类魔术方法`__invoke`, 当class定义此方法时，使用函数方式调用类的实例化时，此方法就会被调用。
+> php 类魔术方法`__invoke`, 当 class 定义此方法时，使用函数方式调用类的实例化时，此方法就会被调用。
 
 <!--more-->
 
@@ -25,6 +25,7 @@ $test = new Test;
 $test();// invoke is called
 var_dump(is_callable($test));// true
 ```
+
 当我们以执行函数的方式执行`$test`时，可以看到`__invoke`方法被执行了，用`is_callable()`函数检测`$test`，返回是`true`，也证明了这一点。
 
 ### 带参数
@@ -43,7 +44,7 @@ $test();// invoke is called,msg is: msg shown
 
 它就是一个正常函数。
 
-## invoke和construct
+## invoke 和 construct
 
 ```php
 class Test
