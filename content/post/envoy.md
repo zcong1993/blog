@@ -27,6 +27,53 @@ $ curl -X POST $BASE/echo -H 'Content-Type: application/json' -d '{"name": "zcon
 
 配置如下:
 ```yaml
+static_resources:
+  listeners:
+  - address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 80
+    filter_chains:
+    - filters:
+      - name: envoy.http_connection_manager
+        config:
+          codec_type: auto
+          stat_prefix: ingress_http
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: backend
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                    cluster: myservice
+          http_filters:
+          - name: envoy.router
+            config: {}
+  clusters:
+  - name: myservice
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    hosts:
+    - socket_address:
+        address: service1
+        port_value: 8080
+    - socket_address:
+        address: service2
+        port_value: 8080
+admin:
+  access_log_path: "/dev/null"
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 8001
+```
+
+```yaml
 <!-- simple-proxy.yaml -->
 version: '2'
 
