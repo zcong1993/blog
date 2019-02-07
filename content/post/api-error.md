@@ -5,7 +5,7 @@ categories:
   - 规范
 tags:
   - API
-draft: true
+draft: false
 ---
 
 现在前后端沟通的方式大多应该是基于 `http` 的序列化使用 `json` 的请求, 规范往往会使用 `Restful`. 然而程序大多数时间都是在处理异常, 但是错误信息组织方式却千奇百怪, 这里简单说一下我自己的理解.
