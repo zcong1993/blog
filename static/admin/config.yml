@@ -6,12 +6,11 @@ media_folder: "static" # Media files will be stored in the repo under static/img
 public_folder: "/" # The src attribute for uploaded media will begin with /img/uploads
 
 collections:
-
   - name: "blog" # Used in routes, e.g., /admin/collections/blog
     label: "Blog"
     folder: "content/post"
     create: true
-    slug: {{slug}}
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields: # The fields for each document, usually in front matter
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
