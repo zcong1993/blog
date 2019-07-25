@@ -15,7 +15,7 @@ draft: false
 ```yaml
 web:
   links:
-   - db
+    - db
 ```
 
 `web`容器就能直接访问 `db` 容器中的端口了, `db` 容器都不用暴露相应的端口, 显得更加安全.

@@ -46,6 +46,6 @@ nodejs 就算是 cli 工具也没什么特殊的，只是装在了全局的 node
 
 ## cli 工具
 
-* [gcommitter](https://github.com/zcong1993/gcommitter) 将 git 基本的几条命令封装成一条
-* [gist](https://github.com/zcong1993/gist) github gist 服务的 cli
-* [git-release](https://github.com/zcong1993/git-release) 根据 git commit 历史信息生成 release 信息的 cli
+- [gcommitter](https://github.com/zcong1993/gcommitter) 将 git 基本的几条命令封装成一条
+- [gist](https://github.com/zcong1993/gist) github gist 服务的 cli
+- [git-release](https://github.com/zcong1993/git-release) 根据 git commit 历史信息生成 release 信息的 cli

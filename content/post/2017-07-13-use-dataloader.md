@@ -23,9 +23,9 @@ const knex = require('knex')
 const db = knex({
   client: 'sqlite3',
   connection: {
-    filename: './mydb.sqlite'
+    filename: './mydb.sqlite',
   },
-  useNullAsDefault: true
+  useNullAsDefault: true,
 })
 
 module.exports = db
@@ -52,8 +52,7 @@ async function up() {
   await db.schema.createTable('posts', t => {
     t.increments('id').primary()
     t.string('title', 100)
-    t
-      .integer('author_id')
+    t.integer('author_id')
       .unsigned()
       .references('id')
       .inTable('users')
@@ -67,7 +66,7 @@ async function mock() {
   const users = Array(20)
     .fill()
     .map(() => ({
-      username: faker.name.findName()
+      username: faker.name.findName(),
     }))
   await Promise.all(
     users.map(user =>
@@ -85,7 +84,7 @@ async function mock() {
         .sentence(faker.random.number({ min: 4, max: 7 }))
         .slice(0, -1)
         .substr(0, 80),
-      author_id: faker.random.number({ min: 1, max: users.length })
+      author_id: faker.random.number({ min: 1, max: users.length }),
     }))
   await Promise.all(
     posts.map(post =>
@@ -110,8 +109,7 @@ run()
 
 ```js
 const db = require('./db')
-db
-  .table('users')
+db.table('users')
   .where('id', 1)
   .select('*')
   .then(data => console.log(data))

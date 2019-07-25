@@ -1,8 +1,8 @@
 ---
-title: "DB Url"
+title: 'DB Url'
 date: 2018-08-28T18:38:32+08:00
 draft: false
-categories: ["感想", "扯淡", "经验"]
+categories: ['感想', '扯淡', '经验']
 ---
 
 服务基本都会使用各式各样的数据库, 一般会使用配置文件配置数据库的地址, 用户名, 密码, 使用数据库名等信息. 有的人喜欢配置一条 url, 而有的人喜欢把它拆开, 两者有什么区别呢?
@@ -106,7 +106,7 @@ const transfer = uri => {
     host: u.hostname || 'localhost',
     port: Number(u.port) || 6379,
     db: db ? Number(db) : 0,
-    password: auth ? auth[1] : ''
+    password: auth ? auth[1] : '',
   }
 }
 

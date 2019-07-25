@@ -1,7 +1,7 @@
 ---
-title: "Books"
+title: 'Books'
 date: 2019-07-16
-menu: "main"
+menu: 'main'
 weight: 50
 ---
 

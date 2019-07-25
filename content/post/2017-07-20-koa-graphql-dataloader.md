@@ -36,8 +36,8 @@ router.post(
     // 上下文，所有的resolver均可拿到
     context: {
       user,
-      post
-    }
+      post,
+    },
   })
 )
 
@@ -68,25 +68,25 @@ type Query {
   user(id: Int!): User
   post(id: Int!): Post
 }
-`
+`,
 ]
 const rootResolvers = {
   Query: {
     // 参数1为前一个对象，此处为Query， 参数2为查询输入参数， 参数3为自定义上下文对象
     user: (_, { id }, { user }) => user.load(id),
     // resolver 需要返回一个包含schema定义字段的object或者返回此object的promise函数
-    post: (_, { id }, { post }) => post.load(id)
+    post: (_, { id }, { post }) => post.load(id),
   },
   Post: {
     // 此处定义Post的author字段的resolver，参数1为Post，根据post的author_id得到author信息，
     // 由于这条查询会在查询post的author字段时自动触发，所以没有用户查询输入参数
-    author: ({ author_id }, _, { user }) => user.load(author_id)
-  }
+    author: ({ author_id }, _, { user }) => user.load(author_id),
+  },
 }
 
 module.exports = makeExecutableSchema({
   typeDefs: rootSchema,
-  resolvers: rootResolvers
+  resolvers: rootResolvers,
 })
 ```
 

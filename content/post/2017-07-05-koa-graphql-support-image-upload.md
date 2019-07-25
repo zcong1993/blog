@@ -54,7 +54,7 @@ function processRequest(request, { uploadDir } = {}) {
 
   const form = formidable.IncomingForm({
     // 文件保存目录，默认为系统临时目录
-    uploadDir
+    uploadDir,
   })
 
   // 解析multipart/form-data请求
@@ -133,7 +133,7 @@ const root = {
     fs.renameSync(path, file)
     // 为文件增加后缀，然后返回处理后链接
     return { url: 'http://localhost:3000/' + file.replace(/^static\//, '') }
-  }
+  },
 }
 
 app.use(bodyParser())
@@ -142,11 +142,11 @@ router.get('/graphql', graphiqlKoa({ endpointURL: '/graphql' }))
 router.post(
   '/graphql',
   uploadKoa({
-    uploadDir: './static/imgs'
+    uploadDir: './static/imgs',
   }),
   graphqlKoa({
     schema: schema,
-    rootValue: root
+    rootValue: root,
   })
 )
 ```
@@ -154,21 +154,29 @@ router.post(
 ## 请求
 
 ```html
-  <form id="form">
-    <input type="file" name="img" accept="image/gif, image/jpeg, image/png" required>
-  </form>
-  <button type="button" id="btn">submit</button>
+<form id="form">
+  <input
+    type="file"
+    name="img"
+    accept="image/gif, image/jpeg, image/png"
+    required
+  />
+</form>
+<button type="button" id="btn">submit</button>
 <script>
   const btn = document.querySelector('#btn')
   const form = document.querySelector('#form')
 
   btn.addEventListener('click', () => {
     const formData = new FormData(form)
-    formData.append('operations', '{"query": "mutation($name: String!, $img: Upload!){uploadImg(name: $name, img: $img){url}}", "variables": {"name": "zc1993"}}')
+    formData.append(
+      'operations',
+      '{"query": "mutation($name: String!, $img: Upload!){uploadImg(name: $name, img: $img){url}}", "variables": {"name": "zc1993"}}'
+    )
 
     fetch('/graphql', {
       method: 'post',
-      body: formData
+      body: formData,
     })
       .then(r => r.json())
       .then(d => console.log(d.data))

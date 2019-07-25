@@ -1,7 +1,7 @@
 ---
-title: "About"
+title: 'About'
 date: 2018-07-02
-menu: "main"
+menu: 'main'
 weight: 50
 ---
 

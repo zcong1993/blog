@@ -1,8 +1,8 @@
 ---
-title: "Influx + Grafana 监控应用"
+title: 'Influx + Grafana 监控应用'
 date: 2018-07-02T18:05:22+08:00
 draft: false
-categories: ["Influx DB", "Grafana", "监控"]
+categories: ['Influx DB', 'Grafana', '监控']
 ---
 
 监控是服务必不可少的一项功能. 当然早已不满足于单纯 health 的监控. 最近尝试了 `Influx DB + Grafana` 做监控和显示服务.
@@ -56,13 +56,13 @@ const options = {
   database: 'app_metrics',
   tags: {
     app: 'my-app',
-    environment: 'test'
+    environment: 'test',
   },
   callback(error) {
     if (error) {
       console.log('Sending data to InfluxDB failed: ', error)
     }
-  }
+  },
 }
 
 const reporter = new InfluxMetrics.Reporter(options)

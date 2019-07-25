@@ -82,16 +82,16 @@ function mapTo(keys, keyFn, rows) {
 const rows = [
   {
     id: 2,
-    name: 'hello'
+    name: 'hello',
   },
   {
     id: 3,
-    name: 'world'
+    name: 'world',
   },
   {
     id: 1,
-    name: '!'
-  }
+    name: '!',
+  },
 ]
 
 const arr = mapTo([2, 3, 4], x => x.id + 1, rows)

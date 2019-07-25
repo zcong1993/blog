@@ -1,8 +1,8 @@
 ---
-title: "Envoy"
+title: 'Envoy'
 date: 2018-09-06T15:09:48+08:00
 draft: false
-categories: ["尝试", "服务", "负载均衡"]
+categories: ['尝试', '服务', '负载均衡']
 ---
 
 负载均衡应用非常广泛, 实现方式也有多种, 有硬件层面上的, 也有软件层面的. 软件层面上的基本大家都很熟悉 `nginx`. 与 docker 配合得很好得有 `traefik`, k8s 好多组件选择了 `envoy`, 今天尝试了一下.
@@ -26,47 +26,48 @@ $ curl -X POST $BASE/echo -H 'Content-Type: application/json' -d '{"name": "zcon
 ### 1. 简单负载均衡
 
 配置如下:
+
 ```yaml
 static_resources:
   listeners:
-  - address:
-      socket_address:
-        address: 0.0.0.0
-        port_value: 80
-    filter_chains:
-    - filters:
-      - name: envoy.http_connection_manager
-        config:
-          codec_type: auto
-          stat_prefix: ingress_http
-          route_config:
-            name: local_route
-            virtual_hosts:
-            - name: backend
-              domains:
-              - "*"
-              routes:
-              - match:
-                  prefix: "/"
-                route:
-                    cluster: myservice
-          http_filters:
-          - name: envoy.router
-            config: {}
+    - address:
+        socket_address:
+          address: 0.0.0.0
+          port_value: 80
+      filter_chains:
+        - filters:
+            - name: envoy.http_connection_manager
+              config:
+                codec_type: auto
+                stat_prefix: ingress_http
+                route_config:
+                  name: local_route
+                  virtual_hosts:
+                    - name: backend
+                      domains:
+                        - '*'
+                      routes:
+                        - match:
+                            prefix: '/'
+                          route:
+                            cluster: myservice
+                http_filters:
+                  - name: envoy.router
+                    config: {}
   clusters:
-  - name: myservice
-    connect_timeout: 0.25s
-    type: strict_dns
-    lb_policy: round_robin
-    hosts:
-    - socket_address:
-        address: service1
-        port_value: 8080
-    - socket_address:
-        address: service2
-        port_value: 8080
+    - name: myservice
+      connect_timeout: 0.25s
+      type: strict_dns
+      lb_policy: round_robin
+      hosts:
+        - socket_address:
+            address: service1
+            port_value: 8080
+        - socket_address:
+            address: service2
+            port_value: 8080
 admin:
-  access_log_path: "/dev/null"
+  access_log_path: '/dev/null'
   address:
     socket_address:
       address: 0.0.0.0
@@ -130,19 +131,20 @@ $ curl -X POST $BASE/echo -H 'Content-Type: application/json' -d '{"name": "zcon
 ```
 
 上面的服务是简单的 `http1.1 -> http1.1` 的代理, 但是我们的路由 `/ws` 是 websocket 协议, 所以我们应该更改配置:
+
 ```yaml
-...
+
+---
 routes:
-- match:
-    prefix: "/ws"
-  route:
-    cluster: myservice
-    use_websocket: true # 对于路由 '/ws' 启用 ws
-- match:
-    prefix: "/"
-  route:
-    cluster: myservice
-...
+  - match:
+      prefix: '/ws'
+    route:
+      cluster: myservice
+      use_websocket: true # 对于路由 '/ws' 启用 ws
+  - match:
+      prefix: '/'
+    route:
+      cluster: myservice
 ```
 
 ### 2. 服务网格

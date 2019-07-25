@@ -38,7 +38,7 @@ type Query {
 const root = {
   hello() {
     return 'hello'
-  }
+  },
 }
 
 app.use(bodyParser())
@@ -48,7 +48,7 @@ router.post(
   '/graphql',
   graphqlKoa({
     schema: schema,
-    rootValue: root
+    rootValue: root,
   })
 )
 
@@ -71,8 +71,8 @@ fetch('http://localhost:3000/graphql', {
   method: 'post',
   body: JSON.stringify({ query: '{ hello }' }),
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 })
   .then(r => r.json())
   .then(d => console.log(d.data))
@@ -124,7 +124,7 @@ router.post(
   parseGraphql,
   graphqlKoa({
     schema: schema,
-    rootValue: root
+    rootValue: root,
   })
 )
 ```
@@ -136,8 +136,8 @@ fetch('http://localhost:3000/graphql', {
   method: 'post',
   body: '{hello}',
   headers: {
-    'Content-Type': 'application/graphql'
-  }
+    'Content-Type': 'application/graphql',
+  },
 })
   .then(r => r.json())
   .then(d => console.log(d.data))
@@ -146,8 +146,8 @@ fetch('http://localhost:3000/graphql', {
 
 ## 为什么
 
-* 首先，简洁，能够和`graphiql`统一
-* 其次，减少了了复杂请求引号嵌套问题
+- 首先，简洁，能够和`graphiql`统一
+- 其次，减少了了复杂请求引号嵌套问题
 
 最终完整代码：
 
@@ -170,7 +170,7 @@ type Query {
 const root = {
   hello() {
     return 'hello'
-  }
+  },
 }
 
 app.use(
@@ -178,8 +178,8 @@ app.use(
     enableTypes: ['json', 'text'],
     extendTypes: {
       text: ['application/graphql'],
-      json: ['application/json']
-    }
+      json: ['application/json'],
+    },
   })
 )
 
@@ -197,7 +197,7 @@ router.post(
   parseGraphql,
   graphqlKoa({
     schema: schema,
-    rootValue: root
+    rootValue: root,
   })
 )
 
