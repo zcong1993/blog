@@ -99,7 +99,7 @@ const simpleCache = async fn => {
   const promise = new Promise(resolve => {
     // 将 resolve 放入队列
     queue.push(resolve)
-    // 第一次调用真正调用结果
+    // 第一次，真正调用函数
     if (queue.length === 1) {
       fn().then(res => {
         // 执行完成后，调用队列中的 resolve
