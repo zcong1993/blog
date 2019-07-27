@@ -133,7 +133,6 @@ $ curl -X POST $BASE/echo -H 'Content-Type: application/json' -d '{"name": "zcon
 上面的服务是简单的 `http1.1 -> http1.1` 的代理, 但是我们的路由 `/ws` 是 websocket 协议, 所以我们应该更改配置:
 
 ```yaml
-
 ---
 routes:
   - match:
