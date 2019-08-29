@@ -32,7 +32,20 @@ HUGO_ENABLEGITINFO = "true"
 [[headers]]
   for = "/*.png"
   [headers.values]
-    #  Multi-key header rules are expressed with multi-line strings
+    cache-control = '''
+    max-age=2592000,
+    public'''
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    cache-control = '''
+    max-age=2592000,
+    public'''
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
     cache-control = '''
     max-age=2592000,
     public'''
