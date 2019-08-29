@@ -28,3 +28,11 @@ HUGO_VERSION = "0.54.0"
 
 [context.next.environment]
 HUGO_ENABLEGITINFO = "true"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    #  Multi-key header rules are expressed with multi-line strings
+    cache-control = '''
+    max-age=2592000,
+    public'''
