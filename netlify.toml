@@ -33,13 +33,13 @@ HUGO_ENABLEGITINFO = "true"
   from = "https://blog.cong.moe/*"
   to = "https://blog.zcong.moe/:splat"
   status = 301
-  # force = true
+  force = true
 
 [[redirects]]
   from = "https://zcong-blog.netlify.com/*"
   to = "https://blog.zcong.moe/:splat"
   status = 301
-  # force = true
+  force = true
 
 [[headers]]
   for = "/*.png"
