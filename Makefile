@@ -4,7 +4,7 @@ format:
 
 resize:
 	./resize.sh
-.PHONY resize
+.PHONY: resize
 
 default: format
 .PHONY: default
