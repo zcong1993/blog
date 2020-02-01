@@ -94,7 +94,7 @@ require('net')
 
 1. 为了实现异步追踪，NodeJS 为每个函数（无论同步或异步）提供了一个 `async scope`，我们可以使用 `async_hooks.executionAsyncId()` 获取当前作用域的 async scope id 也就是 `asyncId`, 使用 `async_hooks.triggerAsyncId()` 可以获取调用者的 asyncId
 
-2. 异步资源创建时，会触发 init 事件，该事件会穿给我们当前 scope 的 `asyncId` 和 `triggerAsyncId` （还有资源类型 type 和资源 resource），别的事件均只会收到 `asyncId` 这一个参数
+2. 异步资源创建时，会触发 init 事件，该事件会传给我们当前 scope 的 `asyncId` 和 `triggerAsyncId` （还有资源类型 type 和资源 resource），别的事件均只会收到 `asyncId` 这一个参数
 
 3. 我们可以看出上面的调用关系为: 7 -> 6 -> 5 -> 1
 
