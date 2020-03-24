@@ -30,14 +30,8 @@ HUGO_VERSION = "0.54.0"
 HUGO_ENABLEGITINFO = "true"
 
 [[redirects]]
-  from = "https://blog.cong.moe/*"
-  to = "https://blog.zcong.moe/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "https://zcong-blog.netlify.com/*"
-  to = "https://blog.zcong.moe/:splat"
+  to = "https://blog.cong.moe/:splat"
   status = 301
   force = true
 
