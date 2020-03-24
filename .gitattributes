@@ -1,0 +1,6 @@
+themes/* export-ignore
+tools/* export-ignore
+static/* export-ignore
+images/* export-ignore
+resources/* export-ignore
+helper.sh export-ignore
