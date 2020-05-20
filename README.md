@@ -2,6 +2,8 @@
 
 > my personal blog by hugo and netlify
 
+Blog
+
 ## License
 
 MIT &copy; zcong1993
