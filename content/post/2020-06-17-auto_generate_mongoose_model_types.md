@@ -40,7 +40,9 @@ const dtoGen = new ModelGenerator({
   filename: `${__dirname}/modelGen.ts`,
   useInterface: true, // 使用 interface 或者 class 类型
   arrayStyle: 'squareBrackets', // 数组生成格式 squareBrackets(T[]) or generic(Array<T>)
-  stringEnumUseUnionType: true, // 是否优化 enum, if set true, String type with enum field ['test1', 'test2'] will be type `'test1' | 'test2'`
+  // 是否优化 enum, if set true, String type with enum field
+  // ['test1', 'test2'] will be type `'test1' | 'test2'`
+  stringEnumUseUnionType: true,
 })
 dtoGen.generateModelBySchema(testSchema, 'Test')
 dtoGen.getFile().saveSync() // save generated code as file
