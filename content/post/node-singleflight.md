@@ -27,7 +27,7 @@ const call = async () => {
   return 'resp'
 }
 
-const simpleCache = async fn => {
+const simpleCache = async (fn) => {
   // if has cache, return cache
   if (cache) {
     return cache
@@ -64,11 +64,11 @@ Array(5)
 ```js
 let lock = null
 
-const simpleCache = async fn => {
+const simpleCache = async (fn) => {
   // 第一次调用，抢到锁的真正执行并设置缓存
   if (!cache && !lock) {
     lock = true
-    return fn().then(res => {
+    return fn().then((res) => {
       cache = res
       return res
     })
@@ -92,18 +92,18 @@ const simpleCache = async fn => {
 ```js
 // 使用队列
 const queue = []
-const simpleCache = async fn => {
+const simpleCache = async (fn) => {
   if (cache) {
     return cache
   }
-  const promise = new Promise(resolve => {
+  const promise = new Promise((resolve) => {
     // 将 resolve 放入队列
     queue.push(resolve)
     // 第一次，真正调用函数
     if (queue.length === 1) {
-      fn().then(res => {
+      fn().then((res) => {
         // 执行完成后，调用队列中的 resolve
-        queue.map(resolve => resolve(res))
+        queue.map((resolve) => resolve(res))
       })
     }
   })

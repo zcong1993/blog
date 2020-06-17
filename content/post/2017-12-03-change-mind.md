@@ -26,10 +26,10 @@ const url = 'ws://demos.kaazing.com/echo'
 const connect = () => {
   const ws = new WebSocket(url)
   ws.on('open', () => console.log('open'))
-  ws.on('message', msg => {
+  ws.on('message', (msg) => {
     console.log(`rec msg: ${msg}`)
   })
-  ws.on('error', err => console.log(err))
+  ws.on('error', (err) => console.log(err))
   // ticker
   const interval = setInterval(() => {
     ws.send('hello')

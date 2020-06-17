@@ -38,7 +38,7 @@ server.listen(3000)
 
 ```js
 // ...
-const helloMw = handler => async (req, res) => {
+const helloMw = (handler) => async (req, res) => {
   console.log('helloMw start')
   await handler(req, res)
   console.log('helloMw end')
@@ -58,7 +58,7 @@ const server = http.createServer(helloMw(handler))
 ```js
 // ...
 // 再高阶一层，相当于工厂函数，能够根据不同的 options 控制中间件行为
-const mw2 = options => handler => async (req, res) => {
+const mw2 = (options) => (handler) => async (req, res) => {
   console.log('mw2 start', options)
   await handler(req, res)
   console.log('mw2 end', options)
@@ -82,7 +82,7 @@ const server = http.createServer(mw2('test options')(helloMw(handler)))
 // ...
 const wrapper = (handler, mws = []) => {
   let h = handler
-  mws.forEach(mw => {
+  mws.forEach((mw) => {
     // 嵌套调用
     h = mw(h)
   })
@@ -123,7 +123,7 @@ class MwManager {
 
   wrapper(handler) {
     let h = handler
-    this.mws.reverse().forEach(mw => {
+    this.mws.reverse().forEach((mw) => {
       h = mw(h)
     })
     return h

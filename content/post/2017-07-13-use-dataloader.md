@@ -44,12 +44,12 @@ async function down() {
 }
 
 async function up() {
-  await db.schema.createTable('users', t => {
+  await db.schema.createTable('users', (t) => {
     t.increments('id').primary()
     t.string('username', 100)
     t.unique('username')
   })
-  await db.schema.createTable('posts', t => {
+  await db.schema.createTable('posts', (t) => {
     t.increments('id').primary()
     t.string('title', 100)
     t.integer('author_id')
@@ -69,12 +69,7 @@ async function mock() {
       username: faker.name.findName(),
     }))
   await Promise.all(
-    users.map(user =>
-      db
-        .table('users')
-        .insert(user)
-        .returning('id')
-    )
+    users.map((user) => db.table('users').insert(user).returning('id'))
   )
 
   const posts = Array(100)
@@ -87,12 +82,7 @@ async function mock() {
       author_id: faker.random.number({ min: 1, max: users.length }),
     }))
   await Promise.all(
-    posts.map(post =>
-      db
-        .table('posts')
-        .insert(post)
-        .returning('id')
-    )
+    posts.map((post) => db.table('posts').insert(post).returning('id'))
   )
 }
 
@@ -112,7 +102,7 @@ const db = require('./db')
 db.table('users')
   .where('id', 1)
   .select('*')
-  .then(data => console.log(data))
+  .then((data) => console.log(data))
 ```
 
 ## 定义 dataloader
@@ -122,11 +112,8 @@ dataloader 相当于 model，只不过功能非常单一。
 比如，定义一个`select user by id`：
 
 ```js
-const user = new Dataloader(ids =>
-  db
-    .table('users')
-    .whereIn('id', ids)
-    .select('*')
+const user = new Dataloader((ids) =>
+  db.table('users').whereIn('id', ids).select('*')
 )
 // 相当于语句 `select * from users where in (...ids)`
 ```
@@ -146,8 +133,8 @@ function assignType(obj, type) {
 
 function mapTo(keys, keyFn, type, rows) {
   if (!rows) return mapTo.bind(null, keys, keyFn, type)
-  const group = new Map(keys.map(key => [key, null]))
-  rows.forEach(row => group.set(keyFn(row), assignType(row, type)))
+  const group = new Map(keys.map((key) => [key, null]))
+  rows.forEach((row) => group.set(keyFn(row), assignType(row, type)))
   return Array.from(group.values())
 }
 ```
@@ -155,19 +142,19 @@ function mapTo(keys, keyFn, type, rows) {
 改造 dataloader
 
 ```js
-exports.user = new Dataloader(ids =>
+exports.user = new Dataloader((ids) =>
   db
     .table('users')
     .whereIn('id', ids)
     .select('*')
-    .then(mapTo(ids, x => x.id, 'User'))
+    .then(mapTo(ids, (x) => x.id, 'User'))
 )
-exports.post = new Dataloader(ids =>
+exports.post = new Dataloader((ids) =>
   db
     .table('posts')
     .whereIn('id', ids)
     .select('*')
-    .then(mapTo(ids, x => x.id, 'Post'))
+    .then(mapTo(ids, (x) => x.id, 'Post'))
 )
 ```
 
@@ -180,7 +167,9 @@ async function getPost(id) {
   p.author = await user.load(p.author_id)
   return p
 }
-Promise.all([1, 2, 3, 4].map(id => getPost(id))).then(data => console.log(data))
+Promise.all([1, 2, 3, 4].map((id) => getPost(id))).then((data) =>
+  console.log(data)
+)
 // 得到文章信息和作者信息
 ```
 

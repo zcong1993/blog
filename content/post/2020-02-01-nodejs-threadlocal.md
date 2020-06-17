@@ -228,7 +228,7 @@ setContextData(data: T) {
 接着我们可以验证下：
 
 ```ts
-const delay = (n: number) => new Promise(resolve => setTimeout(resolve, n))
+const delay = (n: number) => new Promise((resolve) => setTimeout(resolve, n))
 
 const ctx = new Context<any>()
 

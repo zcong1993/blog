@@ -96,7 +96,7 @@ Output: { host: 'localhost',
 ```js
 const url = require('url')
 
-const transfer = uri => {
+const transfer = (uri) => {
   const u = url.parse(uri)
 
   const auth = u.auth && u.auth.split(':')

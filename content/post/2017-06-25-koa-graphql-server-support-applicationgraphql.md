@@ -74,8 +74,8 @@ fetch('http://localhost:3000/graphql', {
     'Content-Type': 'application/json',
   },
 })
-  .then(r => r.json())
-  .then(d => console.log(d.data))
+  .then((r) => r.json())
+  .then((d) => console.log(d.data))
 // {hello: "hello"}
 ```
 
@@ -139,8 +139,8 @@ fetch('http://localhost:3000/graphql', {
     'Content-Type': 'application/graphql',
   },
 })
-  .then(r => r.json())
-  .then(d => console.log(d.data))
+  .then((r) => r.json())
+  .then((d) => console.log(d.data))
 // {hello: "hello"}
 ```
 

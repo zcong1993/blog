@@ -83,7 +83,7 @@ function processRequest(request, { uploadDir } = {}) {
 
 ```js
 function uploadKoa(options) {
-  return async function(ctx, next) {
+  return async function (ctx, next) {
     // 仅处理header为'multipart/form-data'的请求
     if (ctx.request.is('multipart/form-data')) {
       // 将结果传入上下文
@@ -178,9 +178,9 @@ router.post(
       method: 'post',
       body: formData,
     })
-      .then(r => r.json())
-      .then(d => console.log(d.data))
-      .catch(err => console.log(err))
+      .then((r) => r.json())
+      .then((d) => console.log(d.data))
+      .catch((err) => console.log(err))
   })
   // { uploadImg: { url: "http://localhost:3000/imgs/upload_f24cb04bd50d596aa4c0b3c67ae8c374.jpg" } }
 </script>

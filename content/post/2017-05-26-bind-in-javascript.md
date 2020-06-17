@@ -74,8 +74,8 @@ console.log(addOneAddTwo(3)) // 6
 ```js
 function mapTo(keys, keyFn, rows) {
   if (!rows) return mapTo.bind(null, keys, keyFn)
-  const group = new Map(keys.map(key => [key, null]))
-  rows.forEach(row => group.set(keyFn(row), row))
+  const group = new Map(keys.map((key) => [key, null]))
+  rows.forEach((row) => group.set(keyFn(row), row))
   return Array.from(group.values())
 }
 
@@ -94,12 +94,12 @@ const rows = [
   },
 ]
 
-const arr = mapTo([2, 3, 4], x => x.id + 1, rows)
+const arr = mapTo([2, 3, 4], (x) => x.id + 1, rows)
 console.log(arr)
 //[ { id: 1, name: '!' },
 //  { id: 2, name: 'hello' },
 //  { id: 3, name: 'world' } ]
-const arr1 = mapTo([2, 3, 4], x => x.id + 1)(rows)
+const arr1 = mapTo([2, 3, 4], (x) => x.id + 1)(rows)
 console.log(arr1 === arr)
 //[ { id: 1, name: '!' },
 //  { id: 2, name: 'hello' },
