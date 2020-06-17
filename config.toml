@@ -36,6 +36,12 @@ paginate = 5
   creator = "CongZhangDev"
   site = "/"
 
+[params.utteranc]
+enable = true
+repo = "zcong1993/blog-hugo"
+issueTerm = "pathname"
+theme = "github-dark"
+
 [languages]
   [languages.en]
     languageName = "English"
