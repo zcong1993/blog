@@ -6,5 +6,10 @@ resize:
 	./resize.sh
 .PHONY: resize
 
+sync:
+	git pull --recurse-submodules
+	git submodule update --remote
+.PHONY: sync
+
 default: format
 .PHONY: default
