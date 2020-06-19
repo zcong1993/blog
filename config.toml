@@ -2,6 +2,7 @@ baseurl = "https://blog.cong.moe/"
 languageCode = "en-us"
 theme = "terminal"
 paginate = 5
+googleAnalytics = "UA-92092104-2"      # UA-XXXXXXXX-X
 
 [params]
   # dir name of your blog content (default is `content/posts`)
@@ -66,3 +67,10 @@ theme = "github-dark"
         identifier = "posts"
         name = "Posts"
         url = "/post"
+
+# See https://gohugo.io/about/hugo-and-gdpr/
+[privacy]
+  [privacy.googleAnalytics]
+    anonymizeIP = true      # 12.214.31.144 -> 12.214.31.0
+  [privacy.youtube]
+    privacyEnhanced = true
