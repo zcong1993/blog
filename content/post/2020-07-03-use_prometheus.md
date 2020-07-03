@@ -215,21 +215,29 @@ scrape_configs:
 
 ## 常用查询语句
 
-* 最近 2 分钟平均 QPS, 根据路由分组
+- 最近 2 分钟平均 QPS, 根据路由分组
 
-`sum(rate(http_requests_total{job=~"koa-app", path=~".*"}[2m])) by (path)`
+```sql
+sum(rate(http_requests_total{job=~"koa-app", path=~".*"}[2m])) by (path)
+```
 
-* 最近 1 分钟平均响应时间, 根据路由分组
+- 最近 1 分钟平均响应时间, 根据路由分组
 
-`avg(increase(http_request_duration_ms_sum{job=~"koa-app", path=~".*"}[1m])/ increase(http_request_duration_ms_count{job=~"koa-app", path=~".*"}[1m]) >0) by (path)`
+```sql
+avg(increase(http_request_duration_ms_sum{job=~"koa-app", path=~".*"}[1m]) / increase(http_request_duration_ms_count{job=~"koa-app", path=~".*"}[1m]) >0) by (path)
+```
 
-* 最近 1 分钟 90 分位响应时间, 根据路由分组
+- 最近 1 分钟 90 分位响应时间, 根据路由分组
 
-`histogram_quantile(0.90, sum(irate(http_request_duration_ms_bucket{job=~"koa-app", path=~".*"}[1m])) by (path, le))`
+```sql
+histogram_quantile(0.90, sum(irate(http_request_duration_ms_bucket{job=~"koa-app", path=~".*"}[1m])) by (path, le))
+```
 
-* 最近 5 分钟, 非 200 请求率, 根据路由分组
+- 最近 5 分钟, 非 200 请求率, 根据路由分组
 
-`sum(irate(http_requests_total{status!~"200",job=~"koa-app", path=~".*"}[5m])) BY (job, path, status) / IGNORING(status) GROUP_LEFT() sum(irate(http_requests_total{job=~"koa-app", path=~".*"}[5m])) BY (job, path) * 100`
+```sql
+sum(irate(http_requests_total{status!~"200",job=~"koa-app", path=~".*"}[5m])) BY (job, path, status) / IGNORING(status) GROUP_LEFT() sum(irate(http_requests_total{job=~"koa-app", path=~".*"}[5m])) BY (job, path) * 100
+```
 
 ## 总结
 
