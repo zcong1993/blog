@@ -7,3 +7,5 @@ tags:
   - Default
 draft: true
 ---
+
+![wxmp](/wxmp_tiny.png)
