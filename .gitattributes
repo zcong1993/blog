@@ -4,3 +4,9 @@ static/* export-ignore
 images/* export-ignore
 resources/* export-ignore
 helper.sh export-ignore
+themes/* linguist-vendored
+tools/* linguist-vendored
+static/* linguist-vendored
+images/* linguist-vendored
+resources/* linguist-vendored
+helper.sh linguist-vendored
