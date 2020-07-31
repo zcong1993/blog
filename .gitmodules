@@ -3,4 +3,4 @@
 	url = https://github.com/olOwOlo/hugo-theme-even.git
 [submodule "themes/terminal"]
 	path = themes/terminal
-	url = git@github.com:zcong1993/hugo-theme-terminal.git
+	url = https://github.com:zcong1993/hugo-theme-terminal.git
