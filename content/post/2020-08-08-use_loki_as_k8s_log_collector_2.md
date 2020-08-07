@@ -11,7 +11,7 @@ tags:
   - K8S
   - 日志
   - loki
-draft: true
+draft: false
 ---
 
 [上篇文章](/post/2020-07-27-use_loki_as_k8s_log_collector) 介绍了日志收集的背景和 loki 的优点, 真正部署的时候基本是一键的感觉没什么技术含量(虽然开箱即用部署简单是优势), 本章将介绍如何使用它来收集容器内日志文件.
