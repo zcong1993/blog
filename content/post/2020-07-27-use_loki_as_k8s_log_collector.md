@@ -114,7 +114,8 @@ $ kubectl port-forward --namespace default service/loki-grafana 3000:80
 
 这里我写了一个简单的 NodeJS 程序, 每一秒钟会打印一条 `logfmt` 格式的日志, 并且随机 level.
 
-```yaml
+<!-- prettier-ignore-start -->
+{{< code language="yaml" title="test-pod.yaml" id="1" expand="Show" collapse="Hide" isCollapsed="false" >}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -135,7 +136,8 @@ spec:
         - name: log-test
           image: zcong/node-log:latest
           imagePullPolicy: IfNotPresent
-```
+{{< /code >}}
+<!-- prettier-ignore-end -->
 
 部署好了之后, 就可以在 grafana 中看到了:
 
