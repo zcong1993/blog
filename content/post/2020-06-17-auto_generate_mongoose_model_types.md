@@ -10,6 +10,7 @@ tags:
   - MongoDB
   - Typescript
 draft: false
+description: 如何解放双手根据 mongoose schema 类型生成 Typescript 类型.
 ---
 
 MongoDB 在 NodeJS 社区有着非常广泛的使用. 虽然灵活是 MongoDB 的一大优势, 但是真正业务中不希望它 '过于灵活', 因此一般都会搭配 mongoose 来使用, 所以基本也会定义 `Schema`.

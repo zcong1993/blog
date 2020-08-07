@@ -10,6 +10,7 @@ tags:
   - Github
   - Github Actions
 draft: false
+description: Github Fork 是一个很常见的操作, 常用来做自己的定制化开发, 或者做修改之后提交(pr)回上游仓库. 假如我们希望自己的 fork 版本同步更新上游的新功能和 bug fix. 那么怎么做呢?
 ---
 
 [Github Fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-forks) 是一个很常见的操作, 常用来做自己的定制化开发, 或者做修改之后提交(pr)回上游仓库.

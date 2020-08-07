@@ -59,7 +59,7 @@ theme = "github-dark"
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
-      logoText = "Terminal"
+      logoText = "Cong"
       logoHomeLink = "/"
 
     [languages.en.menu]
