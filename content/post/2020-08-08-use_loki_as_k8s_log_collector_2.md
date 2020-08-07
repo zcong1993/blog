@@ -91,7 +91,7 @@ volumes:
 {{< /code >}}
 <!-- prettier-ignore-end -->
 
-_ps:_ promtail 配置通过 loki-promtail 这个 ConfigMap 修改. 修改后文件在了这里 [loki-tail-file.yaml](https://gist.githubusercontent.com/zcong1993/2ed197b97a3286dd958e4c8cfd81e5ea/raw/8604910e8b6f56ff3ad13204db133420ffe01c8e/loki-tail-file.yaml).
+_ps:_ promtail 配置通过 loki-promtail 这个 ConfigMap 修改. 修改后文件放在了这里 [loki-tail-file.yaml](https://gist.githubusercontent.com/zcong1993/2ed197b97a3286dd958e4c8cfd81e5ea/raw/8604910e8b6f56ff3ad13204db133420ffe01c8e/loki-tail-file.yaml).
 
 可以使用下面这个测试应用测试下, 测试应用还是上一章的应用, 不过这次是输出日志到文件中.
 
@@ -191,7 +191,7 @@ spec:
 
 对于我们要收集文件的 pod 我们可以配置一个 annotation, 例如: `loki.io/logfile: '/mnt/log/winston/*.log'`, 它有两个使命:
 
-- 告诉 promtail 该收集那些日志文件
+- 告诉 promtail 该收集哪些日志文件
 - 忽略掉没有这条 annotation 的 pod
 
 所以我们可以这样配置:
