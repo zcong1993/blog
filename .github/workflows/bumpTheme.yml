@@ -1,7 +1,7 @@
 name: Bump Themes
 
 on:
-  push:
+  # push:
   schedule:
     - cron: '0 * * * *'
 

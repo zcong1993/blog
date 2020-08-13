@@ -1,5 +1,7 @@
-name: deploy website
-on: [push]
+name: Deploy Website
+on:
+  push:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
