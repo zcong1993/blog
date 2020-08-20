@@ -87,7 +87,7 @@ ENTRYPOINT ["main"]
 
 其实更简单的方法就是 build arg 结合镜像构建 `ARG`  关键字.
 
-ARG 声名的变量可以通过 `docker build --build-arg NODE_VERSION=xxx`  在构建时传入, 所以我们 dockerfile 这样写:
+ARG 声明的变量可以通过 `docker build --build-arg NODE_VERSION=xxx`  在构建时传入, 所以我们 dockerfile 这样写:
 
 ```dockerfile
 ARG NODE_VERSION
@@ -111,7 +111,7 @@ cmd 相当于默认命令, 用户自定义命令时会直接覆盖掉;
 
 ### 提升用户体验
 
-docker 镜像构建出来很多情况是共享给他人使用的, 所以我们应该注意点用户体验, dockerfile 除了允许注释外, 还有一些声名式关键字, 例如: LABEL, EXPOSE
+docker 镜像构建出来很多情况是共享给他人使用的, 所以我们应该注意点用户体验, dockerfile 除了允许注释外, 还有一些声明式关键字, 例如: LABEL, EXPOSE
 
 `LABEL` 允许我们添加一些元信息, 例如 maintainer 信息, 或者留个邮箱之类的.
 `EXPOSE` 允许我们声明我们服务对外暴露的是什么端口, 它对于容器运行没有任何影响, 只是方便使用者知道该把什么端口映射出去. 这点很重要, 很多时候使用别人镜像还要去在源码里面找寻这些信息.
@@ -122,7 +122,7 @@ docker 镜像构建出来很多情况是共享给他人使用的, 所以我们�
 
 首先强烈建议镜像 tag 和 git commit 或者 git tag 能够对应, 不然出了问题半天都不知道镜像对应的代码对应哪次提交.
 
-经过我们生产实践, 基本 tag 需要包含一下几个信息:
+经过我们生产实践, 基本 tag 需要包含以下几个信息:
 
 1. git commit hash 和 git tag, 主要用来定位和源码对应关系
 1. 构建日期, 可以快速定位构建记录, 或者定位发版记录
