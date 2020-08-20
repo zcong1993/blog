@@ -7,7 +7,7 @@ categories:
   - Docker
 tags:
   - Docker
-draft: true
+draft: false
 ---
 
 docker 的出现改写了服务部署规则, 也是 k8s 的基础. 而镜像是 docker 运行 container 的基础. 如何构建高质量的镜像呢?
