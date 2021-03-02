@@ -1,5 +1,4 @@
-name: Compress Image
-
+name: Compress Images
 on:
   push:
     branches:
@@ -8,14 +7,25 @@ on:
       - '**.jpg'
       - '**.jpeg'
       - '**.png'
-
+      - '**.webp'
 jobs:
-  setup:
+  build:
+    name: calibreapp/image-actions
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@main
+      - name: Checkout Repo
+        uses: actions/checkout@v2
       - name: Compress Images
-        uses: zcong1993/image-actions@master
+        id: calibre
+        uses: calibreapp/image-actions@main
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+          compressOnly: true
+      - name: Create New Pull Request If Needed
+        if: steps.calibre.outputs.markdown != ''
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: Compressed Images
+          branch-suffix: timestamp
+          commit-message: Compressed Images
+          body: ${{ steps.calibre.outputs.markdown }}
