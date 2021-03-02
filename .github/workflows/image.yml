@@ -8,6 +8,7 @@ on:
       - '**.jpeg'
       - '**.png'
       - '**.webp'
+      - '.github/workflows/image.yml'
 jobs:
   build:
     name: calibreapp/image-actions
