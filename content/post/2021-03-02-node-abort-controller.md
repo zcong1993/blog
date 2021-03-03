@@ -173,7 +173,7 @@ async function readFileHandle(filehandle, options) {
 }
 ```
 
-上面代码删减了不相关代码, `fsPromises.readFile` 核心通过 `readFileHandle` 方法实现, 总结一下就是带缓冲的 read, 每次异步 read chunk 知道文件读完, 最后将内容返回. 因此更加简单, 总结下来只需要两步:
+上面代码删减了不相关代码, `fsPromises.readFile` 核心通过 `readFileHandle` 方法实现, 总结一下就是带缓冲的 read, 每次异步 read chunk 直到文件读完, 最后将内容返回. 因此更加简单, 总结下来只需要两步:
 
 1. 执行操作前, 检查 signal 是否已经是 aborted 状态, 如果是直接 throw AbortError
 1. 同步循环每次操作前检查 signal 是否已经是 aborted 状态
