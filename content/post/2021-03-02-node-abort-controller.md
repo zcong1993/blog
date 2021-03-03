@@ -182,7 +182,7 @@ async function readFileHandle(filehandle, options) {
 
 ## 对比 Go 语言
 
-熟悉 go 语言的朋友看到这个肯定会想到 `context`, context 的一个很大的作用就是在不同 Goroutine 之间同步取消信号来减少资源浪费. 本文所讲的 AbortController 相当于 `context.WithCancel`, 当然 go 语言的 context 功能更加复杂, 是一个树形结构, 但是在用法上思想其实是想通的.
+熟悉 go 语言的朋友看到这个肯定会想到 `context`, context 的一个很大的作用就是在不同 Goroutine 之间同步取消信号来减少资源浪费. 本文所讲的 AbortController 相当于 `context.WithCancel`, 当然 go 语言的 context 功能更加复杂, 是一个树形结构, 但是在用法上思想其实是相通的.
 
 ```go
 // 同步在 for 循环间检查是否已取消
