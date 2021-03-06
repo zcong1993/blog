@@ -16,7 +16,7 @@ draft: false
 
 <!--more-->
 
-_注意:_ 本文所有内容均基于 [grpc/grpc-go](https://github.com/grpc/grpc-go), 不同语言实现会有不同, 后面不在强调.
+_注意:_ 本文所有内容均基于 [grpc/grpc-go](https://github.com/grpc/grpc-go), 不同语言实现会有不同, 后面不在说明.
 
 ## 基本介绍
 
@@ -39,11 +39,20 @@ gRPC 采取的客户端负载均衡, 大概原理是:
 
 gRPC go client 中负责解析 `server -> addrs` 的模块是 [google.golang.org/grpc/resolver](https://github.com/grpc/grpc-go/tree/61f0b5fa7c1c375e2bbf29f2f5f8610d2b5ba956/resolver) 模块.
 
-client 建立连接时, 会根据 `URI scheme` 选取 resolver 模块中全局注册的对应 resolver, 被选中的 resolver 负责根据 uri 解析出对应的 addrs. 因此我们实现自己服务发现模块就是通过扩展全局注册自定义 scheme resolver 实现. 详情参考 [gRPC Name Resolution](https://github.com/grpc/grpc/blob/master/doc/naming.md) 文档.
+client 建立连接时, 会根据 `URI scheme` 选取 resolver 模块中全局注册的对应 resolver, 被选中的 resolver 负责根据 `uri Endpoint` 解析出对应的 `addrs`. 因此我们实现自己服务发现模块就是通过扩展全局注册自定义 `scheme resolver` 实现. 详情参考 [gRPC Name Resolution](https://github.com/grpc/grpc/blob/master/doc/naming.md) 文档.
 
 扩展 resolver 核心就是实现 [resolver.Builder](https://github.com/grpc/grpc-go/blob/61f0b5fa7c1c375e2bbf29f2f5f8610d2b5ba956/resolver/resolver.go#L229) 这个 interface.
 
 ```go
+// m is a map from scheme to resolver builder.
+var	m = make(map[string]Builder)
+
+type Target struct {
+	Scheme    string
+	Authority string
+	Endpoint  string
+}
+
 // Builder creates a resolver that will be used to watch name resolution updates.
 type Builder interface {
 	// Build creates a new resolver for the given target.
@@ -54,6 +63,21 @@ type Builder interface {
 	// Scheme returns the scheme supported by this resolver.
 	// Scheme is defined at https://github.com/grpc/grpc/blob/master/doc/naming.md.
 	Scheme() string
+}
+
+// State contains the current Resolver state relevant to the ClientConn.
+type State struct {
+	// Addresses is the latest set of resolved addresses for the target.
+	Addresses []Address
+
+	// ServiceConfig contains the result from parsing the latest service
+	// config.  If it is nil, it indicates no service config is present or the
+	// resolver does not provide service configs.
+	ServiceConfig *serviceconfig.ParseResult
+
+	// Attributes contains arbitrary data about the resolver intended for
+	// consumption by the load balancing policy.
+	Attributes *attributes.Attributes
 }
 
 // Resolver watches for the updates on the specified target.
@@ -69,7 +93,14 @@ type Resolver interface {
 }
 ```
 
-`builder.Scheme` 返回值代表当前 `resolver` 负责解析的 `Scheme` 类型, 例如我们的 `testResolver.Scheme` 返回 test, 那么当连接地址为 `test:///xxx` 这种时, 会使用我们注册的 `testResolver`. 整个连接地址会被解析为 `&Target{Scheme: "test", Authority: "", Endpoint: "xxx"}`, 这个会作为调用 `resolver.Build` 的参数, 我们需要做的就是将 Target 解析出对应的真实后端地址, 然后调用 `cc.UpdateState` 将地址交给下层连接, 并且后端服务列表变化时我们要更新这个 `addrs`, 一般会在 `Resolver` 中做.
+gRPC 客户端在建立连接时, 地址解析部分大致会有以下几个步骤:
+
+1. 根据传入地址的 `Scheme` 在全局 resolver map (上面代码中的 m) 中找到与之对应的 resolver (Builder)
+1. 将地址解析为 `Target` 作为参数调用 `resolver.Build` 方法实例化出 `Resolver`
+1. 使用用户实现 `Resolver` 中调用 `cc.UpdateState` 传入的 `State.Addrs` 中的地址建立连接
+
+例如: 注册一个 test resolver, m 值会变为 `{test: testResolver}`, 当连接地址为 `test:///xxx` 时,
+会被匹配到 `testResolver`, 并且地址会解析为 `&Target{Scheme: "test", Authority: "", Endpoint: "xxx"}`, 作为参数调用 `testResolver.Build` 方法.
 
 整理一下:
 
@@ -125,7 +156,19 @@ func (*exampleResolver) ResolveNow(o resolver.ResolveNowOptions) {}
 func (*exampleResolver) Close()                                  {}
 ```
 
-可以看到非常简单, 我们的 resolver 只是把从路由表中查到的 addrs 更新到底层的 connection 中, 使用是仅仅需要调用 `resolver.Register(NewExampleResolverBuilder(map[string][]string{}))`, 然后连接时 `grpc.Dial("example:///xxx")`.
+可以这么使用:
+
+```go
+// 注册我们的 resolver
+resolver.Register(NewExampleResolverBuilder(map[string][]string{
+  "test": []string{"localhost:8080", "localhost:8081"},
+}))
+
+// 建立对应 scheme 的连接, 并且配置负载均衡
+conn, err := grpc.Dial("example:///test", grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`))
+```
+
+原理非常简单, `exampleResolver` 只是把从路由表中查到的 `addrs` 更新到底层的 `connection` 中.
 
 ### 基于 etcd 的 resolver
 
@@ -302,7 +345,7 @@ func (r *etcdResolver) Close() {
 1. r.rn channel 收到消息时做一次全量刷新, r.rn 消息在 ResolveNow 被调用时产生
 1. 全局设了一个 30 分钟全量刷新的兜底方案, 周期到达时, 做一次全量刷新
 
-完整代码以及事例可以查看 [zcong1993/grpc-example](https://github.com/zcong1993/grpc-example).
+使用方法和静态路由差不多, 完整代码以及事例可以查看 [zcong1993/grpc-example](https://github.com/zcong1993/grpc-example).
 
 ## 负载均衡
 
