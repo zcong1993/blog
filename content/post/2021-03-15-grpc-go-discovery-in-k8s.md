@@ -1,7 +1,7 @@
 ---
 title: 在 k8s 中使用 gRPC Go 服务发现
 date: 2021-03-15T16:51:07+08:00
-cover: /cover.jpeg
+cover: /grpc-lb-k8s/cover.jpg
 description: k8s 已经成为云时代云平台的一等公民, 本文介绍下如何在 k8s 中使用 grpc 服务发现.
 categories:
   - gRPC
