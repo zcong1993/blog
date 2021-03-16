@@ -23,3 +23,5 @@ hugo_new() {
 
   hugo new $ALL_NAME
 }
+
+hugo_new "$@"
