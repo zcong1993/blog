@@ -4,6 +4,13 @@ theme = "terminal"
 paginate = 5
 googleAnalytics = "UA-92092104-2"      # UA-XXXXXXXX-X
 
+# [markup]
+#     defaultMarkdownHandler = "goldmark"
+
+#   [markup.goldmark]
+#     [markup.goldmark.renderer]
+#       unsafe = true
+
 [params]
   # dir name of your blog content (default is `content/posts`)
   contentTypeName = "post"
