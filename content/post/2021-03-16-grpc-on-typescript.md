@@ -141,3 +141,143 @@ export class HelloClient extends grpc.Client {
   ): grpc.ClientDuplexStream<hello_pb.EchoRequest, hello_pb.EchoRequest>
 }
 ```
+
+## grpc rpc 类型
+
+一般 rpc 只支持一应一答式的请求响应, grpc 也支持 stream, 所以有以下四种类型:
+
+1. 一应一答
+1. server 端流
+1. client 端流
+1. 双向流
+
+grpc 的流对应 nodejs 中的流, 使用 `on('data')` 获取数据; 而单条响应则是使用 `callback` 形式. 但是对于现代的 js 语言, callback 是很倒退的, 一般会优化为 promise, 而流一般是为了做流式处理提高效率, 如果简单优化为收到所有数据一起返回的 promise 就背离了 stream 的初衷, 我们可以通过 [rxjs](https://github.com/reactivex/rxjs) 将流转化成 `Observer` 就能使用 rxjs 丰富的 API 来操作流了. 我写了一个工具库 [zcong1993/ts-grpc-helper](https://github.com/zcong1993/ts-grpc-helper). 下文会对比两种方式的代码.
+
+### 1. 一应一答
+
+`rpc Echo(EchoRequest) returns (EchoRequest);`
+
+#### server 端
+
+简单 echo 服务, 将 request 直接返回
+
+```ts
+{
+  echo: (call, callback) => {
+    console.log(call.request.toObject())
+    callback(null, call.request)
+  }
+}
+```
+
+callback 版本不做说明.
+
+```ts
+{
+  echo: toHandleUnaryCall(async (req, md, call) => {
+    console.log(req.toObject())
+    return req
+  }),
+}
+```
+
+使用 helper 方法包装后, 仅需要将 response 返回即可.
+
+#### client 端
+
+```ts
+const testEcho = async (c: HelloClient) => {
+  const req = new pb.EchoRequest()
+  req.setMessage('test')
+
+  c.echo(req, (err, data) => {
+    if (err) {
+      console.log('err: ', err)
+    } else {
+      console.log(data.toObject())
+    }
+  })
+}
+```
+
+```ts
+const testEcho = async (c: HelloClient) => {
+  const req = new pb.EchoRequest()
+  req.setMessage('test')
+
+  const resp = await promisifyUnaryCall(c.echo, c)(req)
+  console.log(resp.res.toObject())
+}
+```
+
+client 端同理, 包装之后可以使用异步.
+
+### 2. server 端流
+
+`rpc ServerStream(EchoRequest) returns (stream EchoRequest);`
+
+#### server 端
+
+简单 echo 服务, 返回流发送三次收到的 request.
+
+```ts
+{
+  serverStream: (call) => {
+    console.log(call.request.toObject())
+    Array(3)
+      .fill(call.request)
+      .map((r) => call.write(r))
+    call.end()
+  },
+}
+```
+
+通过多次调用 `call.write()` 发送多个 chunk data.
+
+```ts
+{
+  serverStream: toHandleServerStreamingCall(async (req, md, call) => {
+    console.log(req.toObject())
+    return from(Array(3).fill(req))
+  }),
+}
+```
+
+直接返回 `Observable` 即可.
+
+#### client 端
+
+```ts
+const testStream = async (c: HelloClient) => {
+  const req = new pb.EchoRequest()
+  req.setMessage('test2')
+  const st = c.serverStream(req)
+  st.on('data', (d) => {
+    console.log(d.toObject())
+  })
+
+  st.on('end', () => {
+    console.log('done')
+  })
+
+  st.on('error', (err) => {
+    console.log('error', err)
+  })
+}
+```
+
+发送请求, 返回一个类似 `readstream`.
+
+```ts
+const testStream = async (c: HelloClient) => {
+  const req = new pb.EchoRequest()
+  req.setMessage('test2')
+  const st = c.serverStream(req)
+  const result$ = readStreamToObserver(st)
+  await result$.forEach((data) => {
+    console.log(data.toObject())
+  })
+}
+```
+
+使用 `readStreamToObserver()` 方法将返回流转化为 `Observable`.
