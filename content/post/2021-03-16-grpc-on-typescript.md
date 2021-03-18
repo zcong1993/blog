@@ -1,7 +1,7 @@
 ---
 title: 在 Typescript 中使用 gRPC
 date: 2021-03-16T15:32:21+08:00
-cover: /cover.jpeg
+cover: /grpc-on-typescript.jpeg
 description: gRPC 是一个高性能, 支持多种语言的 RPC 框架, 官方已经支持了 NodeJS 语言. 而 Typescript 作为 JavaScript 的超集, 可以提高 js 代码的可维护性, 并且代码提示很不错, 已在 js 市场占据了很大份额. 本文简单介绍下 gRPC 在 Typescript 中如何使用.
 categories:
   - gRPC
@@ -11,7 +11,7 @@ tags:
   - gRPC
   - NodeJS
   - TypeScript
-draft: true
+draft: false
 ---
 
 gRPC 是一个高性能, 支持多种语言的 RPC 框架, 官方已经支持了 NodeJS 语言. 而 Typescript 作为 JavaScript 的超集, 可以提高 js 代码的可维护性, 并且代码提示很不错, 已在 js 市场占据了很大份额. 本文简单介绍下 gRPC 在 Typescript 中如何使用.
@@ -59,10 +59,13 @@ PROTOC_GEN_GRPC_PATH="./node_modules/.bin/grpc_tools_node_protoc_plugin"
 OUT_DIR="./src/generated"
 
 protoc \
-    --plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \  # 生成消息类型 .js 和 .d.ts 文件
-    --plugin="protoc-gen-grpc=${PROTOC_GEN_GRPC_PATH}" \ # 生成 grpc 相关 .js
+    # 生成消息类型 .js 和 .d.ts 文件
+    --plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
+    # 生成 grpc 相关 .js
+    --plugin="protoc-gen-grpc=${PROTOC_GEN_GRPC_PATH}" \
     --js_out="import_style=commonjs,binary:${OUT_DIR}" \
-    --ts_out="service=grpc-node,mode=grpc-js:${OUT_DIR}" \ # 传递参数, 生成 grpc .d.ts 文件, 并指明我们使用的是 @grpc/grpc-js
+    # 传递参数, 生成 grpc .d.ts 文件, 并指明我们使用的是 @grpc/grpc-js
+    --ts_out="service=grpc-node,mode=grpc-js:${OUT_DIR}" \
     --grpc_out="grpc_js:${OUT_DIR}" \
     hello.proto
 ```
@@ -214,7 +217,7 @@ client 端同理, 包装之后可以使用异步.
 
 ### 2. server 端流
 
-`rpc ServerStream(EchoRequest) returns (stream EchoRequest);`
+`rpc ServerStream(EchoRequest) returns (stream EchoRequest);` 接收一个请求, 返回一个流.
 
 #### server 端
 
@@ -281,3 +284,200 @@ const testStream = async (c: HelloClient) => {
 ```
 
 使用 `readStreamToObserver()` 方法将返回流转化为 `Observable`.
+
+### 3. client 端流
+
+`rpc ClientStream(stream EchoRequest) returns (EchoRequest);` 接收一个流, 返回一个普通响应.
+
+#### server 端
+
+接收 request 流, 结束后发送最后一个 chunk.
+
+```ts
+{
+  clientStream: (call, callback) => {
+    let d: any
+    call.on('data', (dd) => {
+      console.log(dd.toObject())
+      d = dd
+    })
+
+    call.on('error', (err) => {
+      callback(err)
+    })
+
+    call.on('end', () => {
+      callback(null, d)
+    })
+  },
+}
+```
+
+需要使用 `on('data')` 接收消息, 并且 `on('end')` 时调用 callback 返回响应.
+
+```ts
+{
+  clientStream: toHandleClientStreamingCall(async (req, md, call) => {
+    let res: hello_pb.EchoRequest
+    await req.forEach((data) => {
+      res = data
+      console.log(data.toObject())
+    })
+
+    return res
+  }),
+}
+```
+
+request 变成了 `Observable`, 并且只需要将 response 作为返回值返回即可.
+
+#### client 端
+
+请求流发送 5 条数据 `test 0` 到 `test 4`.
+
+```ts
+const testClientStream = async (c: HelloClient) => {
+  const call = c.clientStream((err, resp) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(resp)
+    }
+  })
+
+  Array(5)
+    .fill(null)
+    .forEach((_, i) => {
+      const req = new pb.EchoRequest()
+      req.setMessage(`test ${i}`)
+      call.write(req)
+    })
+
+  call.end()
+}
+```
+
+```ts
+const testClientStream = async (c: HelloClient) => {
+  const call = c.clientStream((err, resp) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(resp.toObject())
+    }
+  })
+
+  observerToWriteStream(
+    range(0, 5).pipe(
+      map((val) => {
+        const req = new pb.EchoRequest()
+        req.setMessage(`test ${val}`)
+        return req
+      })
+    ),
+    call
+  )
+}
+```
+
+调用 `observerToWriteStream()` 方法将 `Observable` 转化成需要的 `writeStream`, callback 响应暂未处理.
+
+### 4. 双向流
+
+`rpc DuplexStream(stream EchoRequest) returns (stream EchoRequest);` 接收一个流返回一个流.
+
+#### server 端
+
+将请求流转发回去.
+
+```ts
+{
+  duplexStream: (call) => {
+    call.on('error', (err) => {
+      call.emit('error', err)
+    })
+
+    call.on('end', () => {
+      call.end()
+    })
+
+    call.on('data', (d) => {
+      console.log(d.toObject())
+      call.write(d)
+    })
+  },
+}
+```
+
+`call` 为双向流, `on('data')` 收到数据时直接 `write()` 发送回去.
+
+```ts
+{
+  duplexStream: toHandleBidiStreamingCall(async (req, md, call) => {
+    return req.pipe(tap((data) => console.log(data.toObject())))
+  }),
+}
+```
+
+直接将 request 流返回即可, `pipe(tap)` 只是为了打印请求.
+
+#### client 端
+
+请求流发送 5 条数据 `test 0` 到 `test 4`, 每秒发送一条.
+
+```ts
+const testDuplexStream = async (c: HelloClient) => {
+  const call = c.duplexStream()
+  call.on('data', (data) => {
+    console.log(data.toObject())
+  })
+
+  call.on('end', () => {
+    console.log('end')
+  })
+
+  for (let i = 0; i < 5; i++) {
+    const req = new pb.EchoRequest()
+    req.setMessage(`test ${i}`)
+    call.write(req)
+    if (i < 4) {
+      await sleep(1000)
+    }
+  }
+
+  call.end()
+}
+```
+
+和 server 端一样, `on('data')` 接收数据, `write()` 发送数据.
+
+```ts
+const testDuplexStream = async (c: HelloClient) => {
+  const call = c.duplexStream()
+
+  const result$ = readStreamToObserver(call)
+  result$
+    .forEach((data) => {
+      console.log(data.toObject())
+    })
+    .then(() => console.log('end'))
+
+  const source$ = interval(1000).pipe(
+    take(5),
+    map((v) => {
+      const req = new pb.EchoRequest()
+      req.setMessage(`test ${v}`)
+      return of(req)
+    }),
+    concatAll()
+  )
+
+  observerToWriteStream(source$, call)
+}
+```
+
+组合 `readStreamToObserver()` 和 `observerToWriteStream()` 方法, 将读写分别转化为两个 `Observable`.
+
+## 总结
+
+以上就是使用 grpc 最简单的示例, 完整代码可查看 [zcong1993/ts-grpc-example](https://github.com/zcong1993/ts-grpc-example). 错误处理和 metadata 之类的功能后续再介绍.
