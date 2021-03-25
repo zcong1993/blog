@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     name: calibreapp/image-actions
-    if: "!startsWith(github.event.comment.body, 'Compressed Images')"
+    if: "!contains(github.event.head_commit.message, 'Compressed Images')"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
