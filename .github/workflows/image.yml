@@ -25,9 +25,18 @@ jobs:
           compressOnly: true
       - name: Create New Pull Request If Needed
         if: steps.calibre.outputs.markdown != ''
+        id: pr
         uses: peter-evans/create-pull-request@v3
         with:
           title: Compressed Images
-          branch-suffix: timestamp
+          branch: compress-image
+          delete-branch: true
           commit-message: Compressed Images
           body: ${{ steps.calibre.outputs.markdown }}
+      - name: Merge Pr
+        if: steps.pr.outputs.pull-request-url != ''
+        uses: action-git-merge@master
+        with:
+          head: compress-image
+          base: master
+          commit_message: Merge Compressed Images
