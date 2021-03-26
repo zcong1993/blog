@@ -35,7 +35,7 @@ jobs:
           body: ${{ steps.calibre.outputs.markdown }}
       - name: Merge Pr
         if: steps.pr.outputs.pull-request-url != ''
-        uses: action-git-merge@master
+        uses: zcong1993/action-git-merge@master
         with:
           head: compress-image
           base: master
