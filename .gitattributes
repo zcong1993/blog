@@ -1,7 +1,7 @@
-* text=auto
 themes/* linguist-vendored
 tools/* linguist-vendored
 static/* linguist-vendored
 images/* linguist-vendored
 resources/* linguist-vendored
 helper.sh linguist-vendored
+Makefile linguist-vendored
