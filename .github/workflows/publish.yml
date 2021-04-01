@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  setup:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,6 +38,7 @@ jobs:
           enable-pull-request-comment: false
           enable-commit-comment: false
           overwrites-pull-request-comment: false
+          netlify-config-path: './netlify.toml'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
