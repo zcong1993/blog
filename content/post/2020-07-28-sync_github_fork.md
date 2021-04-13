@@ -4,7 +4,7 @@ date: 2020-07-28T15:48:55+08:00
 categories:
   - Git
   - Github
-  - Github Actions
+  - CI
 tags:
   - Git
   - Github

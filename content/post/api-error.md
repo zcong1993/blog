@@ -2,7 +2,7 @@
 title: 'API 错误应该返回什么'
 date: 2019-02-07T23:22:30+08:00
 categories:
-  - 规范
+  - API
 tags:
   - API
 draft: false

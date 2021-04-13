@@ -4,7 +4,6 @@ date: 2020-11-30T21:51:01+08:00
 cover: /leetcode/cover.jpeg
 description: 现在程序员招聘越来越注重算法之类的考核了, 所以刷算法题也就成了程序员日常生活的一部分了. 今天介绍一个工具 -- leetcode-tool, 帮助大家更轻松的刷题, 沉淀知识.
 categories:
-  - Leetcode
   - Tool
 tags:
   - Leetcode

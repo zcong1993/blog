@@ -4,6 +4,9 @@ date: '2017-06-25'
 categories:
   - NodeJS
   - GraphQL
+tags:
+  - NodeJS
+  - GraphQL
   - Koa2
   - Middleware
 draft: false

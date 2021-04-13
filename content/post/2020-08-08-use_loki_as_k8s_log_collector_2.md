@@ -5,11 +5,10 @@ cover: loki-06.jpeg
 description: 上篇文章介绍了日志收集的背景和 loki 的优点, 真正部署的时候基本是一键的(开箱即用部署简单确实是优势)感觉没什么技术含量, 本章将介绍如何使用它来收集容器内日志文件.
 categories:
   - K8S
-  - 日志
-  - loki
+  - log
 tags:
   - K8S
-  - 日志
+  - log
   - loki
 draft: false
 ---

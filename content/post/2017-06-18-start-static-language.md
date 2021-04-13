@@ -3,8 +3,6 @@ title: 入坑静态语言
 date: '2017-06-18'
 categories:
   - Golang
-  - 静态语言
-  - 感想
 draft: false
 ---
 

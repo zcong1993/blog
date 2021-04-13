@@ -3,7 +3,9 @@ title: '访问控制利器 Casbin'
 date: 2019-08-29T22:30:17+08:00
 categories:
   - NodeJS
+  - RBAC
 tags:
+  - NodeJS
   - RBAC
 draft: false
 ---

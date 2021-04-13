@@ -3,9 +3,6 @@ title: Git入门教程6-分支起步
 date: '2017-01-10'
 categories:
   - Git
-  - Github
-  - 总结
-  - 入门
 draft: false
 ---
 

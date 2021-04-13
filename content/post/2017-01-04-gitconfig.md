@@ -3,9 +3,6 @@ title: Git入门教程2-配置
 date: '2017-01-04'
 categories:
   - Git
-  - Github
-  - 总结
-  - 入门
 draft: false
 ---
 

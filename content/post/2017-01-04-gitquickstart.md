@@ -3,9 +3,6 @@ title: Git入门教程3-快速上手
 date: '2017-01-04'
 categories:
   - Git
-  - Github
-  - 总结
-  - 入门
 draft: false
 ---
 

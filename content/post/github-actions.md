@@ -6,6 +6,7 @@ categories:
   - Github
 tags:
   - CI
+  - Github
 draft: false
 ---
 

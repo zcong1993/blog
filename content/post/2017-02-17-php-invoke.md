@@ -3,7 +3,6 @@ title: php __invoke
 date: '2017-02-17'
 categories:
   - PHP
-  - 扯淡
 draft: false
 ---
 

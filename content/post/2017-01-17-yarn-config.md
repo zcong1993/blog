@@ -2,7 +2,9 @@
 title: yarn config
 date: '2017-01-17'
 categories:
-  - GFW
+  - NPM
+  - NodeJS
+tags:
   - Yarn
   - NodeJS
   - NPM

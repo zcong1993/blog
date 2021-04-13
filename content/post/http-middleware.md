@@ -1,8 +1,8 @@
 ---
 title: 'Http Middleware'
 date: 2019-07-28T01:27:39+08:00
-categories: [NodeJs, Golang, Web]
-tags: [NodeJs, Golang, Web]
+categories: [NodeJs, Golang]
+tags: [NodeJs, Golang]
 draft: false
 ---
 

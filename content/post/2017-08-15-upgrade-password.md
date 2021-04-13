@@ -2,8 +2,6 @@
 title: 登录系统密码升级
 date: '2017-08-15'
 categories:
-  - 安全
-  - 逻辑
   - PHP
 draft: false
 ---

@@ -2,9 +2,10 @@
 title: circleci 系列1 - 起步
 date: '2018-01-21'
 categories:
+  - CI
+tags:
   - Circleci
   - CI
-  - 经验
 draft: false
 ---
 

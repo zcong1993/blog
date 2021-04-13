@@ -2,7 +2,8 @@
 title: 'Influx + Grafana 监控应用'
 date: 2018-07-02T18:05:22+08:00
 draft: false
-categories: ['Influx DB', 'Grafana', '监控']
+categories: ['监控']
+tags: ['Influx DB', 'Grafana', '监控']
 ---
 
 监控是服务必不可少的一项功能. 当然早已不满足于单纯 health 的监控. 最近尝试了 `Influx DB + Grafana` 做监控和显示服务.

@@ -19,7 +19,7 @@ googleAnalytics = "UA-92092104-2"      # UA-XXXXXXXX-X
   themeColor = "orange"
 
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 3
+  showMenuItems = 5
 
   # show selector to switch language
   showLanguageSelector = false
@@ -74,6 +74,14 @@ theme = "github-dark"
         identifier = "posts"
         name = "Posts"
         url = "/post"
+      [[languages.en.menu.main]]
+        identifier = "categories"
+        name = "Categories"
+        url = "/categories"
+      [[languages.en.menu.main]]
+        identifier = "tags"
+        name = "Tags"
+        url = "/tags"
 
 # See https://gohugo.io/about/hugo-and-gdpr/
 [privacy]

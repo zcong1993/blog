@@ -4,8 +4,6 @@ date: '2017-01-18'
 categories:
   - Git
   - Github
-  - 总结
-  - 入门
 draft: false
 ---
 

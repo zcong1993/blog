@@ -3,7 +3,6 @@ title: bind in javascript
 date: '2017-05-26'
 categories:
   - JavaScript
-  - 总结
 draft: false
 ---
 

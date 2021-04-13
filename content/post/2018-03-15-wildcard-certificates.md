@@ -3,8 +3,9 @@ title: Let’s Encrypt 通配符证书
 date: '2018-03-15'
 categories:
   - https
-  - Let’s Encrypt
-  - Wildcard Certificates
+tags:
+  - https
+  - cert
 draft: false
 ---
 

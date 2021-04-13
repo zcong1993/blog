@@ -3,8 +3,9 @@ title: 使用dataloader
 date: '2017-07-13'
 categories:
   - NodeJS
+tags:
+  - NodeJS
   - DataLoader
-  - SQL
 draft: false
 ---
 

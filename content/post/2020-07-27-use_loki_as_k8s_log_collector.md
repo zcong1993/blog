@@ -4,11 +4,10 @@ date: 2020-08-03T00:39:39+08:00
 cover: loki-03.jpeg
 categories:
   - K8S
-  - 日志
-  - loki
+  - log
 tags:
   - K8S
-  - 日志
+  - log
   - loki
 draft: false
 description: 应用日志是我们的好朋友, 不仅在排查错误时必不可少而且还有助于我们了解应用运行状态. 虽然现在到了 K8S 的时代, 但是它并没有提供一个开箱即用的日志解决方案, 那么我们该怎么做呢?

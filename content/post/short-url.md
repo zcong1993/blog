@@ -2,10 +2,9 @@
 title: '做一个短链接服务'
 date: 2019-03-24T00:25:01+08:00
 categories:
-  - 服务
   - API
 tags:
-  - 服务
+  - API
 draft: false
 ---
 
