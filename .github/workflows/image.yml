@@ -40,3 +40,4 @@ jobs:
           head: compress-image
           base: master
           commit_message: Merge Compressed Images
+          token: ${{ secrets.PAT }}
