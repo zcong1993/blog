@@ -4,11 +4,11 @@ date: 2020-06-17T15:12:21+08:00
 categories:
   - NodeJS
   - MongoDB
-  - Typescript
+  - TypeScript
 tags:
   - NodeJS
   - MongoDB
-  - Typescript
+  - TypeScript
 draft: false
 description: 如何解放双手根据 mongoose schema 类型生成 Typescript 类型.
 ---
