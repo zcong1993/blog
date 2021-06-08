@@ -1,0 +1,17 @@
+<!--
+To add comments section, please create `layouts/partials/comments.html` in your
+Hugo directory and insert:
+{{ template "_internal/disqus.html" . }}
+or whatever comment engine you want -> https://gohugo.io/content-management/comments/#readout
+-->
+
+{{- if .Site.Params.utteranc.repo -}}
+  <div id="utter-container"></div>
+  <script src="https://utteranc.es/client.js"
+      repo= '{{ .Site.Params.utteranc.repo }}'
+      issue-term= "{{ .Site.Params.utteranc.issueTerm }}"
+      theme= '{{ .Site.Params.utteranc.theme }}'
+      crossorigin= "anonymous"
+      async>
+  </script>
+{{- end }}
