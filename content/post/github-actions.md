@@ -24,7 +24,7 @@ draft: false
 
 `Github Actions` 是一个基于 GitHub 事件的 `CI/CD pipeline`，在微软收购 GitHub 之前，大家基本都是用的 `CircleCI` 或者 `TravisCI` 之类的，收购之后，由于微软自家平台本来就有 `Azure pipeline` 服务，所以就诞生了 `Github Actions`，其实相当于 `Azure pipeline` 的定制版本。
 
-说了这么多，`Github Actions` 有什么相比别的有什么亮点呢？其实最大的亮点就是支持 `Schedule` 任务，也就是你可以通过 crontab 的方式执行任务。
+说了这么多, `Github Actions` 有什么相比别的有什么亮点呢？其实最大的亮点就是支持 `Schedule` 任务，也就是你可以通过 crontab 的方式执行任务。
 
 ## 如何使用
 
