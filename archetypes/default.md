@@ -7,7 +7,8 @@ categories:
   - Default
 tags:
   - Default
+keywords: []
 draft: true
 ---
 
-![wxmp](/wxmp_tiny.png)
+<!-- ![wxmp](/wxmp_tiny.png) -->
