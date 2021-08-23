@@ -1,7 +1,7 @@
 ---
 title: 使用 VictoriaMetrics 替换 Prometheus
 date: 2021-08-23T15:33:00+08:00
-cover: /cover.jpeg
+cover: /vm/cover.jpeg
 description: 本文讲述笔者将生产环境监控服务从 Prometheus 迁移到了 VictoriaMetrics, 并简单介绍其架构原理.
 categories:
   - Devops
