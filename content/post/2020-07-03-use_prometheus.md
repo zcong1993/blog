@@ -3,10 +3,10 @@ title: '使用 prometheus 监控应用'
 date: 2020-07-03T14:02:19+08:00
 categories:
   - Devops
-  - 监控
+  - Monitoring
 tags:
   - Devops
-  - 监控
+  - Monitoring
 draft: false
 description: 生产环境的应用往往都需要 7x24 小时高强度服务用户, 上线之后如果想睡好觉, 就需要知晓应用运行的某些状态指标, 以此判断应用是否健康, 这也就是监控的意义之一. K8S 世界会有什么样的工具帮我们做好监控呢?
 ---
