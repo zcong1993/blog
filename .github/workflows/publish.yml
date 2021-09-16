@@ -37,23 +37,23 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1
-      - name: Build Site2
-        run: |
-          rm -rf ./public
-          hugo --gc --minify --config config.toml,xyz.toml
-      - name: Deploy to Netlify Site2
-        uses: nwtgck/actions-netlify@v1.1
-        with:
-          publish-dir: './public'
-          production-branch: master
-          production-deploy: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: ${{ github.event.head_commit.message }}
-          enable-pull-request-comment: false
-          enable-commit-comment: false
-          overwrites-pull-request-comment: false
-          netlify-config-path: './netlify.toml'
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_2 }}
-        timeout-minutes: 1
+      # - name: Build Site2
+      #   run: |
+      #     rm -rf ./public
+      #     hugo --gc --minify --config config.toml,xyz.toml
+      # - name: Deploy to Netlify Site2
+      #   uses: nwtgck/actions-netlify@v1.1
+      #   with:
+      #     publish-dir: './public'
+      #     production-branch: master
+      #     production-deploy: true
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     deploy-message: ${{ github.event.head_commit.message }}
+      #     enable-pull-request-comment: false
+      #     enable-commit-comment: false
+      #     overwrites-pull-request-comment: false
+      #     netlify-config-path: './netlify.toml'
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_2 }}
+      #   timeout-minutes: 1
