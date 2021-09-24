@@ -49,7 +49,7 @@ googleAnalytics = "UA-92092104-2"      # UA-XXXXXXXX-X
 
 [params.utteranc]
 enable = true
-repo = "zcong1993/blog-hugo"
+repo = "zcong1993/blog"
 issueTerm = "pathname"
 theme = "github-dark"
 
