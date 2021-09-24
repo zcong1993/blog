@@ -53,6 +53,9 @@ repo = "zcong1993/blog"
 issueTerm = "pathname"
 theme = "github-dark"
 
+[params.custom]
+js = ["js/prism-protobuf.min.js"]
+
 [languages]
   [languages.en]
     languageName = "English"

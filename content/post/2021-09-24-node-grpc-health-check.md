@@ -26,7 +26,7 @@ draft: false
 
 健康检查协议也是基于 gRPC 调用, 和普通的 gRPC 请求没有区别, 所以服务端需要实现两个 rpc 方法:
 
-```proto
+```protobuf
 message HealthCheckRequest {
   string service = 1;
 }
