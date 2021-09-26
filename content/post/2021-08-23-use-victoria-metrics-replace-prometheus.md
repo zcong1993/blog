@@ -63,7 +63,7 @@ k8s 现在已是非常普及, 所以本文介绍 k8s 集群如何部署. 对于 
 
 官方工具 `vmctl` 提供各种类型的数据迁移, 文档可见 [vmctl.html](https://docs.victoriametrics.com/vmctl.html).
 
-对于 Prometheus 数据, 首先要保存一个快照, 操作课参考文档 [taking-snapshots-of-prometheus-data](https://www.robustperception.io/taking-snapshots-of-prometheus-data).
+对于 Prometheus 数据, 首先要保存一个快照, 操作可参考文档 [taking-snapshots-of-prometheus-data](https://www.robustperception.io/taking-snapshots-of-prometheus-data).
 
 如果是通过 k8s 部署, 迁移操作最好使用 pod 完成, 因为迁移操作需要访问 vm 服务, 如果不在集群内部执行迁移操作可能额外需要将 vm 服务暴露出去使得 vmctl 可以访问.
 
