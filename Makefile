@@ -11,5 +11,9 @@ sync:
 	git submodule update --remote
 .PHONY: sync
 
+show.tags:
+	node tools/show-tags.js
+.PHONY: show.tags
+
 default: format.changed
 .PHONY: default
