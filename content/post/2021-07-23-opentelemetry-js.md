@@ -21,7 +21,7 @@ draft: false
 
 ## 1. OpenTelemetry 是什么?
 
-[OpenTelemetry](https://opentelemetry.io) 是由 [OpenTracing](https://opentracing.io) 和 [OpenCensus](https://opencensus.io) 合并而成, 前身之一 OpenTracing 则是 CNCF 的一个 tracing  方向的孵化项目. OpenTelemetry 对自己的定义是一个大而全的可观测性框架.
+[OpenTelemetry](https://opentelemetry.io) 是由 [OpenTracing](https://opentracing.io) 和 [OpenCensus](https://opencensus.io) 合并而成, 前身之一 OpenTracing 则是 CNCF 的一个 tracing 方向的孵化项目. OpenTelemetry 对自己的定义是一个大而全的可观测性框架.
 
 <!--more-->
 
@@ -40,6 +40,7 @@ draft: false
 根据上图可以想象: 一个请求进来被 http server handler (1) 处理, 1 调用了函数 2, 函数 2 内做了数据库操作 3, 之后并发调用函数 4 和 5, 结束后 1 返回请求响应.
 
 <!-- ![jaeger](/opentelemetry/jaeger.png) -->
+
 {{< figure src="/opentelemetry/jaeger.png" alt="jaeger" position="center" caption="Jaeger web UI 中的 tracing 时序图" captionPosition="center" >}}
 
 ### 3.1 数据格式
@@ -156,21 +157,24 @@ const print = (prefix) => {
   let c = active()
   let l = [`${prefix}`]
 
-  while(c.parent) {
+  while (c.parent) {
     l.push(c.name)
     c = c.parent
   }
 
-  console.log(l.reverse()
-    .map(n => n.length >= 5 ? n : n + ' '.repeat(5-n.length))
-    .join(' '.repeat(5)))
+  console.log(
+    l
+      .reverse()
+      .map((n) => (n.length >= 5 ? n : n + ' '.repeat(5 - n.length)))
+      .join(' '.repeat(5))
+  )
 }
 
 const run = async (name, fn) => {
   const parent = active()
   const current = {
     parent,
-    name
+    name,
   }
 
   return asyncLocalStorage.run(current, async () => {
@@ -203,22 +207,30 @@ http 协议选择 header 作为 carrier, grpc 使用 metadata.
 
 ```ts
 class PropagationAPI {
-    /**
-     * Inject context into a carrier to be propagated inter-process
-     *
-     * @param context Context carrying tracing data to inject
-     * @param carrier carrier to inject context into
-     * @param setter Function used to set values on the carrier
-     */
-    inject<Carrier>(context: Context, carrier: Carrier, setter?: TextMapSetter<Carrier>): void;
-    /**
-     * Extract context from a carrier
-     *
-     * @param context Context which the newly created context will inherit from
-     * @param carrier Carrier to extract context from
-     * @param getter Function used to extract keys from a carrier
-     */
-    extract<Carrier>(context: Context, carrier: Carrier, getter?: TextMapGetter<Carrier>): Context;
+  /**
+   * Inject context into a carrier to be propagated inter-process
+   *
+   * @param context Context carrying tracing data to inject
+   * @param carrier carrier to inject context into
+   * @param setter Function used to set values on the carrier
+   */
+  inject<Carrier>(
+    context: Context,
+    carrier: Carrier,
+    setter?: TextMapSetter<Carrier>
+  ): void
+  /**
+   * Extract context from a carrier
+   *
+   * @param context Context which the newly created context will inherit from
+   * @param carrier Carrier to extract context from
+   * @param getter Function used to extract keys from a carrier
+   */
+  extract<Carrier>(
+    context: Context,
+    carrier: Carrier,
+    getter?: TextMapGetter<Carrier>
+  ): Context
 }
 ```
 
@@ -243,7 +255,7 @@ server 端 extract 代码:
 context.with(
   propagation.extract(ROOT_CONTEXT, call.metadata, {
     get: (carrier, key) => carrier.get(key).map(String),
-    keys: carrier => Object.keys(carrier.getMap()),
+    keys: (carrier) => Object.keys(carrier.getMap()),
   }),
   () => {
     // run origin server handler in span context
@@ -257,7 +269,7 @@ client 端 inject 代码:
 export function setSpanContext(metadata: grpcJs.Metadata): void {
   propagation.inject(context.active(), metadata, {
     set: (metadata, k, v) => metadata.set(k, v as grpcJs.MetadataValue),
-  });
+  })
 }
 ```
 
@@ -281,47 +293,55 @@ instrumentation 通过 monkey patch 形式更改相应的库进行无感知 trac
 
 由于 instrumentation 使用 monkey patch 实现, 所以需要在 patch 库之前执行, 某些框架有自己的加载器, 没有一个入口文件, 所以建议单独定义一个 `trace.js` 文件, 使用 `node --require trace.js app.js` 启动应用, 框架基本都有给 node 传递 require 文件的方法.
 
+opentelemetry-js 正在经历了 0.x 版本到 1.0 版本的过渡, 所以非常多的 `BREAKING CHANGE`, API 变化非常大, 本文已经将代码更新为 1.0 版本新 API 形式, 如果后续有冲突请以官方文档为准.
+
 ```ts
-import { NodeTracerProvider } from '@opentelemetry/node'
-import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api'
-import { Resource } from '@opentelemetry/resources';
-import { ResourceAttributes } from '@opentelemetry/semantic-conventions';
-import { SimpleSpanProcessor, BatchSpanProcessor } from '@opentelemetry/tracing'
 import { JaegerExporter } from '@opentelemetry/exporter-jaeger'
-import { registerInstrumentations } from '@opentelemetry/instrumentation'
-import { GrpcInstrumentation } from '@opentelemetry/instrumentation-grpc'
+import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base'
+import { NodeSDK } from '@opentelemetry/sdk-node'
+import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node'
 
-const serviceName = process.env.serviceName || 'server'
+// 环境变量配置, 完整列表可见下面链接
+// https://github.com/open-telemetry/opentelemetry-js/blob/3045eba229f031e1510785dbb9713f24daf17ed1/packages/opentelemetry-core/src/utils/environment.ts
+// 定义 service 名称
+process.env.OTEL_SERVICE_NAME = 'test-service'
+// 定义日志级别
+process.env.OTEL_LOG_LEVEL = 'ALL'
 
-diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG)
+const main = async () => {
+  // 定义 tracing 输出服务, zipkin 选择 ZipkinExporter
+  const exporter = new JaegerExporter({
+    endpoint: 'http://localhost:14268/api/traces',
+  })
 
-// 声名定义 tracer provider
-const provider = new NodeTracerProvider({
-  resource: new Resource({
-    // 定义 service 名称
-    [ResourceAttributes.SERVICE_NAME]: serviceName,
-  }),
-});
+  const sdk = new NodeSDK({
+    // SimpleSpanProcessor 每个 span 发一个请求, 性能很低, 生产环境不要用
+    // provider.addSpanProcessor(new SimpleSpanProcessor(exporter))
+    // BatchSpanProcessor 批处理, 生产环境使用
+    spanProcessor: new BatchSpanProcessor(exporter),
+    instrumentations: [
+      // 注册需要的 instrumentations
+      // @opentelemetry/auto-instrumentations-node 可以帮我们自动注入一些内置模块和通用模块
+      // 详情可查看文档
+      // https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/metapackages/auto-instrumentations-node
+      getNodeAutoInstrumentations(),
+    ],
+  })
 
-// 定义 tracing 输出服务, zipkin 选择 ZipkinExporter
-const exporter = new JaegerExporter({
-  host: 'localhost',
-  port: 6832,
-})
+  await sdk.start()
 
-// SimpleSpanProcessor 每个 span 发一个请求, 性能很低, 生产环境不要用
-// provider.addSpanProcessor(new SimpleSpanProcessor(exporter))
-// BatchSpanProcessor 批处理, 生产环境使用
-provider.addSpanProcessor(new BatchSpanProcessor(exporter))
+  console.log('[trace] initialized')
 
-// 注册需要的 instrumentations
-registerInstrumentations({
-  instrumentations: [new GrpcInstrumentation()],
-})
+  // gracefully shut down the SDK on process exit
+  process.on('SIGTERM', () => {
+    sdk
+      .shutdown()
+      .then(() => console.log('[trace] terminated'))
+      .catch((error) => console.log('[trace] Error terminating tracing', error))
+  })
+}
 
-provider.register()
-
-console.log('tracing initialized')
+main()
 ```
 
 **注意:** jaeger batch UDP processor 注意调整 sysctl net.inet.udp.maxdgram
