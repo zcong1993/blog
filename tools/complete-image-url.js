@@ -2,7 +2,7 @@ const fs = require('fs')
 
 const argv = process.argv.slice(2)
 
-const PUBLIC_URL = 'https://blog.cong.moe'
+const PUBLIC_URL = 'https://gitee.com/zcong1993/blog/raw/master/static'
 
 if (argv.length !== 1) {
   console.log('need one arg for process file!')

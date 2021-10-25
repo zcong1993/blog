@@ -1,0 +1,21 @@
+name: Sync to Gitee
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@master
+      - name: Sync to Gitee
+        uses: Yikun/hub-mirror-action@master
+        with:
+          src: github/zcong1993
+          dst: gitee/zcong1993
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: "blog"
