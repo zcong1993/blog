@@ -98,4 +98,9 @@ Dapr 与服务网格都有的一些常见功能包括:
 
 而且 dapr 抽象出了很多通用的应用层服务.
 
+## 参考资料
+
+- [https://github.com/dapr/dapr](https://github.com/dapr/dapr)
+- [https://docs.dapr.io](https://docs.dapr.io)
+
 ![wxmp](/wxmp_tiny_1.png)

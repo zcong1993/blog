@@ -198,4 +198,8 @@ export class TimeoutManager {
 1. client 端, 发送 http 请求时使用 `timeoutManager.getTimeout()` 获取当前剩余超时时间, 放入 header 中传递给 server
 2. server 端在全局超时中间件中, 拿到 request header 中的 timeout, 使用 `timeoutManager.shrinkDeadline(timeout)` 将当前请求的超时时间设置为 client 超时和全局超时中较小值
 
+## 参考资料
+
+- [https://mp.weixin.qq.com/s/BERHvjCbxTCEUF8glOBqBg](https://mp.weixin.qq.com/s/BERHvjCbxTCEUF8glOBqBg)
+
 ![wxmp](/wxmp_tiny_1.png)
