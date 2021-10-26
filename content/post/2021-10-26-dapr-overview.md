@@ -20,7 +20,7 @@ draft: false
 
 ## Dapr 是什么?
 
-dapr 是 **`Distributed Application Runtime`** 的缩写, 翻译一下就是分布式运行时.
+dapr 是 **`Distributed Application Runtime`** 的缩写, 翻译一下就是分布式应用运行时.
 
 官方文档中的定义是:
 
