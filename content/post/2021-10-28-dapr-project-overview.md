@@ -15,7 +15,7 @@ keywords:
   - Golang
   - Dapr
   - Cloud Native
-draft: true
+draft: false
 ---
 
 本文源码选用 dapr 1.4.3 [https://github.com/zcong1993/dapr-1/tree/learn-1.4.3](https://github.com/zcong1993/dapr-1/tree/learn-1.4.3)
