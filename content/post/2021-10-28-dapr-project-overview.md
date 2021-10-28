@@ -1,7 +1,7 @@
 ---
 title: Dapr 项目总览
 date: 2021-10-28T17:58:42+08:00
-cover: /cover.jpeg
+cover: /dapr-project-overview-cover.png
 description: Dapr 项目总览, 基本概念, 项目结构介绍.
 categories:
   - Golang
