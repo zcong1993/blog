@@ -2,12 +2,12 @@ const fs = require('fs')
 
 const argv = process.argv.slice(2)
 
-const PUBLIC_URL = 'https://gitee.com/zcong1993/blog/raw/master/static'
-
-if (argv.length !== 1) {
+if (argv.length < 1) {
   console.log('need one arg for process file!')
   process.exit(1)
 }
+
+const PUBLIC_URL = argv.length > 1 ? 'https://gitee.com/zcong1993/blog/raw/master/static' : 'https://blog.cong.moe'
 
 const file = argv[0]
 const content = fs.readFileSync(file, 'utf8')
