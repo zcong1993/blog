@@ -29,29 +29,29 @@ HUGO_VERSION = "0.88.1"
 [context.next.environment]
 HUGO_ENABLEGITINFO = "true"
 
-[[redirects]]
-  from = "https://zcong-blog.netlify.com/*"
-  to = "https://blog.cong.moe/:splat"
-  status = 301
-  force = true
+# [[redirects]]
+#   from = "https://zcong-blog.netlify.com/*"
+#   to = "https://blog.cong.moe/:splat"
+#   status = 301
+#   force = true
 
-[[headers]]
-  for = "/*.png"
-  [headers.values]
-    cache-control = '''
-    max-age=2592000,
-    public'''
+# [[headers]]
+#   for = "/*.png"
+#   [headers.values]
+#     cache-control = '''
+#     max-age=2592000,
+#     public'''
 
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    cache-control = '''
-    max-age=2592000,
-    public'''
+# [[headers]]
+#   for = "/*.css"
+#   [headers.values]
+#     cache-control = '''
+#     max-age=2592000,
+#     public'''
 
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    cache-control = '''
-    max-age=2592000,
-    public'''
+# [[headers]]
+#   for = "/*.js"
+#   [headers.values]
+#     cache-control = '''
+#     max-age=2592000,
+#     public'''

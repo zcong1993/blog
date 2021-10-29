@@ -1,4 +1,4 @@
-baseurl = "https://blog.cong.moe/"
+baseurl = "https://nblog.cong.moe/"
 languageCode = "en-us"
 theme = "terminal"
 paginate = 5
