@@ -15,7 +15,7 @@ keywords:
   - Golang
   - Dapr
   - Cloud Native
-draft: true
+draft: false
 ---
 
 `Components` 是 dapr 抽象出来的提供某种特定功能的可插拔组件, 为 dapr 或者 building blocks 所使用.
