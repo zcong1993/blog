@@ -7,7 +7,17 @@ if (argv.length < 1) {
   process.exit(1)
 }
 
-const PUBLIC_URL = argv.length > 1 ? 'https://gitee.com/zcong1993/blog/raw/master/static' : 'https://blog.cong.moe'
+let PUBLIC_URL
+switch (argv[1]) {
+  case '1':
+    PUBLIC_URL = 'https://gitee.com/zcong1993/blog/raw/master/static'
+    break
+  case '2':
+    PUBLIC_URL = 'https://github.com/zcong1993/blog/raw/master/static'
+    break
+  default:
+    PUBLIC_URL = 'https://blog.cong.moe'
+}
 
 const file = argv[0]
 const content = fs.readFileSync(file, 'utf8')
