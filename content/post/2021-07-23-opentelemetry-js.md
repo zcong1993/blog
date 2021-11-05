@@ -125,7 +125,6 @@ draft: false
 [AsyncLocalStorage](https://nodejs.org/dist/latest-v16.x/docs/api/async_context.html#async_context_class_asynclocalstorage) 相当于 java 的 `ThreadLocal`. 区别就是 java ThreadLocal 是基于线程级别隔离的, 而 js 则可以基于异步函数块做隔离.
 
 ```ts
-// https://github.com/zcong1993/context-async-hooks/blob/master/__test__/index.test.ts#L161
 const scope1 = '1'
 const scope2 = '2'
 const scope3 = '3'
@@ -147,6 +146,8 @@ await contextManager.with(scope1, async () => {
   expect(contextManager.active()).toStrictEqual(scope1)
 })
 ```
+
+[zcong1993/context-async-hooks/index.test.ts#L161](https://github.com/zcong1993/context-async-hooks/blob/master/__test__/index.test.ts#L161)
 
 可以看到 `contextManager.with(ctx, asyncFn)` 函数能够保证在 asyncFn 函数中调用 `contextManager.active()` 函数始终只能够拿到 with 函数设置的 `ctx`.
 
@@ -171,7 +172,6 @@ await cm.with(a, async () => {
 所以 opentelemetry-js 的 context 使用 `Map` 类型, 在处理 context 修改时会复制一份, 相当于 immutable.
 
 ```ts
-// https://github.com/open-telemetry/opentelemetry-js-api/blob/26ae4c463e3fd660198076e98a3e7000c78db964/src/context/context.ts#L30
 class BaseContext implements Context {
   private _currentContext!: Map<symbol, unknown>
 
@@ -198,11 +198,11 @@ class BaseContext implements Context {
 }
 ```
 
+[opentelemetry-js-api/src/context/context.ts#L30](https://github.com/open-telemetry/opentelemetry-js-api/blob/26ae4c463e3fd660198076e98a3e7000c78db964/src/context/context.ts#L30)
+
 `tracer.startSpan()` 默认会以 active span 作为 parent 创建出子 span, 层级关系就这样有了, 最后用 `context.with(ctx, fn)` 使函数在 scope 中执行(封装的 `asyncLocalStorage.run` 方法):
 
 ```ts
-// https://github.com/open-telemetry/opentelemetry-js/blob/a1b47ac4407e5af85d2d98be0308938e70d3cddf/packages/opentelemetry-sdk-trace-base/src/Tracer.ts#L64
-
 startSpan(
   name: string,
   options: api.SpanOptions = {},
@@ -239,6 +239,8 @@ startSpan(
   return span;
 }
 ```
+
+[opentelemetry-sdk-trace-base/src/Tracer.ts#L64](https://github.com/open-telemetry/opentelemetry-js/blob/a1b47ac4407e5af85d2d98be0308938e70d3cddf/packages/opentelemetry-sdk-trace-base/src/Tracer.ts#L64)
 
 根据上面原理分析, tracing 伪代码如下:
 
@@ -432,4 +434,6 @@ sudo sysctl net.inet.udp.maxdgram=65536
 
 OpenTelemetry Tracing 方面能够做到无侵入使用体验非常好, 但是 Metrics 方面就没必要使用了, 首先 Prometheus 生态已经非常成熟而且使用扩展起来很简单, 其次 OpenTelemetry Metrics 自己定义了一套指标类型然后通过适配器转化成 Prometheus metrics 个人感觉没什么必要.
 
-从源码阅读体验来说, 是非常痛苦的. 因为抽象了太多东西导致源码分散在了无数个 npm 包, 而且正在经历 0.x 到 1.0 过渡时期, 包名和源码未知变动都很大. 随处可见的 interface, 并且很多地方采用全局 `provider register` 来管理, 这些都是比较好的设计模式. 但是也有反常规的地方, 例如 `opentelemetry-context-async-hooks` 这个包封装了不同 node 版本的 context manager, 我下意识认为这个包是纯高层抽象, 来管理抽象的上下文类型应该是 `AsyncLocalStorageContextManager<T>` 类型, 结果它直接耦合了 context 类型, 并且将 rootContext 默认值在这个层面返回, 导致当初我找 `Context` 实现时花费了很长时间, 可见[源码](https://github.com/open-telemetry/opentelemetry-js/blob/a1b47ac4407e5af85d2d98be0308938e70d3cddf/packages/opentelemetry-context-async-hooks/src/AsyncLocalStorageContextManager.ts#L30). 这点也导致这个包不能共享出来在别的地方直接使用, 所以我 fork 了一个自己的版本 [zcong1993/context-async-hooks](https://github.com/zcong1993/context-async-hooks), 也算阅读源码的一个产出.
+从源码阅读体验来说, 是非常痛苦的. 因为抽象了太多东西导致源码分散在了无数个 npm 包, 而且正在经历 0.x 到 1.0 过渡时期, 包名和源码未知变动都很大. 随处可见的 interface, 并且很多地方采用全局 `provider register` 来管理, 这些都是比较好的设计模式.
+
+但是也有反常规的地方, 例如 `opentelemetry-context-async-hooks` 这个包封装了不同 node 版本的 context manager, 我下意识认为这个包是纯高层抽象, 来管理抽象的上下文类型应该是 `AsyncLocalStorageContextManager<T>` 类型, 结果它直接耦合了 context 类型, 并且将 rootContext 默认值在这个层面返回, 导致当初我找 `Context` 实现时花费了很长时间, 可见[源码](https://github.com/open-telemetry/opentelemetry-js/blob/a1b47ac4407e5af85d2d98be0308938e70d3cddf/packages/opentelemetry-context-async-hooks/src/AsyncLocalStorageContextManager.ts#L30). 这点也导致这个包不能共享出来在别的地方直接使用, 所以我 fork 了一个自己的版本 [zcong1993/context-async-hooks](https://github.com/zcong1993/context-async-hooks), 也算阅读源码的一个产出.
