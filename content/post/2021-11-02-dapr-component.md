@@ -334,6 +334,20 @@ runtime.secretStores = map[string]secretstores.SecretStore{
 }
 ```
 
+同理别的部分模块也会被按照分类以 map 的形式存在 runtime 中:
+
+```go
+type DaprRuntime struct {
+  // ...
+  stateStores            map[string]state.Store
+  inputBindings          map[string]bindings.InputBinding
+  outputBindings         map[string]bindings.OutputBinding
+  secretStores           map[string]secretstores.SecretStore
+  pubSubs                map[string]pubsub.PubSub
+  // ...
+}
+```
+
 ### 为什么会出现模块依赖?
 
 组件配置中经常会需要配置一些敏感信息, 例如数据库密码之类. 使用纯文本是非常不安全的, 所以 dapr 允许在组件配置中引用 `secret store` 组件中的秘钥配置, 类似于 k8s 中环境变量引用 secrets.
