@@ -19,6 +19,8 @@ switch (argv[1]) {
     PUBLIC_URL = 'https://blog.cong.moe'
 }
 
+const write = argv[2]
+
 const file = argv[0]
 const content = fs.readFileSync(file, 'utf8')
 
@@ -27,4 +29,8 @@ const processedContent = content.replace(
   `$1(${PUBLIC_URL}$2)`
 )
 
-console.log(processedContent)
+if (write) {
+  fs.writeFileSync(`${write}.md`, processedContent)
+} else {
+  console.log(processedContent)
+}
