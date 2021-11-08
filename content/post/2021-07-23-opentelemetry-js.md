@@ -278,7 +278,7 @@ http 协议选择 header 作为 carrier, grpc 使用 metadata.
 - extract 负责从接收到的 carrier 中还原 span 信息
 
 ```ts
-class PropagationAPI {
+interface PropagationAPI {
   /**
    * Inject context into a carrier to be propagated inter-process
    *
@@ -430,10 +430,12 @@ sudo sysctl net.inet.udp.maxdgram=65536
 
 `OTEL_TRACES_SAMPLER` 和 `OTEL_TRACES_SAMPLER_ARG` 环境变量可以直接控制内置采样器, 也可以实现自己的采样器
 
-## 6. 个人感受
+## 6. 个人感受与产出
 
 OpenTelemetry Tracing 方面能够做到无侵入使用体验非常好, 但是 Metrics 方面就没必要使用了, 首先 Prometheus 生态已经非常成熟而且使用扩展起来很简单, 其次 OpenTelemetry Metrics 自己定义了一套指标类型然后通过适配器转化成 Prometheus metrics 个人感觉没什么必要.
 
 从源码阅读体验来说, 是非常痛苦的. 因为抽象了太多东西导致源码分散在了无数个 npm 包, 而且正在经历 0.x 到 1.0 过渡时期, 包名和源码位置变动都很大. 随处可见的 interface, 并且很多地方采用全局 `provider register` 来管理, 这些都是比较好的设计模式.
 
 但是也有反常规的地方, 例如 `opentelemetry-context-async-hooks` 这个包封装了不同 node 版本的 context manager, 我下意识认为这个包是纯高层抽象, 来管理抽象的上下文类型应该是 `AsyncLocalStorageContextManager<T>` 类型, 结果它直接耦合了 context 类型, 并且将 rootContext 默认值在这个层面返回, 导致当初我找 `Context` 实现时花费了很长时间, 可见[源码](https://github.com/open-telemetry/opentelemetry-js/blob/a1b47ac4407e5af85d2d98be0308938e70d3cddf/packages/opentelemetry-context-async-hooks/src/AsyncLocalStorageContextManager.ts#L30). 这点也导致这个包不能共享出来在别的地方直接使用, 所以我 fork 了一个自己的版本 [zcong1993/context-async-hooks](https://github.com/zcong1993/context-async-hooks), 也算阅读源码的一个产出.
+
+而另一个产出是 [opentelemetry-instrumentation-egg](https://github.com/zcong1993/opentelemetry-instrumentation-egg), 为 [egg.js](https://github.com/eggjs/egg) 框架写了个 instrumentation, 并且已经用于我们公司项目中了. 由于 egg.js 底层是基于 koa, 所以实现起来和 `opentelemetry-instrumentation-koa` 差不多.
