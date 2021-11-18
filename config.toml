@@ -2,7 +2,7 @@ baseurl = "https://nblog.cong.moe/"
 languageCode = "en-us"
 theme = "terminal"
 paginate = 5
-googleAnalytics = "UA-92092104-2"      # UA-XXXXXXXX-X
+# googleAnalytics = "UA-92092104-2"      # UA-XXXXXXXX-X
 
 # [markup]
 #     defaultMarkdownHandler = "goldmark"
