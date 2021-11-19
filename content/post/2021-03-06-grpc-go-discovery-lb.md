@@ -45,51 +45,51 @@ client 建立连接时, 会根据 `URI scheme` 选取 resolver 模块中全局�
 
 ```go
 // m is a map from scheme to resolver builder.
-var	m = make(map[string]Builder)
+var  m = make(map[string]Builder)
 
 type Target struct {
-	Scheme    string
-	Authority string
-	Endpoint  string
+  Scheme    string
+  Authority string
+  Endpoint  string
 }
 
 // Builder creates a resolver that will be used to watch name resolution updates.
 type Builder interface {
-	// Build creates a new resolver for the given target.
-	//
-	// gRPC dial calls Build synchronously, and fails if the returned error is
-	// not nil.
-	Build(target Target, cc ClientConn, opts BuildOptions) (Resolver, error)
-	// Scheme returns the scheme supported by this resolver.
-	// Scheme is defined at https://github.com/grpc/grpc/blob/master/doc/naming.md.
-	Scheme() string
+  // Build creates a new resolver for the given target.
+  //
+  // gRPC dial calls Build synchronously, and fails if the returned error is
+  // not nil.
+  Build(target Target, cc ClientConn, opts BuildOptions) (Resolver, error)
+  // Scheme returns the scheme supported by this resolver.
+  // Scheme is defined at https://github.com/grpc/grpc/blob/master/doc/naming.md.
+  Scheme() string
 }
 
 // State contains the current Resolver state relevant to the ClientConn.
 type State struct {
-	// Addresses is the latest set of resolved addresses for the target.
-	Addresses []Address
+  // Addresses is the latest set of resolved addresses for the target.
+  Addresses []Address
 
-	// ServiceConfig contains the result from parsing the latest service
-	// config.  If it is nil, it indicates no service config is present or the
-	// resolver does not provide service configs.
-	ServiceConfig *serviceconfig.ParseResult
+  // ServiceConfig contains the result from parsing the latest service
+  // config.  If it is nil, it indicates no service config is present or the
+  // resolver does not provide service configs.
+  ServiceConfig *serviceconfig.ParseResult
 
-	// Attributes contains arbitrary data about the resolver intended for
-	// consumption by the load balancing policy.
-	Attributes *attributes.Attributes
+  // Attributes contains arbitrary data about the resolver intended for
+  // consumption by the load balancing policy.
+  Attributes *attributes.Attributes
 }
 
 // Resolver watches for the updates on the specified target.
 // Updates include address updates and service config updates.
 type Resolver interface {
-	// ResolveNow will be called by gRPC to try to resolve the target name
-	// again. It's just a hint, resolver can ignore this if it's not necessary.
-	//
-	// It could be called multiple times concurrently.
-	ResolveNow(ResolveNowOptions)
-	// Close closes the resolver.
-	Close()
+  // ResolveNow will be called by gRPC to try to resolve the target name
+  // again. It's just a hint, resolver can ignore this if it's not necessary.
+  //
+  // It could be called multiple times concurrently.
+  ResolveNow(ResolveNowOptions)
+  // Close closes the resolver.
+  Close()
 }
 ```
 
@@ -116,41 +116,41 @@ gRPC 客户端在建立连接时, 地址解析部分大致会有以下几个步�
 const exampleScheme = "example"
 
 type exampleResolverBuilder struct {
-	addrsStore map[string][]string
+  addrsStore map[string][]string
 }
 
 func NewExampleResolverBuilder(addrsStore map[string][]string) *exampleResolverBuilder {
-	return &exampleResolverBuilder{addrsStore: addrsStore}
+  return &exampleResolverBuilder{addrsStore: addrsStore}
 }
 
 func (e *exampleResolverBuilder) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
   // 初始化 resolver, 将 addrsStore 传递进去
-	r := &exampleResolver{
-		target:     target,
-		cc:         cc,
-		addrsStore: e.addrsStore,
-	}
+  r := &exampleResolver{
+    target:     target,
+    cc:         cc,
+    addrsStore: e.addrsStore,
+  }
   // 调用 start 初始化地址
-	r.start()
-	return r, nil
+  r.start()
+  return r, nil
 }
 func (e *exampleResolverBuilder) Scheme() string { return exampleScheme }
 
 type exampleResolver struct {
-	target     resolver.Target
-	cc         resolver.ClientConn
-	addrsStore map[string][]string
+  target     resolver.Target
+  cc         resolver.ClientConn
+  addrsStore map[string][]string
 }
 
 func (r *exampleResolver) start() {
   // 在静态路由表中查询此 Endpoint 对应 addrs
-	addrStrs := r.addrsStore[r.target.Endpoint]
-	addrs := make([]resolver.Address, len(addrStrs))
-	for i, s := range addrStrs {
-		addrs[i] = resolver.Address{Addr: s}
-	}
+  addrStrs := r.addrsStore[r.target.Endpoint]
+  addrs := make([]resolver.Address, len(addrStrs))
+  for i, s := range addrStrs {
+    addrs[i] = resolver.Address{Addr: s}
+  }
   // addrs 列表转化为 state, 调用 cc.UpdateState 更新地址
-	r.cc.UpdateState(resolver.State{Addresses: addrs})
+  r.cc.UpdateState(resolver.State{Addresses: addrs})
 }
 func (*exampleResolver) ResolveNow(o resolver.ResolveNowOptions) {}
 func (*exampleResolver) Close()                                  {}
@@ -185,28 +185,28 @@ etcd 作为服务发现主要原理是:
 
 ```go
 func Register(ctx context.Context, client *clientv3.Client, service, self string) error {
-	resp, err := client.Grant(ctx, 2)
-	if err != nil {
-		return errors.Wrap(err, "etcd grant")
-	}
-	_, err = client.Put(ctx, strings.Join([]string{service, self}, "/"), self, clientv3.WithLease(resp.ID))
-	if err != nil {
-		return errors.Wrap(err, "etcd put")
-	}
-	// respCh 需要消耗, 不然会有 warning
-	respCh, err := client.KeepAlive(ctx, resp.ID)
-	if err != nil {
-		return errors.Wrap(err, "etcd keep alive")
-	}
+  resp, err := client.Grant(ctx, 2)
+  if err != nil {
+    return errors.Wrap(err, "etcd grant")
+  }
+  _, err = client.Put(ctx, strings.Join([]string{service, self}, "/"), self, clientv3.WithLease(resp.ID))
+  if err != nil {
+    return errors.Wrap(err, "etcd put")
+  }
+  // respCh 需要消耗, 不然会有 warning
+  respCh, err := client.KeepAlive(ctx, resp.ID)
+  if err != nil {
+    return errors.Wrap(err, "etcd keep alive")
+  }
 
-	for {
-		select {
-		case <-ctx.Done():
-			return nil
-		case <-respCh:
+  for {
+    select {
+    case <-ctx.Done():
+      return nil
+    case <-respCh:
 
-		}
-	}
+    }
+  }
 }
 ```
 
@@ -217,125 +217,125 @@ func Register(ctx context.Context, client *clientv3.Client, service, self string
 ```go
 const (
   // etcd resolver 负责的 scheme 类型
-	Scheme      = "etcd"
-	defaultFreq = time.Minute * 30
+  Scheme      = "etcd"
+  defaultFreq = time.Minute * 30
 )
 
 type Builder struct {
-	client *clientv3.Client
+  client *clientv3.Client
   // 全局路由表快照, 非必要
-	store  map[string]map[string]struct{}
+  store  map[string]map[string]struct{}
 }
 
 func NewBuilder(client *clientv3.Client) *Builder {
-	return &Builder{
-		client: client,
-		store:  make(map[string]map[string]struct{}),
-	}
+  return &Builder{
+    client: client,
+    store:  make(map[string]map[string]struct{}),
+  }
 }
 
 func (b *Builder) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
-	b.store[target.Endpoint] = make(map[string]struct{})
+  b.store[target.Endpoint] = make(map[string]struct{})
 
   // 初始化 etcd resolver
-	r := &etcdResolver{
-		client: b.client,
-		target: target,
-		cc:     cc,
-		store:  b.store[target.Endpoint],
-		stopCh: make(chan struct{}, 1),
-		rn:     make(chan struct{}, 1),
-		t:      time.NewTicker(defaultFreq),
-	}
+  r := &etcdResolver{
+    client: b.client,
+    target: target,
+    cc:     cc,
+    store:  b.store[target.Endpoint],
+    stopCh: make(chan struct{}, 1),
+    rn:     make(chan struct{}, 1),
+    t:      time.NewTicker(defaultFreq),
+  }
 
   // 开启后台更新 goroutine
-	go r.start(context.Background())
+  go r.start(context.Background())
   // 全量更新服务地址
-	r.ResolveNow(resolver.ResolveNowOptions{})
+  r.ResolveNow(resolver.ResolveNowOptions{})
 
-	return r, nil
+  return r, nil
 }
 
 func (b *Builder) Scheme() string {
-	return Scheme
+  return Scheme
 }
 
 type etcdResolver struct {
-	client *clientv3.Client
-	target resolver.Target
-	cc     resolver.ClientConn
-	store  map[string]struct{}
-	stopCh chan struct{}
-	// rn channel is used by ResolveNow() to force an immediate resolution of the target.
-	rn chan struct{}
-	t  *time.Ticker
+  client *clientv3.Client
+  target resolver.Target
+  cc     resolver.ClientConn
+  store  map[string]struct{}
+  stopCh chan struct{}
+  // rn channel is used by ResolveNow() to force an immediate resolution of the target.
+  rn chan struct{}
+  t  *time.Ticker
 }
 
 func (r *etcdResolver) start(ctx context.Context) {
-	target := r.target.Endpoint
+  target := r.target.Endpoint
 
-	w := clientv3.NewWatcher(r.client)
-	rch := w.Watch(ctx, target+"/", clientv3.WithPrefix())
-	for {
-		select {
-		case <-r.rn:
-			r.resolveNow()
-		case <-r.t.C:
-			r.ResolveNow(resolver.ResolveNowOptions{})
-		case <-r.stopCh:
-			w.Close()
-			return
-		case wresp := <-rch:
-			for _, ev := range wresp.Events {
-				switch ev.Type {
-				case mvccpb.PUT:
-					r.store[string(ev.Kv.Value)] = struct{}{}
-				case mvccpb.DELETE:
-					delete(r.store, strings.Replace(string(ev.Kv.Key), target+"/", "", 1))
-				}
-			}
-			r.updateTargetState()
-		}
-	}
+  w := clientv3.NewWatcher(r.client)
+  rch := w.Watch(ctx, target+"/", clientv3.WithPrefix())
+  for {
+    select {
+    case <-r.rn:
+      r.resolveNow()
+    case <-r.t.C:
+      r.ResolveNow(resolver.ResolveNowOptions{})
+    case <-r.stopCh:
+      w.Close()
+      return
+    case wresp := <-rch:
+      for _, ev := range wresp.Events {
+        switch ev.Type {
+        case mvccpb.PUT:
+          r.store[string(ev.Kv.Value)] = struct{}{}
+        case mvccpb.DELETE:
+          delete(r.store, strings.Replace(string(ev.Kv.Key), target+"/", "", 1))
+        }
+      }
+      r.updateTargetState()
+    }
+  }
 }
 
 func (r *etcdResolver) resolveNow() {
-	target := r.target.Endpoint
-	resp, err := r.client.Get(context.Background(), target+"/", clientv3.WithPrefix())
-	if err != nil {
-		r.cc.ReportError(errors.Wrap(err, "get init endpoints"))
-		return
-	}
+  target := r.target.Endpoint
+  resp, err := r.client.Get(context.Background(), target+"/", clientv3.WithPrefix())
+  if err != nil {
+    r.cc.ReportError(errors.Wrap(err, "get init endpoints"))
+    return
+  }
 
-	for _, kv := range resp.Kvs {
-		r.store[string(kv.Value)] = struct{}{}
-	}
+  for _, kv := range resp.Kvs {
+    r.store[string(kv.Value)] = struct{}{}
+  }
 
-	r.updateTargetState()
+  r.updateTargetState()
 }
 
 func (r *etcdResolver) updateTargetState() {
-	addrs := make([]resolver.Address, len(r.store))
-	i := 0
-	for k := range r.store {
-		addrs[i] = resolver.Address{Addr: k}
-		i++
-	}
-	r.cc.UpdateState(resolver.State{Addresses: addrs})
+  addrs := make([]resolver.Address, len(r.store))
+  i := 0
+  for k := range r.store {
+    addrs[i] = resolver.Address{Addr: k}
+    i++
+  }
+  r.cc.UpdateState(resolver.State{Addresses: addrs})
 }
 
 // 会并发调用, 所以这里防止同时多次全量刷新
 func (r *etcdResolver) ResolveNow(o resolver.ResolveNowOptions) {
-	select {
-	case r.rn <- struct{}{}:
-	default:
+  select {
+  case r.rn <- struct{}{}:
+  default:
 
-	}
+  }
 }
 
 func (r *etcdResolver) Close() {
-	r.t.Stop()
-	close(r.stopCh)
+  r.t.Stop()
+  close(r.stopCh)
 }
 ```
 

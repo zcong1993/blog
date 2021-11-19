@@ -162,7 +162,7 @@ $ stern server -t -s 1s
 
 #### 解决方案
 
-有人提出了一个比较肮脏的方案, 通过设置 server 端 `MaxConnectionAge` 来定时 `踢掉` client 连接. 细节查看 [grpc/keepalive#ServerParameters](https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters).
+有人提出了一个比较奇怪的方案, 通过设置 server 端 `MaxConnectionAge` 来定时 `踢掉` client 连接. 细节查看 [grpc/keepalive#ServerParameters](https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters).
 
 更改 k8s 文件, 启用服务端参数:
 
@@ -198,7 +198,7 @@ spec:
 
 ![log3.png](/grpc-lb-k8s/log3.png)
 
-发现经过一段时间(maxConnectionAge 设置的是 30s), grpc client 确实 '发现' 了新 pod. 但是这种只是种 `trick`, 不建议使用, 谁会想到 server 端的 `maxConnectionAge` 参数竟然是为了帮助 client 端发现新服务.
+发现经过一段时间(maxConnectionAge 设置的是 30s), grpc client 确实 '发现' 了新 pod. 但是这种只是种 `trick`, 谁会想到 server 端的 `maxConnectionAge` 参数竟然是为了帮助 client 端发现新服务. 微软的 [https://dapr.io](https://dapr.io) 项目就是使用这种方式解决 k8s 服务发现和证书过期的问题.
 
 ## 使用 k8s api 实现 resolver
 
@@ -214,11 +214,11 @@ k8s 向外暴露了集群信息 API, 使用 [Endpoints read API](https://kuberne
 
 除去不符合要求的集中方式, 对比下几种方式优缺点:
 
-|          方式          |                     优点                      |                                缺点                                |
-| :--------------------: | :-------------------------------------------: | :----------------------------------------------------------------: |
-| dns (maxConnectionAge) | 使用方便, 只需增加参数和使用 headless service | 手段太 trick, 并且需要定时断开连接, 需要权衡 maxConnectionAge 参数 |
-|        k8s api         |                 实时, 无依赖                  |         需要配置 ServiceAccount 权限, 仅能在 k8s 内部使用          |
-|          etcd          |         实时, 部署环境不限于 k8s 内部         |                       需要额外维护 etcd 服务                       |
+|          方式          |                     优点                      |                                 缺点                                 |
+| :--------------------: | :-------------------------------------------: | :------------------------------------------------------------------: |
+| dns (maxConnectionAge) | 使用方便, 只需增加参数和使用 headless service | 手段 trick, 并且需要定时断开底层连接, 需要权衡 maxConnectionAge 参数 |
+|        k8s api         |                 实时, 无依赖                  |          需要配置 ServiceAccount 权限, 仅能在 k8s 内部使用           |
+|          etcd          |         实时, 部署环境不限于 k8s 内部         |                        需要额外维护 etcd 服务                        |
 
 个人建议使用 `etcd` 方式.
 
