@@ -36,13 +36,19 @@ Service Invocation 是 dapr 对外提供的最基础功能, 也就是服务间�
 
 1. service A 想通过 HTTP/gRPC 调用 service B, 会先请求自己本地 dapr A(sidecar)应用
 2. dapr A 通过 `name resolution` 服务发现模块获取到 dapr B 服务的地址
-3. dapr A 通过 `gRPC` 调用 dapr B (dapr之间的调用都会用 gRPC 提高性能)
+3. dapr A 通过 `gRPC` 调用 dapr B (dapr 之间的调用都会用 gRPC 提高性能)
 4. dapr B 收到请求后转发请求给 service B
 5. service B 返回响应给 dapr B
 6. dapr B 将收到的响应返回给 dapr A
 7. dapr A 将收到的相应返回给 service A
 
-## HTTP API
+整个流程经过了 dapr runtime 三个部分, 首先是 service A 通过 dapr API 调用 dapr sidecar(1, 7), 接着 sidecar 之间通过 internal grpc client 调用 internal grpc server(3, 6), 最后是目标 sidecar 通过 App Channel 调用 service B(4, 5).
+
+## Dapr API
+
+dapr sidecar 会启动 HTTP 和 gRPC 两种 API 服务供用户 app 调用.
+
+以 HTTP API 为例:
 
 ### 1. 入口
 
@@ -50,7 +56,7 @@ dapr 对外提供的服务间调用 HTTP API 为:
 
 `POST/GET/PUT/DELETE [http://localhost](http://localhost/):<daprPort>/v1.0/invoke/<appId>/method/<method-name>`
 
-### 1.1 onDirectMessage (1, 7)
+### 2. onDirectMessage (1, 7)
 
 ```go
 // http://github.com/zcong1993/dapr-1/blob/a8ee30180e1183e2a2e4d00c283448af6d73d0d0/pkg/http/api.go#L260
@@ -97,10 +103,14 @@ onDirectMessage 为 API handler, 简单来说主要做了以下几点事情:
 
 1. 解析请求获取目标 app-id, 和一些简单校验工作
 2. 通过用户请求构建出内部请求(内部请求为 protobuf 格式, body 为 pb.Any 格式)
-3. 调用 `directMessaging.Invoke` 转发请求
+3. 调用`directMessaging.Invoke` 转发请求
 4. 根据响应构建响应返回给用户
 
-### 1.2 directMessaging
+## Internal gRPC remote call
+
+这一步到了 dapr sidecar 之间互相调用. 每个 dapr sidecar 都会启动一个 grpc 服务供其他 sidecar 调用, 叫做 Internal Server(proto 声明可见 [dapr/proto/internals/v1](https://github.com/zcong1993/dapr-1/tree/learn-1.4.3/dapr/proto/internals/v1)).
+
+### 1. directMessaging
 
 dapr 也是很标准的大写开头定义 interface 接口, 小写字母开头定义实现.
 
@@ -126,15 +136,13 @@ func (d *directMessaging) Invoke(ctx context.Context, targetAppID string, req *i
 }
 ```
 
-
-
 directMessaging 做了下面几件事情:
 
 1. 通过 name resolution 获取目标 app 的 address
 2. 如果发现调用是自己, 则通过 `invokeLocal` 调用自己 sidecar 本地的用户 app
 3. 发现不是自己时, 通过 `invokeWithRetry` 调用目标 dapr sidecar
 
-### 2.  name resolution (2)
+### 2. name resolution (2)
 
 name resolution 部分会在后续讲解, 现在只需要知道它和我们服务发现差不多, `ResolveID(req ResolveRequest) (string, error)` 通过 interface 定义可以看出, 就是通过 appId 和 namespace 获取 address.
 
@@ -180,6 +188,8 @@ invokeWithRetry 做了两件事情:
 
 ### 3.1 connectionCreatorFn
 
+dapr 使用 `[Manager](http://github.com/zcong1993/dapr-1/blob/a8ee30180e1183e2a2e4d00c283448af6d73d0d0/pkg/grpc/grpc.go#L42-L42)` 来管理 grpc client 连接, 保证每一个服务仅创建一个连接.
+
 ```go
 // http://github.com/zcong1993/dapr-1/blob/a8ee30180e1183e2a2e4d00c283448af6d73d0d0/pkg/grpc/grpc.go#L77
 func (g *Manager) GetGRPCConnection(ctx context.Context, address, id string, namespace string, skipTLS, recreateIfExists, sslEnabled bool, customOpts ...grpc.DialOption) (*grpc.ClientConn, error) {
@@ -217,7 +227,7 @@ func (g *Manager) GetGRPCConnection(ctx context.Context, address, id string, nam
 }
 ```
 
-GetGRPCConnection 简单管理共享复用 grpc client 连接, `map[string]*grpc.ClientConn` . 当参数 recreateIfExists 为 true 时会关闭旧连接创建新连接. 后续 `d.invokeRemote` 也是通过此函数拿连接.
+`GetGRPCConnection` 简单管理共享复用 grpc client 连接, `map[string]*grpc.ClientConn` . 当参数 `recreateIfExists` 为 true 时会关闭旧连接创建新连接. 后续 `d.invokeRemote` 也是通过此函数拿连接.
 
 ### 3.2 invokeRemote
 
@@ -250,9 +260,9 @@ func (d *directMessaging) invokeRemote(ctx context.Context, appID, namespace, ap
 }
 ```
 
-invokeRemote 通过 grpc  `CallLocal` 方法调用另一个 dapr sidecar 的 grpc server 方法. 这里的 `CallLocal` 不是本地调用的意思, 而是代表它是 dapr 的 internal 内部方法.
+invokeRemote 通过 grpc `CallLocal` 方法调用另一个 dapr sidecar 的 internal grpc server 方法. 这里的 `CallLocal` 不是本地调用的意思, 而是代表它是 dapr 的 internal 内部方法.
 
-### 4.  grpcServer.CallLocal (4, 5)
+### 4. grpcServer.CallLocal (4, 5)
 
 ```go
 // http://github.com/zcong1993/dapr-1/blob/a8ee30180e1183e2a2e4d00c283448af6d73d0d0/pkg/grpc/api.go#L147
@@ -283,9 +293,11 @@ func (a *api) CallLocal(ctx context.Context, in *internalv1pb.InternalInvokeRequ
 }
 ```
 
-发现 CallLocal 部分除了转换下请求和路由权限管理外, 将核心逻辑交给了 `appChannel.InvokeMethod` 来处理, 那么 `appChannel` 又是什么呢?
+发现 CallLocal 部分除了转换下请求和路由权限管理外, 将核心逻辑交给了 `appChannel.InvokeMethod` 来处理.
 
-我们知道 dapr 作为 sidecar 时允许我们 app 通过 HTTP 和 gRPC 两种方式和它交互, 所以 `appChannel` 其实就是这个调用的抽象, 它有两个实现, 一种是 HTTP, 另一种是 gRPC.
+## AppChannel
+
+dapr sidecar 通过 `AppChannel` 来调用用户服务, 由于用户服务可以是 gRPC 协议也可以是 HTTP 协议. 所以 appChannel 也有 HTTP 和 gRPC 两种实现.
 
 dapr 会根据 `runtimeConfig.ApplicationProtocol` 中指定的类型(可以通过 dapr run`--app-protocol` 参数指定)选择初始化哪种作为 `appChannel`:
 
@@ -375,28 +387,13 @@ func (h *Channel) invokeMethodV1(ctx context.Context, req *invokev1.InvokeMethod
 }
 ```
 
-invokeMethodV1 最终做的就是将内部的请求类型转化为用户服务类型, 例如 body 转为 json 类型, 拿到响应后再转为内部类型. `grpcServer.CallLocal` 部分就分析完了.
-
-### 5. invokeLocal (1, 7)
-
-invokeLocal 只会出现在使用 dapr API 自己调用自己时, 只是简单调用 `appChannel.InvokeMethod` . 正常情况下不会出现此情况.
-
-```go
-// http://github.com/zcong1993/dapr-1/blob/a8ee30180e1183e2a2e4d00c283448af6d73d0d0/pkg/messaging/direct_messaging.go#L158
-func (d *directMessaging) invokeLocal(ctx context.Context, req *invokev1.InvokeMethodRequest) (*invokev1.InvokeMethodResponse, error) {
-  if d.appChannel == nil {
-    return nil, errors.New("cannot invoke local endpoint: app channel not initialized")
-  }
-
-  return d.appChannel.InvokeMethod(ctx, req)
-}
-```
+invokeMethodV1 最终做的就是将内部的请求类型转化为用户服务类型, 例如 body 转为 json 类型, 拿到响应后再转为内部类型.
 
 ## gRPC API
 
 dapr 1.4 使用 `gRPC proxying` 这个新特性来处理用户 app 和 dapr sidecar 之间的 gRPC 调用.
 
-简单来说就是现在使用 dapr 进行 gRPC 调用时, 使用方式和直接调用自己服务没有区别, 仅仅需要把 client 连接地址换成 dapr sidecar gRPC API 的地址, 并且调用时需要在 metadata  中增加 `dapr-app-id`.
+简单来说就是现在使用 dapr 进行 gRPC 调用时, 使用方式和直接调用自己服务没有区别, 仅仅需要把 client 连接地址换成 dapr sidecar gRPC API 的地址, 并且调用时需要在 metadata 中增加 `dapr-app-id`.
 
 ### 为什么需要这个特性?
 
@@ -484,12 +481,12 @@ func (p *proxy) intercept(ctx context.Context, fullName string) (context.Context
 
 假如上面流程图里面 server A 和 service B 都是 gRPC 服务, 而且 A 调用 B 的 `Echo` 方法, 会经过一下流程:
 
-1. 直接连接 dapr A gRPC server, 调用  `Echo` 方法, metadata `dapr-app-id` 需要设置为 service-b
+1. 直接连接 dapr A gRPC server, 调用 `Echo` 方法, metadata `dapr-app-id` 需要设置为 service-b
 2. dapr A 不认识这个方法, grpc_proxy.TransparentHandler 处理请求, 根据 `dapr-app-id` 与 dapr B 建立连接, 并将请求转发给 dapr B
 3. dapr B 也不认识这个方法, grpc_proxy.TransparentHandler 处理请求, 根据 `dapr-app-id` 发现请求目标是自己, 与 service B 建立连接, 并将请求转发给 service B
 4. service B `Echo` 处理请求, 并响应结果
 
-## 参考资料
+## **参考资料**
 
 - [https://github.com/dapr/dapr](https://github.com/dapr/dapr)
 - [https://docs.dapr.io](https://docs.dapr.io)
