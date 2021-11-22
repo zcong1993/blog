@@ -20,7 +20,7 @@ draft: false
 
 发布订阅在 dapr 既是一个 component 又是一个 building block.
 
-dapr 的 pubsub 构建块可以对外提供一个`最少一次送达保证`的发布订 API, 可以支持多种软件作为 message broker. 使用这个功能我们的服务就需要引入繁杂的 message broker sdk 和管理消息队列连接.
+dapr 的 pubsub 构建块可以对外提供一个`最少一次送达保证`的发布订阅 API, 可以支持多种软件作为 message broker. 使用这个功能我们的服务就需要引入繁杂的 message broker sdk 和管理消息队列连接.
 
 <!--more-->
 
@@ -54,7 +54,7 @@ dapr 也允许通过配置来限制用户服务使用发布订阅 topic 的权�
 
 ## 源码分析
 
-首先 pubsub 作为一个 component, 我们查看它的 interface 声名:
+首先 pubsub 作为一个 component, 我们查看它的 interface 声明:
 
 ```go
 // http://github.com/zcong1993/components-contrib/blob/ff9f357a77f74a9ebaa0032da71c1f571143a1ca/pubsub/pubsub.go#L11-L11
@@ -71,7 +71,7 @@ type Handler func(ctx context.Context, msg *NewMessage) error
 ```
 
 1. Init 负责校验 component config 和初始化
-2. Features 用来声名实现者所提供的特性, 下文说明
+2. Features 用来声明实现者所提供的特性, 下文说明
 3. Publish 提供发布消息的能力
 4. Subscribe 提供订阅消息的能力
 5. Close 退出时关闭资源
@@ -380,9 +380,9 @@ func (a *DaprRuntime) getTopicRoutes() (map[string]TopicRoute, error) {
 }
 ```
 
-可以看到此函数会分别通过`声名式`和`函数式`两种方式拿到订阅配置并合并.
+可以看到此函数会分别通过`声明式`和`函数式`两种方式拿到订阅配置并合并.
 
-声名式是指使用 `Subscription` CRD 文件的形式定义配置, 而函数式是指用户通过路由 `/dapr/subscribe` 或者 grpc `ListTopicSubscriptions` handler 暴露给 dapr sidecar 的配置.
+声明式是指使用 `Subscription` CRD 文件的形式定义配置, 而函数式是指用户通过路由 `/dapr/subscribe` 或者 grpc `ListTopicSubscriptions` handler 暴露给 dapr sidecar 的配置.
 
 topicRoutes 则是 dapr 的新特性 [Pub/Sub routing](https://docs.dapr.io/developing-applications/building-blocks/pubsub/howto-route-messages/) 允许我们定义规则来使得同一个 topic 下可以为不同 `event.type` 消息绑定不同 handler. 本文不做过多介绍.
 

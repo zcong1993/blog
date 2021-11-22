@@ -352,7 +352,7 @@ type DaprRuntime struct {
 
 组件配置中经常会需要配置一些敏感信息, 例如数据库密码之类. 使用纯文本是非常不安全的, 所以 dapr 允许在组件配置中引用 `secret store` 组件中的秘钥配置, 类似于 k8s 中环境变量引用 secrets.
 
-例如, 可以这么声名一个基于 redis 实现的 state store:
+例如, 可以这么声明一个基于 redis 实现的 state store:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
