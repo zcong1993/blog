@@ -15,7 +15,7 @@ keywords:
   - Golang
   - Dapr
   - Cloud Native
-draft: true
+draft: false
 ---
 
 Observability(可观测性)一般指 `Logging`, `Metrics` 和 `Tracing` .
