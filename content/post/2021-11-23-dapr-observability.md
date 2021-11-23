@@ -546,6 +546,12 @@ func (a *DaprRuntime) sendBindingEventToApp(bindingName string, data []byte, met
 }
 ```
 
+## 总结
+
+Metrics 和 Tracing 几乎也已经是现代服务的标配了, 对于运行在应用层的 dapr 来说, 实现这两个功能都是非常简单的.
+
+总的来说 Metrics 各种意义上都比 Tracing 简单得多, dapr 在处理这两者时和我们业务服务基本是一模一样的, http header 和 grpc metadata 天然就是追踪信息的载体, 对于消息队列这些中间件则是没有很好的方式, 只能放在数据层面上显示传递, 这也是 CloudEvent 格式的一大优点, 采用标准化的形式为这些通用的元信息留有空间.
+
 ## 参考资料
 
 - [https://github.com/dapr/dapr](https://github.com/dapr/dapr)
