@@ -1,13 +1,20 @@
 ---
 title: Dapr 源码解析 | Sidecar Injector
 date: 2021-11-23T18:58:34+08:00
-cover: /cover.jpeg
-description: 2021 11 23 Dapr Sidecar Injector
+cover: /sidecar-injector.png
+description: 本文介绍 Dapr Sidecar Injector 相关源码.
 categories:
-  - Default
+  - Golang
+  - Dapr
+  - Cloud Native
 tags:
-  - Default
-keywords: []
+  - Golang
+  - Dapr
+  - Cloud Native
+keywords:
+  - Golang
+  - Dapr
+  - Cloud Native
 draft: true
 ---
 
@@ -39,25 +46,25 @@ metadata:
   labels:
     app: dapr-sidecar-injector
 webhooks:
-- name: sidecar-injector.dapr.io
-  clientConfig:
-    service:
-      namespace: default
-      name: dapr-sidecar-injector
-      path: "/mutate"
-    caBundle: "xxxx"
-  rules:
-  - apiGroups:
-    - ""
-    apiVersions:
-    - v1
-    resources:
-    - pods
-    operations:
-    - CREATE
-  failurePolicy: Ignore
-  sideEffects: None
-  admissionReviewVersions: ["v1", "v1beta1"]
+  - name: sidecar-injector.dapr.io
+    clientConfig:
+      service:
+        namespace: default
+        name: dapr-sidecar-injector
+        path: '/mutate'
+      caBundle: 'xxxx'
+    rules:
+      - apiGroups:
+          - ''
+        apiVersions:
+          - v1
+        resources:
+          - pods
+        operations:
+          - CREATE
+    failurePolicy: Ignore
+    sideEffects: None
+    admissionReviewVersions: ['v1', 'v1beta1']
 ```
 
 可以看到配置类型是 `MutatingWebhookConfiguration` , 它是做什么的呢?
@@ -254,7 +261,7 @@ func getSidecarContainer(annotations map[string]string, id, daprSidecarImage, im
 
 在阅读 dapr 源码前, 我是不知道 k8s 支持 `MutatingWebhookConfiguration` 功能的, 没想打这个狗能可以这么简单实现出来. 全局化配置和注解差异化配置也使得 dapr sidecar 容器的很多配置是可控的.
 
-不过 injector  做完工作 sidecar 并不是可用状态, 因为仅仅有 sidecar 容器并不能互相做 grpc 调用, 所以剩下一部分工作还需要 operator 完成, 后续文章再说明.
+不过 injector 做完工作 sidecar 并不是可用状态, 因为仅仅有 sidecar 容器并不能互相做 grpc 调用, 所以剩下一部分工作还需要 operator 完成, 后续文章再说明.
 
 ## **参考资料**
 
