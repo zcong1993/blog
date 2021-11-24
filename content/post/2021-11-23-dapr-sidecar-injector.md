@@ -15,7 +15,7 @@ keywords:
   - Golang
   - Dapr
   - Cloud Native
-draft: true
+draft: false
 ---
 
 dapr sidecar injector 是 dapr 几个独立软件之一, 功能是在 k8s 环境为用户服务注入 dapr runtime sidecar 容器.
