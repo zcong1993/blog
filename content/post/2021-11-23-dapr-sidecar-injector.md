@@ -259,7 +259,7 @@ func getSidecarContainer(annotations map[string]string, id, daprSidecarImage, im
 
 ## 总结
 
-在阅读 dapr 源码前, 我是不知道 k8s 支持 `MutatingWebhookConfiguration` 功能的, 没想打这个狗能可以这么简单实现出来. 全局化配置和注解差异化配置也使得 dapr sidecar 容器的很多配置是可控的.
+在阅读 dapr 源码前, 我是不知道 k8s 支持 `MutatingWebhookConfiguration` 功能的, 没想到这个功能可以这么简单实现出来. 全局化配置和注解差异化配置也使得 dapr sidecar 容器的很多配置是可控的.
 
 不过 injector 做完工作 sidecar 并不是可用状态, 因为仅仅有 sidecar 容器并不能互相做 grpc 调用, 所以剩下一部分工作还需要 operator 完成, 后续文章再说明.
 
