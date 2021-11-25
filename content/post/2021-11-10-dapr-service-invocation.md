@@ -54,7 +54,7 @@ dapr sidecar 会启动 HTTP 和 gRPC 两种 API 服务供用户 app 调用.
 
 dapr 对外提供的服务间调用 HTTP API 为:
 
-`POST/GET/PUT/DELETE [http://localhost](http://localhost/):<daprPort>/v1.0/invoke/<appId>/method/<method-name>`
+`POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method/<method-name>`
 
 ### 2. onDirectMessage (1, 7)
 
