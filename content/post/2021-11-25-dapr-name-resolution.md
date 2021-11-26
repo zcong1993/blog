@@ -15,7 +15,7 @@ keywords:
   - Golang
   - Dapr
   - Cloud Native
-draft: true
+draft: false
 ---
 
 Name resolution 解决的是微服务中的服务发现问题, dapr 中服务的标识符为 `app-id` , 服务间调用是通过 `app-id` 来确定目标服务的. 所以就需要 `app-id` 到真实服务地址的映射.
