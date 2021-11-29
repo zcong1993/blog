@@ -3,7 +3,8 @@ const fs = require('fs')
 const argv = process.argv.slice(2)
 
 if (argv.length < 1) {
-  console.log('need one arg for process file!')
+  console.log(`node ./tools/complete-image-url.js [post] [type] [output]
+  type: 1 gitee, 2 github, default blog`)
   process.exit(1)
 }
 
