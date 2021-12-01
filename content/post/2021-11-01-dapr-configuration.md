@@ -195,23 +195,6 @@ func FromFlags() (*DaprRuntime, error) {
   daprInternalGRPCPort := flag.String("dapr-internal-grpc-port", "", "gRPC port for the Dapr Internal API to listen on")
   appPort := flag.String("app-port", "", "The port the application is listening on")
   // ...
-
-  // 从环境变量中获取
-  variables := map[string]string{
-    env.AppID:           *appID,
-    env.AppPort:         *appPort,
-    env.HostAddress:     host,
-    env.DaprPort:        strconv.Itoa(daprInternalGRPC),
-    env.DaprGRPCPort:    *daprAPIGRPCPort,
-    env.DaprHTTPPort:    *daprHTTPPort,
-    env.DaprMetricsPort: metricsExporter.Options().Port, // TODO - consider adding to runtime config
-    env.DaprProfilePort: *profilePort,
-  }
-
-  if err = setEnvVariables(variables); err != nil {
-    return nil, err
-  }
-  // ...
 }
 ```
 
