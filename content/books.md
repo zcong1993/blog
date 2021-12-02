@@ -2,7 +2,7 @@
 title: 'Books'
 date: 2019-07-16
 menu: 'main'
-weight: 50
+weight: 40
 ---
 
 ### 近期看的一些书

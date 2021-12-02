@@ -77,14 +77,17 @@ js = ["js/prism-protobuf.min.js"]
         identifier = "posts"
         name = "Posts"
         url = "/post"
+        weight = -3
       [[languages.en.menu.main]]
         identifier = "categories"
         name = "Categories"
         url = "/categories"
+        weight = -2
       [[languages.en.menu.main]]
         identifier = "tags"
         name = "Tags"
         url = "/tags"
+        weight = -1
 
 # See https://gohugo.io/about/hugo-and-gdpr/
 [privacy]
