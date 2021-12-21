@@ -5,7 +5,7 @@ Hugo directory and insert:
 or whatever comment engine you want -> https://gohugo.io/content-management/comments/#readout
 -->
 
-{{- if .Site.Params.utteranc.repo -}}
+{{- if .Site.Params.utteranc.enable -}}
   <div id="utter-container"></div>
   <script src="https://utteranc.es/client.js"
       repo= '{{ .Site.Params.utteranc.repo }}'
@@ -14,4 +14,21 @@ or whatever comment engine you want -> https://gohugo.io/content-management/comm
       crossorigin= "anonymous"
       async>
   </script>
+{{- end }}
+
+{{- if .Site.Params.giscus.enable -}}
+<div id="giscus"></div>
+<script src="https://giscus.app/client.js"
+        data-repo="zcong1993/blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxMzk0MjQ3MTk="
+        data-category="Announcements"
+        data-category-id="DIC_kwDOCE9zz84CAYDY"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-theme="dark"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 {{- end }}

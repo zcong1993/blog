@@ -48,10 +48,13 @@ paginate = 5
   site = "/"
 
 [params.utteranc]
-enable = true
+enable = false
 repo = "zcong1993/blog"
 issueTerm = "pathname"
 theme = "github-dark"
+
+[params.giscus]
+enable = true
 
 [params.custom]
 js = ["js/prism-protobuf.min.js"]
@@ -89,9 +92,9 @@ js = ["js/prism-protobuf.min.js"]
         url = "/tags"
         weight = -1
 
-# See https://gohugo.io/about/hugo-and-gdpr/
-[privacy]
-  [privacy.googleAnalytics]
-    anonymizeIP = true      # 12.214.31.144 -> 12.214.31.0
-  [privacy.youtube]
-    privacyEnhanced = true
+# # See https://gohugo.io/about/hugo-and-gdpr/
+# [privacy]
+#   [privacy.googleAnalytics]
+#     anonymizeIP = true      # 12.214.31.144 -> 12.214.31.0
+#   [privacy.youtube]
+#     privacyEnhanced = true
