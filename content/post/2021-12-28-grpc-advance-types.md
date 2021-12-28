@@ -381,7 +381,7 @@ func NewValue(v interface{}) (*Value, error) {
 
 ## 参考资料
 
-- [https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf)
-- [https://github.com/protocolbuffers/protobuf-go/tree/master/types/known](https://github.com/protocolbuffers/protobuf-go/tree/master/types/known)
+- [protocolbuffers/protobuf/google/protobuf](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf)
+- [protocolbuffers/protobuf-go/types/known](https://github.com/protocolbuffers/protobuf-go/tree/master/types/known)
 
 ![wxmp](/wxmp_tiny_1.png)
