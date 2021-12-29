@@ -41,7 +41,7 @@ fmt.Println(st.Code(), st.Message())
 
 有人建了一个仓库展示了几乎所有语言的 gRPC 错误处理方式: [https://avi.im/grpc-errors](https://avi.im/grpc-errors).
 
-默认错误处理方式非常简单直白, 但是有个很大的问题就是 `表达能力非常有限`. 因为使用有限的抽象 code 没法表达出多样的业务层的错误, 而 message 这种字符串也是不应该被请求方当做业务错误标识符来使用. 所以我们需要一个额外能够传递业务错误码甚至更多额外错误信息字段的功能.
+默认错误处理方式非常简单直白, 但是有个很大的问题就是 `表达能力非常有限`. 因为使用类似于 HTTP 状态码的有限抽象 code 没法表达出多样的业务层的错误, 而 message 这种字符串也是不应该被请求方当做业务错误标识符来使用. 所以我们需要一个额外能够传递业务错误码甚至更多额外错误信息字段的功能.
 
 ## Richer error model
 
@@ -67,7 +67,7 @@ message Status {
 
 可以看到比标准错误多了一个 `details` 数组字段, 而且这个字段是 Any 类型, 支持我们自行扩展.
 
-那么问题来了, 如何传递这个非标准的错误扩展消息呢? 答案是会被放在响应的 `trailing response metadata` 中, key 为 `grpc-status-details-bin`.
+那么问题来了, 如何传递这个非标准的错误扩展消息呢? 答案是放在 `trailing response metadata` 中, key 为 `grpc-status-details-bin`.
 
 这个功能只被部分语言 sdk 支持了, 所以有些不被支持的语言想要使用这个功能需要手动处理.
 
@@ -138,8 +138,8 @@ NodeJS sdk 默认是不附带扩展后的 status 类型的, 所以我们需要�
 
 ```ts
 export interface StatusObject {
-  code: Status
-  details: string // 注意这里的 details 是 message 而不是我们要实现的扩展
+  code: Status // 这里的 Status 指的是 Codes 枚举, 不是我们生成的 Status
+  details: string // 这里的 details 是 message 而不是我们要实现的扩展
   metadata: Metadata
 }
 ```
