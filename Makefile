@@ -17,3 +17,7 @@ show.tags:
 
 default: format.changed
 .PHONY: default
+
+fixtab:
+	@changed-files "node tools/fixtab.js" | bash
+.PHONY: fixtab
