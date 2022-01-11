@@ -172,4 +172,4 @@ func TryDecryptValue(storeName string, value []byte) ([]byte, error) {
 
 - [state-management/howto-encrypt-state](https://docs.dapr.io/developing-applications/building-blocks/state-management/howto-encrypt-state)
 
-<!-- ![wxmp](/wxmp_tiny_1.png) -->
+![wxmp](/wxmp_tiny_1.png)
