@@ -16,6 +16,8 @@ keywords:
   - Dapr
   - Cloud Native
 draft: false
+js:
+  - js/prism-protobuf.min.js
 ---
 
 dapr operator 是 dapr 的几个独立软件之一.

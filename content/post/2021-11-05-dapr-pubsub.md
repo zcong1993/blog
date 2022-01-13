@@ -16,6 +16,8 @@ keywords:
   - Dapr
   - Cloud Native
 draft: false
+js:
+  - js/prism-protobuf.min.js
 ---
 
 发布订阅在 dapr 既是一个 component 又是一个 building block.

@@ -14,6 +14,8 @@ keywords:
   - NodeJS
   - gRPC health check
 draft: false
+js:
+  - js/prism-protobuf.min.js
 ---
 
 健康检查往往用来判断服务是否能够对外正常提供服务, 例如: k8s 中就会用就绪检查和健康检查来判断是否需要重启/剔除 pod.

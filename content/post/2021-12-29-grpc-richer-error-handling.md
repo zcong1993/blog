@@ -15,6 +15,8 @@ keywords:
   - gRPC
   - Error handling
 draft: false
+js:
+  - js/prism-protobuf.min.js
 ---
 
 开发过程中我们会花费大量时间和错误处理打交道, HTTP 协议错误处理基本会通过 status code 和请求响应(自定义消息) 来传递错误, 而 gRPC 这边错误处理就没有 HTTP 这么好控制.

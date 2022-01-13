@@ -57,7 +57,7 @@ theme = "github-dark"
 enable = true
 
 [params.custom]
-js = ["js/prism-protobuf.min.js"]
+js = []
 
 [languages]
   [languages.en]

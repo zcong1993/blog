@@ -16,6 +16,8 @@ keywords:
   - protobuf
   - types
 draft: false
+js:
+  - js/prism-protobuf.min.js
 ---
 
 gRPC 使用 protobuf 格式对消息进行编码, 基本类型都会映射到各种语言的类型. 为了丰富表达能力, 官方基于基本类型封装了一些类型, 例如: `Timestamp`, `Duration`, `Any`, `Struct`.
