@@ -280,7 +280,7 @@ func (p *sampledLFU) fillSample(in []*policyPair) []*policyPair {
 
 ## 总结
 
-提升吞吐方面, 从设计上支持数据丢弃, set 操作不确保成功, get 操作更新 freq 也做了批操作, 并且容忍丢失. 提升命中方面 TinyLFU 在准入时只允许 rank 分更高也就是更有价值的元素进入, 淘汰也是优先淘汰 rank 值低的.
+提升吞吐方面, 从设计上支持数据丢弃, set 操作不确保成功, get 操作更新 freq 也做了批操作, 并且容忍丢失. 提升命中方面 TinyLFU 在准入时只允许 rank 分更高也就是更有价值的元素进入, 淘汰也是优先淘汰 rank 值低的, 永远尝试保留更有价值的数据.
 
 ## 参考资料
 
