@@ -15,7 +15,7 @@ keywords:
   - Golang
   - Dapr
   - Cloud Native
-draft: true
+draft: false
 ---
 
 Dapr 1.17 版本已经发布, 本文介绍 1.17 版本最重磅的功能 `Resiliency` 弹性容错功能.
