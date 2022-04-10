@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | Resiliency
 date: 2022-04-08T22:46:30+08:00
-cover: /cover.jpeg
+cover: /dapr-resiliency.png
 description: 本文介绍 Dapr 新功能, Resiliency 弹性容错功能.
 categories:
   - Golang
