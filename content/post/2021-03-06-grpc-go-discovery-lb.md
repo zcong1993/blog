@@ -550,7 +550,7 @@ func (b *baseBalancer) UpdateSubConnState(sc balancer.SubConn, state balancer.Su
     if s == connectivity.Idle {
       sc.Connect()
     }
-    // 正在连接转态, 不做处理
+    // 正在连接状态, 不做处理
     return
   }
   // 更新状态为新状态
