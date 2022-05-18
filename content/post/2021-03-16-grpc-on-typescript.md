@@ -12,6 +12,8 @@ tags:
   - NodeJS
   - TypeScript
 draft: false
+js:
+  - js/prism-protobuf.min.js
 ---
 
 gRPC 是一个高性能, 支持多种语言的 RPC 框架, 官方已经支持了 NodeJS 语言. 而 Typescript 作为 JavaScript 的超集, 可以提高 js 代码的可维护性, 并且代码提示很不错, 已在 js 市场占据了很大份额. 本文简单介绍下 gRPC 在 Typescript 中如何使用.
@@ -32,7 +34,7 @@ js 这种动态语言官方提供了动态生成工具 [@grpc/proto-loader](http
 
 以下面 proto 文件举例:
 
-```proto
+```protobuf
 syntax = "proto3";
 
 package pb;
