@@ -5,9 +5,7 @@ menu: 'main'
 weight: 50
 ---
 
-西安交大学渣一枚
-
-目前专注 `NodeJS`, `Golang`, `Devops`, `Kubernetes`
+目前专注 `Golang` / `NodeJS` / `Kubernetes` / `Dapr` / `Devops` / `Blockchain`
 
 GitHub [https://github.com/zcong1993](https://github.com/zcong1993)
 
