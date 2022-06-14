@@ -6,3 +6,4 @@ public
 node_modules
 pnpm-lock.yaml
 resources
+.task

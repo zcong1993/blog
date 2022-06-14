@@ -473,7 +473,7 @@ func (a *DaprRuntime) processComponentSecrets(component components_v1alpha1.Comp
 总结一下:
 
 1. 检查组件 `metadata[i].SecretKeyRef` 是否有引用定义, 没有则代表当前组件没有依赖
-2. 有引用 secret store 且该组件没有初始化完成时, 会将引用 secret store作为当前组件的依赖, 此关系会被存入 `runtime.pendingComponentDependents` 中, 当前组件会在引用 secret store 初始化完成之后再被初始化
+2. 有引用 secret store 且该组件没有初始化完成时, 会将引用 secret store 作为当前组件的依赖, 此关系会被存入 `runtime.pendingComponentDependents` 中, 当前组件会在引用 secret store 初始化完成之后再被初始化
 3. 有引用且 secret store 已初始化完成, k8s 模式下 operator 已经将引用 secret 放入 value 中了, 只需要简单 base64 decode 下; 其他模式下调用 `secretStore.GetSecret` 获取秘钥并放在 value 中
 
 ## 参考资料

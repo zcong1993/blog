@@ -1,0 +1,33 @@
+version: '3'
+
+tasks:
+  default:
+    deps:
+      - format:changed
+
+  format:changed:
+    cmds:
+      - changed-files -f "(md|yml|html)$$" "prettier --single-quote --no-semi --trailing-comma es5 --write" | bash
+
+  format:all:
+    cmds:
+      - prettier --single-quote --no-semi --trailing-comma es5 --write '{content,static,archetypes}/**/*.{md,yml,html}'
+    sources:
+      - '{content,static,archetypes}/**/*.{md,yml,html}'
+
+  submodule:init:
+    cmds:
+      - git submodule update --init --recursive
+
+  submodule:sync:
+    cmds:
+      - git pull --recurse-submodules
+      - git submodule update --remote
+
+  show-tags:
+    cmds:
+      - node tools/show-tags.js
+
+  fixtab:
+    cmds:
+      - changed-files "node tools/fixtab.js" | bash
