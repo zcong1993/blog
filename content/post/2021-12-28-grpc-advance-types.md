@@ -5,14 +5,17 @@ cover: /grpc-advance-types.jpeg
 description: 本文主要介绍一些多语言广泛支持的 protobuf 扩展类型.
 categories:
   - gRPC
+  - RPC
   - Golang
   - NodeJS
 tags:
   - gRPC
+  - RPC
   - Golang
   - NodeJS
 keywords:
   - gRPC
+  - RPC
   - protobuf
   - types
 draft: false

@@ -5,10 +5,12 @@ cover: /grpc-lb-k8s/cover.jpg
 description: k8s 已经成为云时代云平台的一等公民, 本文介绍下如何在 k8s 中使用 grpc 服务发现.
 categories:
   - gRPC
+  - RPC
   - Golang
   - K8S
 tags:
   - gRPC
+  - RPC
   - Golang
   - K8S
 draft: false

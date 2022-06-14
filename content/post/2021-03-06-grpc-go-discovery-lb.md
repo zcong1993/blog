@@ -5,9 +5,11 @@ cover: /grpc-go-discovery-lb.jpg
 description: gRPC 是 Google 开源的一款高性能, 支持多种语言的 RPC 框架. 已经被广泛用于集群内服务间调用. 为了大规模流量和避免单点故障, 所以服务往往是部署多实例的, 于是负载均衡就是硬需求了.
 categories:
   - gRPC
+  - RPC
   - Golang
 tags:
   - gRPC
+  - RPC
   - Golang
 draft: false
 ---

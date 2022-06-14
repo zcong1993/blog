@@ -5,14 +5,17 @@ cover: /grpc-richer-error-hanling.png
 description: 本文介绍 gRPC 基本错误处理和使用 goolge 扩展处理错误.
 categories:
   - gRPC
+  - RPC
   - Golang
   - NodeJS
 tags:
   - gRPC
+  - RPC
   - Golang
   - NodeJS
 keywords:
   - gRPC
+  - RPC
   - Error handling
 draft: false
 js:

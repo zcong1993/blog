@@ -5,12 +5,15 @@ cover: /grpc-health-check.jpeg
 description: 本文讲述如何实现 GRPC Health Checking Protocol.
 categories:
   - gRPC
+  - RPC
   - NodeJS
 tags:
   - gRPC
+  - RPC
   - NodeJS
 keywords:
   - gRPC
+  - RPC
   - NodeJS
   - gRPC health check
 draft: false
