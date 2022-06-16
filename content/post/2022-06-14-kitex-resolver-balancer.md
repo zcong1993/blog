@@ -15,7 +15,7 @@ keywords:
   - Kitex
   - RPC
   - Golang
-draft: true
+draft: false
 ---
 
 Kitex 是字节开源的高性能, 强可扩展 的 Golang 微服务 RPC 框架. 之前写过 [gRPC-go 的服务发现和负载均衡源码分析](/post/2021-03-06-grpc-go-discovery-lb), 本文分析下 Kitex 源码, 对比下两者的差异.
