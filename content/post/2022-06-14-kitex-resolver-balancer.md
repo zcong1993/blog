@@ -101,7 +101,7 @@ func resolverBalancerMW(ctx context.Context, req, res interface{}) error {
 }
 ```
 
-如上面伪代码所示, 这样就能完整走通请求流程, 但是很容易就能看出一下几点问题:
+如上面伪代码所示, 这样就能完整走通请求流程, 但是很容易就能看出以下几点问题:
 
 1. 这种实现**有极大的性能问题**
 2. 如何做到容错(kitex 没有像 grpc 那样维护 readySCs 可用连接暴露给上层)
