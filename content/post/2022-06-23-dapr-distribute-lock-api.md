@@ -53,7 +53,6 @@ type Store interface {
 
 ## 实现
 
-
 这两个 API 没啥分析的, 这里简单说明下用 redis 实现分布式锁需要注意的几点:
 
 1. 加锁时 setNX value 值应当有随机性, 释放时可通过 `CAS` 判断是否是 owner
