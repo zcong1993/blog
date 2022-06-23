@@ -31,3 +31,7 @@ tasks:
   fixtab:
     cmds:
       - changed-files "node tools/fixtab.js" | bash
+
+  new-post:
+    cmds:
+      - ./helper.sh {{.CLI_ARGS}}
