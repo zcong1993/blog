@@ -1,7 +1,7 @@
 ---
 title: Grpc 泛化调用
 date: 2022-09-04T23:10:36+08:00
-cover: /cover.jpeg
+cover: /grpc-generic-call.jpeg
 description: 本文介绍 Grpc 泛化调用, 即不使用 pb 生成的 server/client stub 代码实现调用.
 categories:
   - gRPC
