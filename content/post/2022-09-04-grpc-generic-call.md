@@ -283,3 +283,5 @@ func Handler() grpc.StreamHandler {
 在我们学习一个技术的时往往会想这个有什么用? 使用场景是什么? 其实这篇文章是后面我打算写的 grpc proxy 相关文章的铺垫.
 
 grpc 在业务中使用时, proto 定义就是 API 的定义, 能够拉齐服务端和客户端, 但是对于中心化 proxy 这种场景需要承接多个服务, 如果依赖感知所有 proto 定义会变成一个枷锁, 今天这篇文章讲述了如何抛弃 proto 生成的 service 定义部分, 后续 grpc proxy 文章会移除掉所有 proto 依赖.
+
+本文所有的代码均可查看: [https://github.com/zcong1993/grpc-go-beyond](https://github.com/zcong1993/grpc-go-beyond).
