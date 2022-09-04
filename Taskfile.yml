@@ -30,7 +30,7 @@ tasks:
 
   fixtab:
     cmds:
-      - changed-files "node tools/fixtab.js" | bash
+      - changed-files -f ".md$" "node tools/fixtab.js" | bash
 
   new-post:
     cmds:
