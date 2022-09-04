@@ -60,7 +60,7 @@ service Hello {
 4. 客户端在调用 CloseSend 之后无法再发送消息, 表明自己不需要再发送消息, 但是可以继续接收消息
 5. 服务端关闭后两边流都会关闭(不然连接泄露)
 
-### 客户端代码分析
+## 客户端代码分析
 
 我们首先看看客户端, pb 生成的代码仅需要我们传入 `grpc.ClientConnInterface` 类型的客户端连接, 来看看它的类型:
 
@@ -179,3 +179,107 @@ func (r *RawTester) TestEcho() {
 流程更加简单了, 只是按照顺序调用 `SendMsg` -> `CloseSend` -> `RecvMsg` 即可. 但是 grpc 缺额外封装了一层 `Invoke` 语法糖, 主要是因为 unary 是使用频率最高的一种类型, `Invoke` 语法糖会对用户更友好, 并且 `UnaryClientInterceptor` 比 `StreamClientInterceptor` 也会好用非常多.
 
 完整四种实现可见 [https://github.com/zcong1993/grpc-go-beyond/blob/master/internal/clienttest/raw.go](https://github.com/zcong1993/grpc-go-beyond/blob/master/internal/clienttest/raw.go).
+
+## 服务端代码分析
+
+文章开头提到过, server 端仅需要将我们的业务逻辑填充到 pb 生成好的服务端 interface 类型实现中即可. 类比 http 框架, 服务端需要做的只是把业务 handler 绑定给对应的框架路由, 框架在请求匹配到路由时调用我们注册的 handler. grpc server 端逻辑也差不多, 也就是我们只提供 handler 并不是直接管理连接, 这一点非常重要. 所以时序图里面的服务端连接关闭其实就是在我们的 handler 退出后, grpc sdk 会根据 handler 返回的结果和 error 给客户端返回 status 信息并关闭连接.
+
+和客户端类似, pb 生成的服务端代码依赖 grpc sdk 提供的 `ServerStream`:
+
+```go
+type ServerStream interface {
+  // 暂存 header 而不直接发送, 调用多次会 merge
+  SetHeader(metadata.MD) error
+  // 发送 header, 只能在 SendMsg 前调用一次
+  SendHeader(metadata.MD) error
+  // 设置 trailer
+  SetTrailer(metadata.MD)
+  // 发送消息
+  SendMsg(m interface{}) error
+  // 接收消息
+  RecvMsg(m interface{}) error
+  Context() context.Context
+}
+```
+
+和客户端差不多, 只是 header 和 trailer 变成了发送. 服务端生成的代码也只是做了 interface{} 类型到声明类型的转换, 最终还是需要使用 `pb.RegisterHelloServer` 生成的类型注册我们的实现. 但是我们需要的是泛化调用, 所以我们需要使用 `grpc.UnknownServiceHandler(server.Handler())` 这种方式, 类似于 grpc 为我们留了 404 handler, 在路由匹配不到时会 fallback 到这个 handler, 函数签名为 `type StreamHandler func(srv interface{}, stream ServerStream) error`.
+
+### 泛化调用
+
+同理我们以 server stream 为例, 假如业务场景是: 客户端发送一条信息, 服务端流式返回 5 条, 代码大概是这样:
+
+```go
+func (s *stream) handleServerStream() error {
+  // 1. 接收客户端 metadata(optional)
+  if md, ok := metadata.FromIncomingContext(s.serverStream.Context()); ok {
+    fmt.Println("metadata: ", md)
+  }
+
+  // 2. 接收客户端请求, server stream 客户端只会发一条消息
+  var req pb.EchoRequest
+  _ = s.serverStream.RecvMsg(&req)
+
+  // 3. 发送 header(optional)
+  _ = s.serverStream.SendHeader(header)
+
+  // 5. 最后发送 tailer(optional)
+  defer s.serverStream.SetTrailer(trailer)
+
+  for i := 0; i < 5; i++ {
+    // 4. 发送 5 条消息
+    _ = s.serverStream.SendMsg(&req)
+  }
+
+  return nil
+}
+```
+
+和客户端完全一样的逻辑, 再来实现个 unary handler 对比下:
+
+```go
+func (s *stream) handleEcho() error {
+  // 1. 接收请求
+  var req pb.EchoRequest
+  _ = s.serverStream.RecvMsg(&req)
+  // 2. 发送响应
+  return s.serverStream.SendMsg(&req)
+}
+```
+
+完整四种实现可见: [https://github.com/zcong1993/grpc-go-beyond/blob/master/internal/server/stream.go](https://github.com/zcong1993/grpc-go-beyond/blob/master/internal/server/stream.go).
+
+最终我们可以根据方法名区分 handler:
+
+```go
+func Handler() grpc.StreamHandler {
+  return func(srv interface{}, serverStream grpc.ServerStream) error {
+    fullMethodName, ok := grpc.MethodFromServerStream(serverStream)
+    if !ok {
+      return status.Errorf(codes.Internal, "lowLevelServerStream not exists in context")
+    }
+
+    s := stream{serverStream: serverStream}
+
+    switch fullMethodName {
+    case "/proto.Hello/Echo":
+      return s.handleEcho()
+    case "/proto.Hello/ServerStream":
+      return s.handleServerStream()
+    case "/proto.Hello/ClientStream":
+      return s.handleClientStream()
+    case "/proto.Hello/DuplexStream":
+      return s.handleDuplexStream()
+    default:
+      return status.Errorf(codes.Internal, "method not exists")
+    }
+  }
+}
+```
+
+至此, proto grpc 部分生成代码的功能逻辑我们就很清楚了.
+
+## 后记
+
+在我们学习一个技术的时往往会想这个有什么用? 使用场景是什么? 其实这篇文章是后面我打算写的 grpc proxy 相关文章的铺垫.
+
+grpc 在业务中使用时, proto 定义就是 API 的定义, 能够拉齐服务端和客户端, 但是对于中心化 proxy 这种场景需要承接多个服务, 如果依赖感知所有 proto 定义会变成一个枷锁, 今天这篇文章讲述了如何抛弃 proto 生成的 service 定义部分, 后续 grpc proxy 文章会移除掉所有 proto 依赖.
