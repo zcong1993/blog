@@ -29,7 +29,7 @@ js:
 3. client stream (客户端发送多条消息, 服务端返回一条)
 4. duplex stream (客户端和服务端都发送多条消息)
 
-提现在 proto 声明, 大概是这样:
+体现在 proto 声明, 大概是这样:
 
 ```protobuf
 message EchoRequest {
