@@ -33,7 +33,7 @@ type ClientConnInterface interface {
 }
 ```
 
-这个类型在生成的 `_grpc.pb.go` 的文件中被使用, 如注释中所写, 生成的 grpc client 代码中用到了 client conn 的这两个方法, 所以这里相当于 *ClientConn 实现功能的部分抽象, 类似于 `http.RoundTripper` 是底层客户端给上层提供的基本功能.
+这个类型在生成的 `_grpc.pb.go` 的文件中被使用, 如注释中所写, 生成的 grpc client 代码中用到了 client conn 的这两个方法, 所以这里相当于 \*ClientConn 实现功能的部分抽象, 类似于 `http.RoundTripper` 是底层客户端给上层提供的基本功能.
 
 有了这样一层抽象类型, 就可以轻松使用套娃的形式实现中间件, http middleware 就是这个原理. 那么它和 grpc client 端拦截器有什么区别呢?
 
