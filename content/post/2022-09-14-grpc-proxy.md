@@ -20,7 +20,7 @@ draft: false
 
 ## 场景分析
 
-通过上一篇文章 [Grpc 泛化调用](/content/post/2022-09-04-grpc-generic-call.md) 我们可以得出结论: grpc 四种调用方式最终都是双向流的某种特殊形式, 也就是全部可以由双向流表示. 所以我们代理只需要实现双向流的转发方式就足够了. 所以反向代理的时序图基本是这样:
+通过上一篇文章 [Grpc 泛化调用](/post/2022-09-04-grpc-generic-call) 我们可以得出结论: grpc 四种调用方式最终都是双向流的某种特殊形式, 也就是全部可以由双向流表示. 所以我们代理只需要实现双向流的转发方式就足够了. 所以反向代理的时序图基本是这样:
 
 {{< figure src="/grpc-proxy-timeline.png" alt="grpc duplex proxy" position="center" caption="grpc duplex proxy">}}
 
