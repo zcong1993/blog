@@ -1,7 +1,7 @@
 ---
 title: 一种 golang 开发工具管理方式
 date: 2022-12-31T16:51:00+08:00
-cover: /cover.jpeg
+cover: /golang-dev-tools.jpeg
 description: 本文介绍用 Taskfile 来管理 golang 开发工具.
 categories:
   - Golang
