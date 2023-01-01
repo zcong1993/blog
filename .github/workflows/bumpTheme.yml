@@ -2,12 +2,14 @@ name: Bump Themes
 
 on:
   # push:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
 
 jobs:
   setup:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - uses: actions/checkout@master
@@ -15,12 +17,14 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
           submodules: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
       - name: bump themes
         run: |
-          git config pull.rebase true
-          git config pull.ff only
-          git pull --recurse-submodules
-          git submodule update --remote
+          hugo mod get -u
+          hugo mod tidy
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"

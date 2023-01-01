@@ -2,12 +2,14 @@ name: Bump Hugo
 
 on:
   # push:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
 
 jobs:
   setup:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - uses: actions/checkout@master
