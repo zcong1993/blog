@@ -39,3 +39,5 @@ jobs:
         if: steps.pr.outputs.pull-request-url != ''
         run: >-
           gh pr merge compress-image -r -t 'chore: Compressed Images'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
