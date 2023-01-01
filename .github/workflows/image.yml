@@ -37,9 +37,5 @@ jobs:
           body: ${{ steps.calibre.outputs.markdown }}
       - name: Merge Pr
         if: steps.pr.outputs.pull-request-url != ''
-        uses: zcong1993/action-git-merge@master
-        with:
-          head: compress-image
-          base: master
-          commit_message: Merge Compressed Images
-          token: ${{ secrets.PAT }}
+        run: >-
+          gh pr merge compress-image -r -t 'chore: Compressed Images'
