@@ -24,5 +24,11 @@ jobs:
           hugo mod get -u
           hugo mod tidy
       - uses: stefanzweifel/git-auto-commit-action@v4
+        id: auto-commit-action
         with:
           commit_message: 'chore: update themes'
+      - name: Deploy if changed
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        run: gh workflow run vercel.yml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
