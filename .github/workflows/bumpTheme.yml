@@ -12,11 +12,9 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-          submodules: true
+          ref: ${{ github.head_ref }}
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -25,16 +23,6 @@ jobs:
         run: |
           hugo mod get -u
           hugo mod tidy
-      - name: Commit files
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -am "Update themes"
-          else
-            echo "no changes";
-          fi
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: 'chore: update themes'
