@@ -15,23 +15,14 @@ tasks:
     sources:
       - '{content,static,archetypes}/**/*.{md,yml,html}'
 
-  submodule:init:
-    cmds:
-      - git submodule update --init --recursive
-
-  submodule:sync:
-    cmds:
-      - git pull --recurse-submodules
-      - git submodule update --remote
-
   show-tags:
     cmds:
-      - node tools/show-tags.js
+      - node hack/show-tags.js
 
   fixtab:
     cmds:
-      - changed-files -f ".md$" "node tools/fixtab.js" | bash
+      - changed-files -f ".md$" "node hack/fixtab.js" | bash
 
   new-post:
     cmds:
-      - ./helper.sh {{.CLI_ARGS}}
+      - ./hack/helper.sh {{.CLI_ARGS}}
