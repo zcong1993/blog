@@ -5,3 +5,5 @@ images/* linguist-vendored
 resources/* linguist-vendored
 helper.sh linguist-vendored
 Makefile linguist-vendored
+hack/* linguist-vendored
+layouts/* linguist-vendored
