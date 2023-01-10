@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Compress Images
         id: calibre
         uses: calibreapp/image-actions@main
@@ -27,17 +27,18 @@ jobs:
           compressOnly: true
       - name: Create New Pull Request If Needed
         if: steps.calibre.outputs.markdown != ''
-        id: pr
-        uses: peter-evans/create-pull-request@v3
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           title: Compressed Images
-          branch: compress-image
           delete-branch: true
+          branch-suffix: timestamp
           commit-message: Compressed Images
           body: ${{ steps.calibre.outputs.markdown }}
       - name: Merge Pr
-        if: steps.pr.outputs.pull-request-url != ''
+        if: ${{ steps.cpr.outputs.pull-request-number }}
         run: >-
-          gh pr merge compress-image -r -t 'chore: Compressed Images'
+          gh pr merge ${{ steps.cpr.outputs.pull-request-number }} -r -t 'chore: Compressed Images'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
