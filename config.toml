@@ -70,6 +70,9 @@ enable = true
 [params.custom]
 js = []
 
+[params.vercelAnalytics]
+enable = false
+
 [languages]
   [languages.en]
     languageName = "English"
