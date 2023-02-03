@@ -9,6 +9,8 @@ weight: 50
 
 GitHub [https://github.com/zcong1993](https://github.com/zcong1993)
 
+Mastodon <a rel="me" href="https://m.cmx.im/@zcong1993">https://m.cmx.im/@zcong1993</a>
+
 Email zhangcong1992@gmail.com
 
 RSS {{< linkpage page="/index.xml" >}}
