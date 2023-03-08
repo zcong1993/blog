@@ -30,7 +30,7 @@ _ps:_ 我们不管使用什么软件, 最好能够入乡随俗, 遵循该生态�
 我们选择 `/mnt/log` 作为我们应用日志文件挂载根目录, 这样就可以减少 promtail pod 挂载的 volume 数量:
 
 <!-- prettier-ignore-start -->
-{{< code language="yaml" title="Mount volume" id="1" expand="Show" collapse="Hide" isCollapsed="false" >}}
+```yaml
 kind: DaemonSet
 metadata:
   name: loki-promtail
@@ -53,13 +53,13 @@ metadata:
         path: /mnt/log
         type: DirectoryOrCreate # 目录不存在会自动创建
       name: custom
-{{< /code >}}
+```
 <!-- prettier-ignore-end -->
 
 我们应用 pod 也需要挂载这个 hostPath 下的目录作为日志输出目录:
 
 <!-- prettier-ignore-start -->
-{{< code language="yaml" title="App Mount volume" id="2" expand="Show" collapse="Hide" isCollapsed="false" >}}
+```yaml
 ...
 volumeMounts:
   - mountPath: /var/log/custom/winston
@@ -69,7 +69,7 @@ volumes:
   - name: log
     hostPath:
         path: /mnt/log/winston
-{{< /code >}}
+```
 <!-- prettier-ignore-end -->
 
 接着就只剩下增加 promtail 配置, 使得我们的日志也能够被收集.
@@ -79,7 +79,7 @@ volumes:
 挂载了 volume 之后目的很明确, 其实就是要收集 `/mnt/log` 下面的日志文件, 我们简单增加一条静态配置:
 
 <!-- prettier-ignore-start -->
-{{< code language="yaml" title="Static config" id="3" expand="Show" collapse="Hide" isCollapsed="false" >}}
+```yaml
 - job_name: custom
   pipeline_stages:
   static_configs:
@@ -87,7 +87,7 @@ volumes:
       job: custom
       host: localhost
       __path__: /mnt/log/*/*.log
-{{< /code >}}
+```
 <!-- prettier-ignore-end -->
 
 _ps:_ promtail 配置通过 loki-promtail 这个 ConfigMap 修改. 修改后文件放在了这里 [loki-tail-file.yaml](https://gist.githubusercontent.com/zcong1993/2ed197b97a3286dd958e4c8cfd81e5ea/raw/8604910e8b6f56ff3ad13204db133420ffe01c8e/loki-tail-file.yaml).
@@ -95,7 +95,7 @@ _ps:_ promtail 配置通过 loki-promtail 这个 ConfigMap 修改. 修改后文�
 可以使用下面这个测试应用测试下, 测试应用还是上一章的应用, 不过这次是输出日志到文件中.
 
 <!-- prettier-ignore-start -->
-{{< code language="yaml" title="App Deployment" id="4" expand="Show" collapse="Hide" isCollapsed="true" >}}
+```yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -148,7 +148,7 @@ spec:
         - name: log
           hostPath:
               path: /mnt/log/winston
-{{< /code >}}
+```
 <!-- prettier-ignore-end -->
 
 ![loki 04](/loki-04.png)
@@ -162,7 +162,7 @@ spec:
 可以参考 helm 生成出来的配置文件, 我们重点看这几个:
 
 <!-- prettier-ignore-start -->
-{{< code language="yaml" title="Relabel config" id="5" expand="Show" collapse="Hide" isCollapsed="false" >}}
+```yaml
 - job_name: kubernetes-pods-name
   pipeline_stages:
     - docker: {}
@@ -183,7 +183,7 @@ spec:
     - __meta_kubernetes_pod_uid
     - __meta_kubernetes_pod_container_name
     target_label: __path__
-{{< /code >}}
+```
 <!-- prettier-ignore-end -->
 
 重点关注 `action: drop` 和 `target_label: __path__` 这两部分, 上面 action: drop 表示, 如果目标 pod 没有 `__service__` 这个 label 就不收集这个 pod 的日志, 而 `__service__` 其实就是 `__meta_kubernetes_pod_label_name` 最终就是 pod config 里面的 `metadata.labels.name` 的值; 而 `target_label: __path__` 这个是告诉 promtail 这个 pod 对应的日志文件路径, 最终路径为 `/var/log/pods/*<pod_uid>/<container_name>/*.log`. 这样我们就可以动态配置 promtail 了.
@@ -196,7 +196,7 @@ spec:
 所以我们可以这样配置:
 
 <!-- prettier-ignore-start -->
-{{< code language="yaml" title="Relabel config" id="6" expand="Show" collapse="Hide" isCollapsed="false" >}}
+```yaml
 - job_name: kubernetes-pods-custom
   pipeline_stages:
   kubernetes_sd_configs:
@@ -214,7 +214,7 @@ spec:
     source_labels:
     - __meta_kubernetes_pod_annotation_loki_io_logfile
     target_label: __path__
-{{< /code >}}
+```
 <!-- prettier-ignore-end -->
 
 完整配置文件放在这里 [loki2.yaml](https://gist.githubusercontent.com/zcong1993/2ed197b97a3286dd958e4c8cfd81e5ea/raw/2c8504b5f1e3aecf9c874c637be1d5c774c936a3/loki2.yaml).
