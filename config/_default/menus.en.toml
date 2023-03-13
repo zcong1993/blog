@@ -16,10 +16,10 @@
   url = "/post"
   weight = -10
 
-[[main]]
-  name = "Categories"
-  pageRef = "categories"
-  weight = -9
+# [[main]]
+#   name = "Categories"
+#   pageRef = "categories"
+#   weight = -9
 
 [[main]]
   name = "Tags"
