@@ -23,7 +23,7 @@ jobs:
           hugo-version: 'latest'
           extended: true
       - name: Build
-        run: hugo --gc --minify --config config.toml,vercel.toml
+        run: hugo --gc --minify --config config,vercel.toml
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
         with:
