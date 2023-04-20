@@ -1,5 +1,5 @@
 {{ if not (in (.Site.BaseURL | string) "localhost") }}
-  <script async defer data-website-id="b895495e-7999-45a3-b9a9-eaa60aa4a5dc" src="https://umami.cong.moe/umami.js"></script>
+  <script async src="https://umami.cong.moe/script.js" data-website-id="b895495e-7999-45a3-b9a9-eaa60aa4a5dc"></script>
   {{- if .Site.Params.vercelAnalytics.enable -}}
     <script defer src="/_vercel/insights/script.js"></script>
   {{- end }}
