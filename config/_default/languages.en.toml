@@ -14,7 +14,7 @@ copyright = "Copy, _right?_ :thinking_face:"
 [params]
   # mainSections = ["section1", "section2"]
 
-[author]
+[params.author]
   name = "Cong"
   image = "1006164.jpg"
   headline = "一个写东西的地方."
