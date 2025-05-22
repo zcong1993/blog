@@ -6,8 +6,10 @@
 defaultContentLanguage = "en"
 
 enableRobotsTXT = true
-paginate = 8
 summaryLength = 0
+
+[pagination]
+  pagerSize = 8
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
