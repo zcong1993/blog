@@ -1,7 +1,7 @@
 ---
 title: 在 k8s 中使用 gRPC Go 服务发现
 date: 2021-03-15T16:51:07+08:00
-cover: /grpc-lb-k8s/cover.jpg
+cover: grpc-lb-k8s/cover.jpg
 description: k8s 已经成为云时代云平台的一等公民, 本文介绍下如何在 k8s 中使用 grpc 服务发现.
 categories:
   - gRPC
@@ -148,7 +148,7 @@ $ stern server -t -s 1s
 
 **注:** stern 安装查看项目官方 repo [stern/stern](https://github.com/stern/stern).
 
-![log1.png](/grpc-lb-k8s/log1.png)
+![log1.png](grpc-lb-k8s/log1.png)
 
 可以看到服务端确实交替收到请求, 也就是达到了服务发现和负载均衡效果.
 
@@ -156,7 +156,7 @@ $ stern server -t -s 1s
 
 其实还没有, 当我们在 client 一直连接的情况下 kill 一个 pod 触发重启, ip 发生变化时, 会发现新出现的 pod 不会收到任何请求.
 
-![log2.png](/grpc-lb-k8s/log2.png)
+![log2.png](grpc-lb-k8s/log2.png)
 
 断开 client 重新连接时, 又会正常.
 
@@ -198,7 +198,7 @@ spec:
 
 [cmd/dns/k8s2.yml](https://github.com/zcong1993/grpc-example/blob/d08b33fc99/cmd/dns/k8s2.yml)
 
-![log3.png](/grpc-lb-k8s/log3.png)
+![log3.png](grpc-lb-k8s/log3.png)
 
 发现经过一段时间(maxConnectionAge 设置的是 30s), grpc client 确实 '发现' 了新 pod. 但是这种只是种 `trick`, 谁会想到 server 端的 `maxConnectionAge` 参数竟然是为了帮助 client 端发现新服务. 微软的 [https://dapr.io](https://dapr.io) 项目就是使用这种方式解决 k8s 服务发现和证书过期的问题.
 

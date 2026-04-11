@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | 项目总览
 date: 2021-10-28T17:58:42+08:00
-cover: /dapr-project-overview-cover.png
+cover: dapr-project-overview-cover.png
 description: Dapr 项目总览, 基本概念, 项目结构介绍.
 categories:
   - Golang
@@ -24,7 +24,7 @@ draft: false
 
 ## Concepts
 
-![mind](/dapr-overview/mind.png)
+![mind](dapr-overview/mind.png)
 
 总体来看, dapr 可以分为这么几个概念:
 
@@ -95,13 +95,13 @@ dapr 支持两种运行方式, 分别是: **独立运行**和 **k8s 运行**.
 
 此种模式下, daprd 会作为一个 sidecar 进程运行在你的每个 app 旁边, 你的 app 可以通过 HTTP/gRPC 与它交互. 配置文件会存储在本地. 运行时配置需要使用 flag 传递.
 
-![local](/dapr-overview/local.png)
+![local](dapr-overview/local.png)
 
 ### **Kubernetes**
 
 在 k8s 中, daprd 会做为一个 sidecar 容器运行在你的 app pod 中, 并且这一切都是 `dapr-sidecar-injector` 和 `dapr-operator` 帮你自动完成的. 配置文件也是使用 k8s crd 的形式管理, 运行配置可以通过 k8s annonation 来配置.
 
-![k8s](/dapr-overview/k8s.png)
+![k8s](dapr-overview/k8s.png)
 
 ## 参考资料
 
@@ -109,4 +109,4 @@ dapr 支持两种运行方式, 分别是: **独立运行**和 **k8s 运行**.
 - [https://github.com/dapr/components-contrib](https://github.com/dapr/components-contrib)
 - [https://docs.dapr.io](https://docs.dapr.io)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

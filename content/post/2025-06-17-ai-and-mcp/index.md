@@ -1,7 +1,7 @@
 ---
 title: 聊聊AI和MCP
 date: 2025-06-17T16:51:00+08:00
-cover: /cover.webp
+cover: feature-cover.webp
 description: 简单写写个人对AI和MCP的看法和一些思考。
 categories:
   - AI
@@ -13,6 +13,7 @@ keywords:
   - MCP
 draft: false
 ---
+
 ## 1. MCP是什么
 
 AI大模型爆发后的今天，体验过大模型的强大后应该很少会有人质疑大模型的能力。但是很多人都注意到了它的致命缺点：它是离线的。
@@ -24,7 +25,7 @@ AI大模型爆发后的今天，体验过大模型的强大后应该很少会有
 
 ## 2. MCP如何工作
 
-![how-mcp-works](/2025-06-17-ai-and-mcp/how-mcp-works.png)
+![how-mcp-works](2025-06-17-ai-and-mcp/how-mcp-works.png)
 
 先从全局交互/抽象层面来看，MCP其实是把用户一次对话请求拆分成两次/多次底层对话请求：
 1. 将用户消息和mcp tool元信息合并发送给大模型
@@ -56,7 +57,7 @@ MCP server主要职责是：
 - 怎么处理/加工？
 - 想要什么样的结果？
 
-![traditional-tools](/2025-06-17-ai-and-mcp/traditional-tools.png)
+![traditional-tools](2025-06-17-ai-and-mcp/traditional-tools.png)
 
 工具软件的本质是：实现多个原子化模块功能，绑定到用户门槛低的GUI操作功能上。
 
@@ -66,7 +67,7 @@ MCP server主要职责是：
 
 因此上图需要补充很关键的步骤：
 
-![why-users-are-important](/2025-06-17-ai-and-mcp/why-users-are-important.png)
+![why-users-are-important](2025-06-17-ai-and-mcp/why-users-are-important.png)
 
 由此也能看出传统工具的缺点是：**功能总是有限的**。
 
@@ -76,7 +77,7 @@ MCP server主要职责是：
 
 那么大模型强大的根本原因就是：**使用自然语言解决人和工具信息传递**。
 
-![interaction](/2025-06-17-ai-and-mcp/interaction.png)
+![interaction](2025-06-17-ai-and-mcp/interaction.png)
 
 传统交互形式本质还是人适应机器，而大模型是机器来适配人（理想情况下，实际还是卑微地各种调整prompt）。
 
@@ -91,7 +92,7 @@ MCP server主要职责是：
 2. **行动执行（从0到1）：** 从仅提供“建议”到直接执行方案
 3. **能力强化（从0到1）：** 某些垂直领域采用更为成熟的严谨程序，提升精准度
 
-![mcp-flow](/2025-06-17-ai-and-mcp/mcp-flow.png)
+![mcp-flow](2025-06-17-ai-and-mcp/mcp-flow.png)
 
 ## 5. MCP编写使用注意事项
 
@@ -133,4 +134,4 @@ MCP server主要职责是：
 
 拆分复杂任务到多个简单任务解决再合并的方法论体现在在生活的方方面面，传统的工具或者代码一般都会提供任务拆分编排能力，最基本的就是批量重复任务处理，AI工具也得跟上。
 
-![agent-workers](/2025-06-17-ai-and-mcp/agent-workers.png)
+![agent-workers](2025-06-17-ai-and-mcp/agent-workers.png)

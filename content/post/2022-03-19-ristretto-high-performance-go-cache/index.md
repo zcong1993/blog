@@ -1,7 +1,7 @@
 ---
 title: Ristretto 高性能 go 语言缓存
 date: 2022-03-19T19:03:50+08:00
-cover: /ristretto.jpeg
+cover: ristretto.jpeg
 description: 'Ristretto: A high performance memory-bound Go cache.'
 categories:
   - Golang
@@ -287,4 +287,4 @@ func (p *sampledLFU) fillSample(in []*policyPair) []*policyPair {
 - [https://dgraph.io/blog/post/introducing-ristretto-high-perf-go-cache](https://dgraph.io/blog/post/introducing-ristretto-high-perf-go-cache)
 - [https://github.com/dgraph-io/ristretto](https://github.com/dgraph-io/ristretto)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

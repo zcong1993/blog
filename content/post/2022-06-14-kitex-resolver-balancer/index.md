@@ -1,7 +1,7 @@
 ---
 title: Kitex 服务发现与负载均衡
 date: 2022-06-16T21:28:01+08:00
-cover: /kitex-resolver-balancer.jpeg
+cover: kitex-resolver-balancer.jpeg
 description: 本文分析 Kitex 服务发现与负载均衡实现原理.
 categories:
   - Kitex

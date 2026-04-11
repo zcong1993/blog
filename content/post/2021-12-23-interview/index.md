@@ -1,7 +1,7 @@
 ---
 title: 一点面试感想
 date: 2021-12-23T10:44:34+08:00
-cover: /interview.png
+cover: interview.png
 description: 一点面试感想
 categories:
   - 感想

@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | 配置模块
 date: 2021-11-01T14:10:29+08:00
-cover: /dapr-configuration.png
+cover: dapr-configuration.png
 description: Dapr 配置模块. 不同运行环境, 不同可插拔组件如何组织配置.
 categories:
   - Golang
@@ -260,4 +260,4 @@ func getSidecarContainer(annotations map[string]string, id, daprSidecarImage, im
 - [https://github.com/dapr/dapr](https://github.com/dapr/dapr)
 - [https://docs.dapr.io](https://docs.dapr.io)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

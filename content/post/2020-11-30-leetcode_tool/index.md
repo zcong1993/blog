@@ -1,7 +1,7 @@
 ---
 title: leetcode-tool 一个让你更方便刷题的工具
 date: 2020-11-30T21:51:01+08:00
-cover: /leetcode/cover.jpeg
+cover: leetcode/cover.jpeg
 description: 现在程序员招聘越来越注重算法之类的考核了, 所以刷算法题也就成了程序员日常生活的一部分了. 今天介绍一个工具 -- leetcode-tool, 帮助大家更轻松的刷题, 沉淀知识.
 categories:
   - Tool
@@ -86,7 +86,7 @@ solve/solve0001
 
 `problem.md` 文件为 LeetCode 网页上的题目描述, 在 GitHub 上面显示完全正常, 代码块和图片都可正常显示;
 
-![problem](/leetcode/problem.png)
+![problem](leetcode/problem.png)
 
 `solve_0001.go` 为初始化的源码文件:
 
@@ -161,7 +161,7 @@ func TestTwoSum(t *testing.T) {
 ❯ git diff
 ```
 
-![update](/leetcode/update.png)
+![update](leetcode/update.png)
 
 ### 4. 提交
 

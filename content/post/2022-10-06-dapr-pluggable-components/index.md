@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | Pluggable Components
 date: 2022-10-06T17:40:39+08:00
-cover: /dapr-pluggable-components-cover.png
+cover: dapr-pluggable-components-cover.png
 description: 本文介绍 Dapr 1.9 Pluggable Components 相关源码.
 categories:
   - Golang
@@ -28,7 +28,7 @@ js:
 
 再次说明下 Dapr 目前 component 模块的组织形式, 以 state store 为例:
 
-![dapr-components](/dapr-components.png)
+![dapr-components](dapr-components.png)
 
 dapr 将对应场景下对于底层中间件的能力依赖抽象成为一个 interface(go 语言层面), 然后通过实现接口的方式实现对于不同底层中间件的适配, 最终由 dapr runtime 根据用户配置选择对应适配器并加载. 所以适配器代码也是放在 dapr 代码仓库中的, 由于需要根据社区用户需求来适配越来越多的中间件, dapr 将此部分代码单独放在了 [https://github.com/dapr/components-contrib](https://github.com/dapr/components-contrib) 仓库中, 因此如果我们有特殊需求需要改动适配器代码或者需要对公司闭源组件做适配是需要 fork 代码的. 这种扩展方式显然是不太能接受的.
 
@@ -38,7 +38,7 @@ dapr 将对应场景下对于底层中间件的能力依赖抽象成为一个 in
 
 以 state store 为例, 看看新模块是如何解决扩展问题的:
 
-![dapr-pluggable-components](/dapr-pluggable-components.png)
+![dapr-pluggable-components](dapr-pluggable-components.png)
 
 相当于 dapr 重新抽象出了一层需要依赖的底层中间件能力的接口(proto), dapr runtime 通过与用户写的可插拔服务间接与底层中间件交互.
 

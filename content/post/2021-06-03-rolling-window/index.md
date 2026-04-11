@@ -1,7 +1,7 @@
 ---
 title: 滑动窗口计数器
 date: 2021-06-03T11:47:21+08:00
-cover: /ferris-wheel-2210x1473.jpeg
+cover: ferris-wheel-2210x1473.jpeg
 description: 一种只记录最近一段时间的某些数据指标的数据结构
 categories:
   - DataStructure
@@ -31,7 +31,7 @@ now 时刻增加指标的目标桶 index 为 `((now - initTime) / interval) % n`
 
 增加读取时, 重置过期的桶.
 
-![image1](/120444164-f57e6700-c3b9-11eb-95c3-08702a81e1d3.png)
+![image1](120444164-f57e6700-c3b9-11eb-95c3-08702a81e1d3.png)
 
 ## 实现
 

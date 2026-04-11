@@ -1,7 +1,7 @@
 ---
 title: gRPC 扩展错误处理
 date: 2021-12-29T16:15:57+08:00
-cover: /grpc-richer-error-hanling.png
+cover: grpc-richer-error-hanling.png
 description: 本文介绍 gRPC 基本错误处理和使用 goolge 扩展处理错误.
 categories:
   - gRPC
@@ -238,4 +238,4 @@ const getErrorDetails = (err: ServiceError): Any[] => {
 - [https://github.com/stackpath/node-grpc-error-details](https://github.com/stackpath/node-grpc-error-details)
 - [https://avi.im/grpc-errors](https://avi.im/grpc-errors)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

@@ -1,7 +1,7 @@
 ---
 title: 现代化的 Protobuf 构建工具 buf
 date: 2022-05-18T16:06:15+08:00
-cover: /buf-cover.jpeg
+cover: buf-cover.jpeg
 description: 本文介绍 Protobuf 构建工具 buf 的使用.
 categories:
   - gRPC

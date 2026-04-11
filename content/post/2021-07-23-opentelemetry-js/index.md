@@ -1,7 +1,7 @@
 ---
 title: OpenTelemetry-JS Tracing 实现详解
 date: 2021-07-23T18:05:25+08:00
-cover: /opentelemetry/cover.png
+cover: opentelemetry/cover.png
 description: 本文讲解 OpenTelemetry-JS tracing 相关使用和实现原理.
 categories:
   - Tracing
@@ -35,11 +35,11 @@ draft: false
 
 ## 3. Tracing 时序图(效果)
 
-![tracing01](/opentelemetry/tracing01.png)
+![tracing01](opentelemetry/tracing01.png)
 
 根据上图可以想象: 一个请求进来被 http server handler (1) 处理, 1 调用了函数 2, 函数 2 内做了数据库操作 3, 之后并发调用函数 4 和 5, 结束后 1 返回请求响应.
 
-<!-- ![jaeger](/opentelemetry/jaeger.png) -->
+<!-- ![jaeger](opentelemetry/jaeger.png) -->
 
 {{< figure src="/opentelemetry/jaeger.png" alt="jaeger" position="center" caption="Jaeger web UI 中的 tracing 时序图" captionPosition="center" >}}
 
@@ -306,7 +306,7 @@ interface PropagationAPI {
 }
 ```
 
-![propagation](/opentelemetry/propagation.png)
+![propagation](opentelemetry/propagation.png)
 
 跨服务通过 carrier 传播 span 信息, 服务内部通过 AsyncLocalStorage 传递 span
 

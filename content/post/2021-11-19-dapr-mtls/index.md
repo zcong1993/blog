@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | mTLS
 date: 2021-11-19T16:34:47+08:00
-cover: /dapr-mtls.png
+cover: dapr-mtls.png
 description: 本文介绍 Dapr mTLS 相关源码.
 categories:
   - Golang
@@ -28,7 +28,7 @@ js:
 
 ## 总览
 
-![mtls overview](/dapr-mtls-overview.png)
+![mtls overview](dapr-mtls-overview.png)
 
 dapr 提供了一个叫做 `sentry` 的系统服务作为一个证书颁发机构(CA), 来保证集群内流量安全.
 
@@ -356,4 +356,4 @@ dapr 通过设置 `grpc.KeepaliveParams` option 来解决这个问题, grpc serv
 - [https://github.com/dapr/dapr](https://github.com/dapr/dapr)
 - [https://docs.dapr.io](https://docs.dapr.io)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

@@ -1,7 +1,7 @@
 ---
 title: 服务端超时控制
 date: 2021-10-18T19:01:32+08:00
-cover: /stone-cladding-wall-2210x1658.jpeg
+cover: stone-cladding-wall-2210x1658.jpeg
 description: 服务端的资源是有限的, 处理已经超时的请求是没任何意义的. 超时控制是保障服务稳定的一道重要防线, 本质是快速失败节省资源.
 categories:
   - Golang
@@ -202,4 +202,4 @@ export class TimeoutManager {
 
 - [https://mp.weixin.qq.com/s/BERHvjCbxTCEUF8glOBqBg](https://mp.weixin.qq.com/s/BERHvjCbxTCEUF8glOBqBg)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

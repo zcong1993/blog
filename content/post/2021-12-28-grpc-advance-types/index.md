@@ -1,7 +1,7 @@
 ---
 title: gRPC 扩展类型的使用
 date: 2021-12-28T14:24:16+08:00
-cover: /grpc-advance-types.jpeg
+cover: grpc-advance-types.jpeg
 description: 本文主要介绍一些多语言广泛支持的 protobuf 扩展类型.
 categories:
   - gRPC
@@ -389,4 +389,4 @@ func NewValue(v interface{}) (*Value, error) {
 - [protocolbuffers/protobuf/google/protobuf](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf)
 - [protocolbuffers/protobuf-go/types/known](https://github.com/protocolbuffers/protobuf-go/tree/master/types/known)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

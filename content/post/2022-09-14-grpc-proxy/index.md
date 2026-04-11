@@ -1,7 +1,7 @@
 ---
 title: Grpc Proxy
 date: 2022-09-14T10:37:51+08:00
-cover: /grpc-proxy.jpeg
+cover: grpc-proxy.jpeg
 description: 本文介绍 Grpc Proxy 原理.
 categories:
   - gRPC

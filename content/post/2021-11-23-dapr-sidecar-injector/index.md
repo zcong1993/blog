@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | Sidecar Injector
 date: 2021-11-23T18:58:34+08:00
-cover: /sidecar-injector.png
+cover: sidecar-injector.png
 description: 本文介绍 Dapr Sidecar Injector 相关源码.
 categories:
   - Golang
@@ -268,4 +268,4 @@ func getSidecarContainer(annotations map[string]string, id, daprSidecarImage, im
 - [https://github.com/dapr/dapr](https://github.com/dapr/dapr)
 - [https://docs.dapr.io](https://docs.dapr.io)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

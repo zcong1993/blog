@@ -1,7 +1,7 @@
 ---
 title: 分布式全局唯一 ID 生成
 date: 2021-04-13T19:03:05+08:00
-cover: /san-francisco.jpeg
+cover: san-francisco.jpeg
 description: 各种业务账号订单 ID, 保证幂等的消息 ID 等均需要全局唯一, 那么如何设计一个分布式 ID 生成器(Distributed ID Generator)，并保证 ID 按时间粗略有序?
 categories:
   - SystemDesign

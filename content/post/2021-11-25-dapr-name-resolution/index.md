@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | Name Resolution
 date: 2021-11-25T15:40:17+08:00
-cover: /dapr-name-resolution.png
+cover: dapr-name-resolution.png
 description: 本文介绍 Dapr Name Resolution 相关源码.
 categories:
   - Golang
@@ -130,4 +130,4 @@ func GetDialAddressPrefix(mode modes.DaprMode) string {
 - [https://blog.cong.moe/post/2021-03-15-grpc-go-discovery-in-k8s](https://blog.cong.moe/post/2021-03-15-grpc-go-discovery-in-k8s/)
 - [https://blog.cong.moe/post/2021-03-06-grpc-go-discovery-lb](https://blog.cong.moe/post/2021-03-06-grpc-go-discovery-lb/)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

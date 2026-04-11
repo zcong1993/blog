@@ -1,7 +1,7 @@
 ---
 title: Grpc ClientConnInterface 扩展
 date: 2022-08-04T14:50:36+08:00
-cover: /grpc-client-conn-interface.jpeg
+cover: grpc-client-conn-interface.jpeg
 description: 本文介绍 Grpc ClientConnInterface 扩展.
 categories:
   - gRPC

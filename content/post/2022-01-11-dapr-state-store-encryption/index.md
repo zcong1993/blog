@@ -1,7 +1,7 @@
 ---
 title: Dapr | State Store Encryption
 date: 2022-01-11T18:05:39+08:00
-cover: /dapr-state-store-encryption.png
+cover: dapr-state-store-encryption.png
 description: 本文介绍 Dapr 新功能, State Store 加密.
 categories:
   - Golang
@@ -172,4 +172,4 @@ func TryDecryptValue(storeName string, value []byte) ([]byte, error) {
 
 - [state-management/howto-encrypt-state](https://docs.dapr.io/developing-applications/building-blocks/state-management/howto-encrypt-state)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

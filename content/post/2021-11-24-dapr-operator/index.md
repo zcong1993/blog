@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | Operator
 date: 2021-11-24T16:52:50+08:00
-cover: /dapr-operator.png
+cover: dapr-operator.png
 description: 本文介绍 Dapr Operator 相关源码.
 categories:
   - Golang
@@ -327,4 +327,4 @@ k8s 在处理多版本 API 时需要做兼容性处理, 需要开发者实现不
 - [https://docs.dapr.io](https://docs.dapr.io)
 - [https://book.kubebuilder.io](https://book.kubebuilder.io)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

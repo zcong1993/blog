@@ -1,7 +1,7 @@
 ---
 title: 在 Typescript 中使用 gRPC
 date: 2021-03-16T15:32:21+08:00
-cover: /grpc-on-typescript.jpeg
+cover: grpc-on-typescript.jpeg
 description: gRPC 是一个高性能, 支持多种语言的 RPC 框架, 官方已经支持了 NodeJS 语言. 而 Typescript 作为 JavaScript 的超集, 可以提高 js 代码的可维护性, 并且代码提示很不错, 已在 js 市场占据了很大份额. 本文简单介绍下 gRPC 在 Typescript 中如何使用.
 categories:
   - gRPC

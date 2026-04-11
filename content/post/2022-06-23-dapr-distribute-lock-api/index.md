@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | Distribute Lock
 date: 2022-06-23T20:03:25+08:00
-cover: /dapr-distribute-lock.png
+cover: dapr-distribute-lock.png
 description: 本文介绍 Dapr Distribute Lock Api 相关源码.
 categories:
   - Golang

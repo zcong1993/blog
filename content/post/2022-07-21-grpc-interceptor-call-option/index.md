@@ -1,7 +1,7 @@
 ---
 title: Grpc client 拦截器 CallOption 扩展
 date: 2022-07-21T16:26:40+08:00
-cover: /grpc-interceptor-call-option.jpeg
+cover: grpc-interceptor-call-option.jpeg
 description: 本文介绍 Grpc client 拦截器 CallOption 扩展.
 categories:
   - gRPC

@@ -1,7 +1,7 @@
 ---
 title: 写了个简单的多设备文本分享工具
 date: 2021-07-09T15:18:30+08:00
-cover: /text-share/cover.jpeg
+cover: text-share/cover.jpeg
 description: 介绍多设备文本分享工具 text-share.
 categories:
   - Tool
@@ -43,7 +43,7 @@ draft: false
 
 `text share` 思路很简单, 就是一个网页, 你可以增加, 复制, 删除文本.
 
-![text-share](/text-share/show.png)
+![text-share](text-share/show.png)
 
 ### 如何保证安全
 

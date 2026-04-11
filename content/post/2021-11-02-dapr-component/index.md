@@ -1,7 +1,7 @@
 ---
 title: Dapr 源码解析 | 组件模块
 date: 2021-11-02T15:50:51+08:00
-cover: /dapr-component.png
+cover: dapr-component.png
 description: 本文介绍 Dapr Component 部分和源码.
 categories:
   - Golang
@@ -482,4 +482,4 @@ func (a *DaprRuntime) processComponentSecrets(component components_v1alpha1.Comp
 - [https://github.com/dapr/components-contrib](https://github.com/dapr/components-contrib)
 - [https://docs.dapr.io](https://docs.dapr.io)
 
-![wxmp](/wxmp_tiny_1.png)
+![wxmp](wxmp_tiny_1.png)

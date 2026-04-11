@@ -1,7 +1,7 @@
 ---
 title: Node Grpc Health Check
 date: 2021-09-24T11:43:56+08:00
-cover: /grpc-health-check.jpeg
+cover: grpc-health-check.jpeg
 description: 本文讲述如何实现 GRPC Health Checking Protocol.
 categories:
   - gRPC

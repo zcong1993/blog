@@ -1,7 +1,7 @@
 ---
 title: 使用 esbuild 加速 ts 构建
 date: 2021-06-06T23:40:17+08:00
-cover: /0ZrHIetgrHeIa33IktkcsBscOVBts7VzEuEKmhsQ.jpeg
+cover: 0ZrHIetgrHeIa33IktkcsBscOVBts7VzEuEKmhsQ.jpeg
 description: 使用 esbuild 取代 tsc 加速 ts 构建
 categories:
   - TypeScript

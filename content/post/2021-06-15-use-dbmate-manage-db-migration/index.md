@@ -1,7 +1,7 @@
 ---
 title: 使用 dbmate 管理数据库 migration
 date: 2021-06-15T19:07:31+08:00
-cover: /use-dbmate-manage-db-migration.jpeg
+cover: use-dbmate-manage-db-migration.jpeg
 description: 使用 dbmate 管理数据库 migration
 categories:
   - DB

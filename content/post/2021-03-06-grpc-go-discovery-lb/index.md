@@ -1,7 +1,7 @@
 ---
 title: gRPC Go 服务发现与负载均衡(更新版)
 date: 2022-05-11T19:01:06+08:00
-cover: /grpc-go-discovery-lb.jpg
+cover: grpc-go-discovery-lb.jpg
 description: gRPC 是 Google 开源的一款高性能, 支持多种语言的 RPC 框架. 已经被广泛用于集群内服务间调用. 为了大规模流量和避免单点故障, 所以服务往往是部署多实例的, 于是负载均衡就是硬需求了.
 categories:
   - gRPC
@@ -39,7 +39,7 @@ gRPC 采取的客户端负载均衡, 主要由两个客户端组件来完成:
 1. 维护目标服务名称和真实地址列表的映射 (resolver)
 2. 控制该和哪些真实地址建立连接, 该将请求发送给哪个服务实例 (balancer)
 
-![dns_to_load_balancer_mapping_3](/dns_to_load_balancer_mapping_3.png)
+![dns_to_load_balancer_mapping_3](dns_to_load_balancer_mapping_3.png)
 
 这种方式是客户端直接请求服务端, 所以没有额外性能开销. 这种模式客户端**可能**会和多个服务端建立连接(balancer 部分详细介绍), gRPC 的 client connection 背后其实维护了一组 subConnections, 每个 subConnection 会与一个服务端建立连接. 详情参考文档 [Load Balancing in gRPC](https://github.com/grpc/grpc/blob/master/doc/load-balancing.md).
 
