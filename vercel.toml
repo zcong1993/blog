@@ -1,4 +1,0 @@
-baseURL = "https://blog.cong.moe/"
-
-[params.vercelAnalytics]
-enable = true
