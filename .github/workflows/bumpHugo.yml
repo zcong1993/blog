@@ -29,6 +29,6 @@ jobs:
             echo "no changes";
           fi
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v1.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
