@@ -2,9 +2,10 @@ name: Bump Hugo
 
 on:
   # push:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
+  # workflow_dispatch:
+  # schedule:
+  #   - cron: '0 0 * * *'
+  workflow_call: # disabled - unreachable trigger to keep YAML valid
 
 jobs:
   setup:
@@ -29,6 +30,6 @@ jobs:
             echo "no changes";
           fi
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v1.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
