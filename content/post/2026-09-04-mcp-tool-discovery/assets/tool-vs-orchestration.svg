@@ -1,0 +1,81 @@
+<svg viewBox="0 0 720 360" width="720" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
+  </style>
+  <defs>
+    <marker id="a-red" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#e03131"/>
+    </marker>
+    <marker id="a-teal" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#099268"/>
+    </marker>
+    <marker id="a-gray" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#868e96"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="720" height="360" fill="#fffce8"/>
+
+  <!-- Title -->
+  <text x="360" y="34" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">工具发现 vs 工具编排: 分层架构</text>
+
+  <!-- Orchestration layer (top) -->
+  <!-- x=45, y=55, w=630, h=105 -->
+  <rect x="45" y="55" width="630" height="105" rx="8"
+        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="55" y="70" font-size="11" fill="#1e1e1e">编排层</text>
+
+  <!-- Skill: permission/middleware #d0bfff -->
+  <rect x="65" y="82" width="180" height="58" rx="6"
+        fill="#d0bfff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="155" y="106" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Skill / Prompt</text>
+  <text x="155" y="124" font-size="10" fill="#1e1e1e" text-anchor="middle">如何选择和编排工具</text>
+
+  <!-- Agent decision: decision #fff3bf -->
+  <rect x="270" y="82" width="180" height="58" rx="6"
+        fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="360" y="106" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Agent 决策</text>
+  <text x="360" y="124" font-size="10" fill="#1e1e1e" text-anchor="middle">场景理解 + 流程组合</text>
+
+  <!-- mcp-cli: proxy #ffd8a8 -->
+  <rect x="475" y="82" width="180" height="58" rx="6"
+        fill="#ffd8a8" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="565" y="106" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">mcp-cli</text>
+  <text x="565" y="124" font-size="10" fill="#1e1e1e" text-anchor="middle">按需发现 + Pipe 裁剪</text>
+
+  <!-- Arrows: orchestration -> tool layer -->
+  <!-- source bottom 140+5=145, target top 195-14=181 -->
+  <path d="M155,145 L 155,181" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a-gray)"/>
+  <path d="M360,145 L 360,181" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a-gray)"/>
+  <path d="M565,145 L 565,181" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a-gray)"/>
+
+  <!-- Tool layer (bottom) -->
+  <!-- x=45, y=195, w=630, h=130 -->
+  <rect x="45" y="195" width="630" height="130" rx="8"
+        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="55" y="210" font-size="11" fill="#1e1e1e">工具层 (MCP)</text>
+
+  <!-- Tool boxes: client #a5d8ff -->
+  <rect x="65" y="222" width="130" height="39" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="130" y="246" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">API Spec</text>
+
+  <rect x="210" y="222" width="130" height="39" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="275" y="246" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">调用协议</text>
+
+  <rect x="355" y="222" width="140" height="39" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="425" y="246" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Input Schema</text>
+
+  <rect x="510" y="222" width="150" height="39" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="585" y="246" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Spec 维护与分发</text>
+
+  <!-- Summary in tool layer -->
+  <text x="360" y="292" font-size="11" fill="#1e1e1e" text-anchor="middle">服务端能力的 API spec (持续更新) + 调用协议 (基本不变)</text>
+
+  <!-- Bottom label -->
+  <text x="360" y="345" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">MCP 退化到工具调用协议层 — 不是退步，是找到了正确的位置</text>
+</svg>

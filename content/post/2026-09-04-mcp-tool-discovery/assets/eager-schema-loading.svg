@@ -1,0 +1,107 @@
+<svg viewBox="0 0 760 400" width="760" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
+  </style>
+  <defs>
+    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#e03131"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#099268"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#868e96"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="760" height="400" fill="#fffce8"/>
+
+  <!-- Title -->
+  <text x="380" y="34" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">Eager Schema Loading: 上下文膨胀</text>
+
+  <!-- MCP Servers group (left) -->
+  <!-- x=25, y=55, w=190, h=210 -->
+  <rect x="25" y="55" width="190" height="210" rx="8"
+        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="35" y="70" font-size="11" fill="#1e1e1e">MCP Servers</text>
+
+  <!-- Server A: client/ordinary #a5d8ff -->
+  <rect x="42" y="84" width="156" height="39" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="120" y="108" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server A (15 tools)</text>
+
+  <!-- Server B -->
+  <rect x="42" y="133" width="156" height="39" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="120" y="157" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server B (20 tools)</text>
+
+  <!-- Server C -->
+  <rect x="42" y="182" width="156" height="39" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="120" y="206" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server C (25 tools)</text>
+
+  <!-- ... more -->
+  <text x="120" y="248" font-size="11" fill="#1e1e1e" text-anchor="middle">... x N servers</text>
+
+  <!-- Arrows: servers -> LLM context -->
+  <!-- stroke-width 2.2, round caps, 12x12 marker, end = target left - 14 -->
+  <!-- Server A center y=103, Server B center y=152, Server C center y=201 -->
+  <!-- source right edge 198+5=203, target left 280-14=266 -->
+  <path d="M203,103 C 235,103 240,152 266,152" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-gray)"/>
+  <path d="M203,152 L 266,152" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-gray)"/>
+  <path d="M203,201 C 235,201 240,152 266,152" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-gray)"/>
+
+  <text x="243" y="126" font-size="10" fill="#1e1e1e" text-anchor="middle" transform="rotate(-90,243,126)">tools/list</text>
+
+  <!-- LLM Context (center) -->
+  <!-- gateway/key #ffc9c9, x=280, y=55, w=220, h=270 -->
+  <rect x="280" y="55" width="220" height="270" rx="8"
+        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="390" y="78" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">LLM Context Window</text>
+
+  <!-- Schema blocks stacked inside -->
+  <rect x="296" y="92" width="188" height="30" rx="5"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="390" y="112" font-size="11" fill="#1e1e1e" text-anchor="middle">Server A: 15 tool schemas</text>
+
+  <rect x="296" y="128" width="188" height="30" rx="5"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="390" y="148" font-size="11" fill="#1e1e1e" text-anchor="middle">Server B: 20 tool schemas</text>
+
+  <rect x="296" y="164" width="188" height="30" rx="5"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="390" y="184" font-size="11" fill="#1e1e1e" text-anchor="middle">Server C: 25 tool schemas</text>
+
+  <rect x="296" y="200" width="188" height="22" rx="5"
+        fill="#fff3bf" stroke="#1e1e1e" stroke-width="1" stroke-linejoin="round" opacity="0.6"/>
+  <text x="390" y="216" font-size="10" fill="#1e1e1e" text-anchor="middle">... 更多 tool schemas</text>
+
+  <!-- Divider -->
+  <line x1="296" y1="230" x2="484" y2="230" stroke="#1e1e1e" stroke-width="1" stroke-dasharray="6,4" stroke-linecap="round"/>
+
+  <!-- User message squeezed -->
+  <rect x="296" y="238" width="188" height="30" rx="5"
+        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="390" y="258" font-size="11" fill="#1e1e1e" text-anchor="middle">用户消息</text>
+
+  <!-- Conversation history squeezed -->
+  <rect x="296" y="274" width="188" height="30" rx="5"
+        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1" stroke-linejoin="round" opacity="0.5"/>
+  <text x="390" y="294" font-size="11" fill="#1e1e1e" text-anchor="middle">对话历史 (被压缩)</text>
+
+  <!-- Annotation: schema overhead (right brace) -->
+  <path d="M508,92 L 520,92 L 520,220 L 508,220" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="530" y="148" font-size="11" font-weight="700" fill="#1e1e1e">~50K-70K tokens</text>
+  <text x="530" y="164" font-size="10" fill="#1e1e1e">每轮重复携带</text>
+
+  <!-- Annotation: useful content -->
+  <path d="M508,238 L 520,238 L 520,304 L 508,304" fill="none" stroke="#099268" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="530" y="268" font-size="11" font-weight="700" fill="#1e1e1e">有效信息空间</text>
+  <text x="530" y="284" font-size="10" fill="#1e1e1e">被大幅挤压</text>
+
+  <!-- Bottom annotation -->
+  <rect x="100" y="348" width="560" height="34" rx="6"
+        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="380" y="370" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">100 个 tool 的 schema 占据上下文 50K-70K tokens, 10 轮对话累计消耗 ~600K tokens</text>
+</svg>

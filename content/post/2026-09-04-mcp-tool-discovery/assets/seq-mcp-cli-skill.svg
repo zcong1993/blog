@@ -1,0 +1,85 @@
+<svg viewBox="0 0 650 420" width="650" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
+  </style>
+  <defs>
+    <marker id="ma" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#1e1e1e"/>
+    </marker>
+    <marker id="ma-t" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#099268"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="650" height="420" fill="#fffce8"/>
+
+  <!-- Title -->
+  <text x="325" y="30" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">mcp-cli + Skill 模式</text>
+
+  <!-- ===== Participant headers ===== -->
+  <!-- Agent: x=100 -->
+  <rect x="40" y="48" width="120" height="33" rx="6"
+        fill="#d0bfff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="100" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Agent</text>
+
+  <!-- mcp-cli: x=310 -->
+  <rect x="250" y="48" width="120" height="33" rx="6"
+        fill="#ffd8a8" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="310" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">mcp-cli</text>
+
+  <!-- Server A: x=510 -->
+  <rect x="450" y="48" width="120" height="33" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="510" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server A</text>
+
+  <!-- ===== Lifelines ===== -->
+  <line x1="100" y1="81" x2="100" y2="388" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
+  <line x1="310" y1="81" x2="310" y2="388" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
+  <line x1="510" y1="81" x2="510" y2="388" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
+
+  <!-- ===== Messages ===== -->
+
+  <!-- 1. Agent start: no connections (annotation) y=105 -->
+  <text x="100" y="105" font-size="10" fill="#099268" text-anchor="middle">启动: 零 MCP 连接</text>
+  <text x="100" y="119" font-size="10" fill="#099268" text-anchor="middle">零 schema 开销</text>
+
+  <!-- 2. User question (self-message) y=145 -->
+  <path d="M112,145 L 150,145 L 150,160 L 114,160" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ma)"/>
+  <text x="170" y="155" font-size="10" fill="#1e1e1e">用户提问</text>
+
+  <!-- 3. Skill match (self-message) y=180 -->
+  <path d="M112,182 L 150,182 L 150,197 L 114,197" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ma)"/>
+  <text x="170" y="192" font-size="10" fill="#1e1e1e">Skill 匹配 -> 指定 tool-3</text>
+
+  <!-- 4. Agent -> mcp-cli: call y=220 -->
+  <path d="M105,225 L 296,225" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ma)"/>
+  <text x="200" y="220" font-size="10" fill="#1e1e1e" text-anchor="middle">call -s A tool-3 '{...}'</text>
+
+  <!-- 5. mcp-cli -> Server A: connect + callTool y=250 -->
+  <path d="M315,255 L 496,255" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ma)"/>
+  <text x="405" y="250" font-size="10" fill="#1e1e1e" text-anchor="middle">connect + callTool(tool-3)</text>
+
+  <!-- 6. Server A -> mcp-cli: response y=285 -->
+  <path d="M496,290 L 324,290" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ma)"/>
+  <text x="405" y="285" font-size="10" fill="#1e1e1e" text-anchor="middle">原始结果</text>
+
+  <!-- 7. mcp-cli pipe (activation box) y=300-330 -->
+  <rect x="298" y="302" width="24" height="28" rx="3"
+        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="335" y="316" font-size="10" fill="#099268">| jq / head 裁剪</text>
+
+  <!-- 8. mcp-cli -> Agent: trimmed result y=345 -->
+  <path d="M296,350 L 114,350" fill="none" stroke="#099268" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ma-t)"/>
+  <text x="200" y="345" font-size="10" fill="#099268" text-anchor="middle">裁剪后精确信息</text>
+
+  <!-- 9. Agent activation box (green) -->
+  <rect x="88" y="358" width="24" height="22" rx="3"
+        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="125" y="373" font-size="10" fill="#099268">只有需要的信息进入上下文</text>
+
+  <!-- Bottom annotation -->
+  <rect x="70" y="392" width="510" height="24" rx="6"
+        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="325" y="409" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">同样的 Skill 选择逻辑, 但启动零开销 + response 可裁剪</text>
+</svg>

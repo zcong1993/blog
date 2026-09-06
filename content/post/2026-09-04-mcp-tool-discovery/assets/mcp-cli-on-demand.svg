@@ -1,0 +1,134 @@
+<svg viewBox="0 0 760 410" width="760" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
+  </style>
+  <defs>
+    <marker id="arr-red" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#e03131"/>
+    </marker>
+    <marker id="arr-teal" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#099268"/>
+    </marker>
+    <marker id="arr-gray" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#868e96"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="760" height="410" fill="#fffce8"/>
+
+  <!-- Title -->
+  <text x="380" y="34" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">mcp-cli: 按需加载 + Response Pipe</text>
+
+  <!-- Agent box (left): permission/middleware #d0bfff -->
+  <!-- x=25, y=55, w=180, h=310 -->
+  <rect x="25" y="55" width="180" height="310" rx="8"
+        fill="#d0bfff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="115" y="78" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">AI Agent</text>
+
+  <!-- System prompt: decision #fff3bf -->
+  <rect x="40" y="92" width="150" height="39" rx="6"
+        fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="115" y="110" font-size="11" fill="#1e1e1e" text-anchor="middle">System Prompt</text>
+  <text x="115" y="124" font-size="10" fill="#1e1e1e" text-anchor="middle">mcp-cli 用法 (~200 tok)</text>
+
+  <!-- User message: server #b2f2bb -->
+  <rect x="40" y="141" width="150" height="33" rx="6"
+        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="115" y="162" font-size="11" fill="#1e1e1e" text-anchor="middle">用户消息 + 对话历史</text>
+
+  <!-- LLM decides -->
+  <rect x="40" y="184" width="150" height="33" rx="6"
+        fill="#d0bfff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="115" y="205" font-size="11" fill="#1e1e1e" text-anchor="middle">LLM: 需要 Server A</text>
+
+  <!-- tool list result: client #a5d8ff -->
+  <rect x="40" y="227" width="150" height="33" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="115" y="248" font-size="11" fill="#1e1e1e" text-anchor="middle">Server A: 5 tool schemas</text>
+
+  <!-- call result: server #b2f2bb -->
+  <rect x="40" y="270" width="150" height="33" rx="6"
+        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="115" y="291" font-size="11" fill="#1e1e1e" text-anchor="middle">裁剪后结果 (精确信息)</text>
+
+  <!-- Free space -->
+  <rect x="40" y="313" width="150" height="33" rx="6"
+        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="115" y="334" font-size="11" fill="#1e1e1e" text-anchor="middle">充裕的上下文空间</text>
+
+  <!-- mcp-cli box (center): proxy #ffd8a8 -->
+  <!-- x=270, y=100, w=140, h=220 -->
+  <rect x="270" y="100" width="140" height="220" rx="8"
+        fill="#ffd8a8" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="340" y="124" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">mcp-cli</text>
+
+  <!-- tools command: decision #fff3bf -->
+  <rect x="284" y="138" width="112" height="33" rx="5"
+        fill="#fff3bf" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="340" y="159" font-size="11" fill="#1e1e1e" text-anchor="middle">tools -s A</text>
+
+  <!-- call command -->
+  <rect x="284" y="181" width="112" height="33" rx="5"
+        fill="#fff3bf" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="340" y="202" font-size="11" fill="#1e1e1e" text-anchor="middle">call -s A tool</text>
+
+  <!-- pipe -->
+  <rect x="284" y="224" width="112" height="33" rx="5"
+        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="340" y="245" font-size="11" fill="#1e1e1e" text-anchor="middle">| jq / head</text>
+
+  <!-- cache label -->
+  <text x="340" y="280" font-size="10" fill="#1e1e1e" text-anchor="middle">12h TTL cache</text>
+  <rect x="294" y="286" width="92" height="22" rx="4"
+        fill="#fffce8" stroke="#1e1e1e" stroke-width="1" stroke-linejoin="round"/>
+  <text x="340" y="301" font-size="9" fill="#1e1e1e" text-anchor="middle">~/.mcp-cli/cache/</text>
+
+  <!-- MCP Servers (right) -->
+  <!-- x=475, y=100, w=260, h=220 -->
+  <rect x="475" y="100" width="260" height="220" rx="8"
+        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="485" y="115" font-size="11" fill="#1e1e1e">MCP Servers</text>
+
+  <!-- Server A - highlighted: client #a5d8ff -->
+  <rect x="495" y="130" width="110" height="39" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="550" y="154" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server A</text>
+
+  <!-- Server B - dimmed -->
+  <rect x="615" y="130" width="100" height="39" rx="6"
+        fill="#fffce8" stroke="#1e1e1e" stroke-width="1" stroke-linejoin="round" opacity="0.5"/>
+  <text x="665" y="154" font-size="13" fill="#1e1e1e" text-anchor="middle" opacity="0.4">Server B</text>
+
+  <!-- Server C - dimmed -->
+  <rect x="495" y="185" width="110" height="39" rx="6"
+        fill="#fffce8" stroke="#1e1e1e" stroke-width="1" stroke-linejoin="round" opacity="0.5"/>
+  <text x="550" y="209" font-size="13" fill="#1e1e1e" text-anchor="middle" opacity="0.4">Server C</text>
+
+  <!-- Server D - dimmed -->
+  <rect x="615" y="185" width="100" height="39" rx="6"
+        fill="#fffce8" stroke="#1e1e1e" stroke-width="1" stroke-linejoin="round" opacity="0.5"/>
+  <text x="665" y="209" font-size="13" fill="#1e1e1e" text-anchor="middle" opacity="0.4">Server D</text>
+
+  <!-- More servers -->
+  <text x="605" y="258" font-size="11" fill="#1e1e1e" text-anchor="middle">... 未连接, 零开销</text>
+  <text x="605" y="276" font-size="10" fill="#1e1e1e" text-anchor="middle">仅 Server A 按需连接</text>
+
+  <!-- Connectors: Agent -> mcp-cli -->
+  <!-- Agent right edge 205+5=210, mcp-cli left 270-14=256 -->
+  <path d="M210,200 L 256,155" fill="none" stroke="#e03131" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-red)"/>
+  <text x="226" y="168" font-size="10" fill="#1e1e1e">discover</text>
+
+  <path d="M210,286 L 256,240" fill="none" stroke="#099268" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-teal)"/>
+  <text x="220" y="270" font-size="10" fill="#1e1e1e">call | jq</text>
+
+  <!-- mcp-cli -> Server A -->
+  <!-- mcp-cli right edge 410+5=415, Server A left 495-14=481 -->
+  <path d="M415,155 L 481,150" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-gray)"/>
+  <path d="M415,198 L 481,200" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-gray)"/>
+
+  <!-- Bottom annotation -->
+  <rect x="90" y="380" width="580" height="28" rx="6"
+        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="380" y="399" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">基础开销 ~200 tokens | 按需增量 ~1,200 tokens | shell pipe 精确裁剪响应</text>
+</svg>
