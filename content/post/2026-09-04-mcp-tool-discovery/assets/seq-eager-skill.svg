@@ -1,0 +1,97 @@
+<svg viewBox="0 0 750 520" width="750" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
+  </style>
+  <defs>
+    <marker id="ea" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#1e1e1e"/>
+    </marker>
+    <marker id="ea-r" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#e03131"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="750" height="520" fill="#fffce8"/>
+
+  <!-- Title -->
+  <text x="375" y="30" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">Eager + Skill 模式</text>
+
+  <!-- ===== Participant headers ===== -->
+  <!-- Agent: x=100 -->
+  <rect x="40" y="48" width="120" height="33" rx="6"
+        fill="#d0bfff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="100" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Agent</text>
+
+  <!-- Server A: x=280 -->
+  <rect x="220" y="48" width="120" height="33" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="280" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server A</text>
+
+  <!-- Server B: x=440 -->
+  <rect x="380" y="48" width="120" height="33" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="440" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server B</text>
+
+  <!-- Server C: x=600 -->
+  <rect x="540" y="48" width="120" height="33" rx="6"
+        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
+  <text x="600" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server C</text>
+
+  <!-- ===== Lifelines ===== -->
+  <line x1="100" y1="81" x2="100" y2="490" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
+  <line x1="280" y1="81" x2="280" y2="490" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
+  <line x1="440" y1="81" x2="440" y2="490" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
+  <line x1="600" y1="81" x2="600" y2="490" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
+
+  <!-- ===== Messages ===== -->
+
+  <!-- 1. connect + tools/list (parallel) y=110 -->
+  <path d="M105,110 L 266,110" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
+  <text x="185" y="105" font-size="10" fill="#1e1e1e" text-anchor="middle">connect + tools/list</text>
+
+  <path d="M105,125 L 426,125" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
+  <text x="265" y="120" font-size="10" fill="#1e1e1e" text-anchor="middle">connect + tools/list</text>
+
+  <path d="M105,140 L 586,140" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
+  <text x="345" y="135" font-size="10" fill="#1e1e1e" text-anchor="middle">connect + tools/list</text>
+
+  <!-- 2. return schema y=165 -->
+  <path d="M266,165 L 114,165" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ea)"/>
+  <path d="M426,175 L 114,175" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ea)"/>
+  <path d="M586,185 L 114,185" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ea)"/>
+  <text x="380" y="200" font-size="10" fill="#1e1e1e" text-anchor="middle">返回全量 tool schema (并行)</text>
+
+  <!-- 3. Inject schema (activation box on Agent) y=215-250 -->
+  <rect x="88" y="218" width="24" height="35" rx="3"
+        fill="#fff3bf" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="125" y="234" font-size="10" fill="#1e1e1e">注入全量 schema</text>
+  <text x="125" y="248" font-size="10" fill="#e03131" font-weight="700">~60K tokens, 每轮携带</text>
+
+  <!-- 4. User question y=275 (self-message on Agent) -->
+  <path d="M112,280 L 150,280 L 150,295 L 114,295" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
+  <text x="170" y="290" font-size="10" fill="#1e1e1e">用户提问</text>
+
+  <!-- 5. Skill match (self-message on Agent) y=315 -->
+  <path d="M112,320 L 150,320 L 150,335 L 114,335" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
+  <text x="170" y="330" font-size="10" fill="#1e1e1e">Skill 匹配 -> 指定 Server A tool-3</text>
+
+  <!-- 6. callTool y=360 -->
+  <path d="M105,365 L 266,365" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
+  <text x="185" y="360" font-size="10" fill="#1e1e1e" text-anchor="middle">callTool(tool-3)</text>
+
+  <!-- 7. Return full result y=400 -->
+  <path d="M266,405 L 114,405" fill="none" stroke="#e03131" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ea-r)"/>
+  <text x="185" y="400" font-size="10" fill="#e03131" text-anchor="middle">全量结果灌入上下文</text>
+
+  <!-- 8. Activation box for result (red) -->
+  <rect x="88" y="415" width="24" height="30" rx="3"
+        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="125" y="428" font-size="10" fill="#e03131">不可裁剪</text>
+  <text x="125" y="442" font-size="10" fill="#e03131">server 返回多少吃多少</text>
+
+  <!-- Bottom annotation -->
+  <rect x="115" y="468" width="520" height="28" rx="6"
+        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="375" y="487" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">启动连接全部 server + 全量 schema 常驻 + response 不可控</text>
+</svg>
