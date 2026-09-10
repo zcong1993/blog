@@ -1,81 +1,80 @@
-<svg viewBox="0 0 720 360" width="720" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="840"
+     height="860"
+     viewBox="-20 -20 840 860">
   <defs>
-    <marker id="a-red" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#e03131"/>
-    </marker>
-    <marker id="a-teal" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#099268"/>
-    </marker>
-    <marker id="a-gray" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#868e96"/>
-    </marker>
+<marker id="connector-arrow-0" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#868e96" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-1" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#868e96" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-2" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#e03131" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-3" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#099268" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
   </defs>
-
-  <!-- Canvas -->
-  <rect width="720" height="360" fill="#fffce8"/>
-
-  <!-- Title -->
-  <text x="360" y="34" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">工具发现 vs 工具编排: 分层架构</text>
-
-  <!-- Orchestration layer (top) -->
-  <!-- x=45, y=55, w=630, h=105 -->
-  <rect x="45" y="55" width="630" height="105" rx="8"
-        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="55" y="70" font-size="11" fill="#1e1e1e">编排层</text>
-
-  <!-- Skill: permission/middleware #d0bfff -->
-  <rect x="65" y="82" width="180" height="58" rx="6"
-        fill="#d0bfff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="155" y="106" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Skill / Prompt</text>
-  <text x="155" y="124" font-size="10" fill="#1e1e1e" text-anchor="middle">如何选择和编排工具</text>
-
-  <!-- Agent decision: decision #fff3bf -->
-  <rect x="270" y="82" width="180" height="58" rx="6"
-        fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="360" y="106" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Agent 决策</text>
-  <text x="360" y="124" font-size="10" fill="#1e1e1e" text-anchor="middle">场景理解 + 流程组合</text>
-
-  <!-- mcp-cli: proxy #ffd8a8 -->
-  <rect x="475" y="82" width="180" height="58" rx="6"
-        fill="#ffd8a8" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="565" y="106" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">mcp-cli</text>
-  <text x="565" y="124" font-size="10" fill="#1e1e1e" text-anchor="middle">按需发现 + Pipe 裁剪</text>
-
-  <!-- Arrows: orchestration -> tool layer -->
-  <!-- source bottom 140+5=145, target top 195-14=181 -->
-  <path d="M155,145 L 155,181" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a-gray)"/>
-  <path d="M360,145 L 360,181" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a-gray)"/>
-  <path d="M565,145 L 565,181" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a-gray)"/>
-
-  <!-- Tool layer (bottom) -->
-  <!-- x=45, y=195, w=630, h=130 -->
-  <rect x="45" y="195" width="630" height="130" rx="8"
-        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="55" y="210" font-size="11" fill="#1e1e1e">工具层 (MCP)</text>
-
-  <!-- Tool boxes: client #a5d8ff -->
-  <rect x="65" y="222" width="130" height="39" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="130" y="246" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">API Spec</text>
-
-  <rect x="210" y="222" width="130" height="39" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="275" y="246" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">调用协议</text>
-
-  <rect x="355" y="222" width="140" height="39" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="425" y="246" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Input Schema</text>
-
-  <rect x="510" y="222" width="150" height="39" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="585" y="246" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Spec 维护与分发</text>
-
-  <!-- Summary in tool layer -->
-  <text x="360" y="292" font-size="11" fill="#1e1e1e" text-anchor="middle">服务端能力的 API spec (持续更新) + 调用协议 (基本不变)</text>
-
-  <!-- Bottom label -->
-  <text x="360" y="345" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">MCP 退化到工具调用协议层 — 不是退步，是找到了正确的位置</text>
+<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="800" height="820" fill="#fffce8" stroke="none" stroke-width="0" rx="0" ry="0"/></g>
+<g id="a1:1" transform="translate(138, 13.823)"><text font-size="18" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="262"><tspan x="262" y="21.177"><tspan x="47.14" text-anchor="start">AI Agent 工具接入全景：Skill → API/CLI → Schema</tspan></tspan></text></g>
+<g id="o1:2" transform="translate(30, 55)"><rect x="0" y="0" width="740" height="105" fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10 6" rx="6" ry="6"/></g>
+<g id="a1:2" transform="translate(45, 57.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">上层：Skill 编排</tspan></tspan></text></g>
+<g id="o1:3" transform="translate(55, 80)"><rect x="0" y="0" width="695" height="39" fill="#d0bfff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:3" transform="translate(160, 88.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="242"><tspan x="242" y="15.295"><tspan x="48.645" text-anchor="start">Skill = 功能场景的编排单元（组合多个 API / CLI 调用 + 流程逻辑）</tspan></tspan></text></g>
+<g id="a1:4" transform="translate(209.5, 136.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="192.5"><tspan x="192.5" y="11.765"><tspan x="0.695" text-anchor="start">Skill 定义业务意图和工作流，向下调度原子工具能力，向上对接 Agent 的自然语言指令</tspan></tspan></text></g>
+<g id="c1:1" transform="translate(220, 165)"><path fill="none" stroke="#868e96" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-0)" stroke-dasharray="0 0 51.888026247258594 13.8" d="M 40 0 C 40 25 0 35 0 49"/></g>
+<g id="c1:2" transform="translate(540, 165)"><path fill="none" stroke="#868e96" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-1)" stroke-dasharray="0 0 51.888026247258594 13.8" d="M 0 0 C 0 25 40 35 40 49"/></g>
+<g id="o1:4" transform="translate(30, 220)"><rect x="0" y="0" width="740" height="410" fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10 6" rx="6" ry="6"/></g>
+<g id="a1:5" transform="translate(45, 222.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">中层：原子工具（两条 transport 路线，共同本质 = API 入口 + API Spec）</tspan></tspan></text></g>
+<g id="o1:5" transform="translate(50, 247)"><rect x="0" y="0" width="340" height="39" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:6" transform="translate(129, 256.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="91"><tspan x="91" y="15.295"><tspan x="19" text-anchor="start">MCP（HTTP 动态路线）</tspan></tspan></text></g>
+<g id="o1:6" transform="translate(410, 247)"><rect x="0" y="0" width="340" height="39" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:7" transform="translate(501.5, 256.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="78.5"><tspan x="78.5" y="15.295"><tspan x="16.335" text-anchor="start">CLI（进程静态路线）</tspan></tspan></text></g>
+<g id="o1:7" transform="translate(50, 306)"><rect x="0" y="0" width="130" height="54" fill="#ffd8a8" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:8" transform="translate(81, 321.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="34"><tspan x="34" y="15.295"><tspan x="8.875" text-anchor="start">API 入口</tspan></tspan></text></g>
+<g id="o1:8" transform="translate(195, 306)"><rect x="0" y="0" width="195" height="54" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:9" transform="translate(253.5, 312.882)"><text font-size="12" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="38.5"><tspan x="38.5" y="14.118"><tspan x="9.095" text-anchor="start">HTTP 端点</tspan></tspan></text></g>
+<g id="a1:10" transform="translate(232, 335.4115)"><text font-size="9" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="60"><tspan x="60" y="10.589"><tspan x="-3.875" text-anchor="start">/mcp · JSON-RPC · 网络可达</tspan></tspan></text></g>
+<g id="o1:9" transform="translate(410, 306)"><rect x="0" y="0" width="195" height="54" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:11" transform="translate(483, 312.882)"><text font-size="12" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="14.118"><tspan x="6" text-anchor="start">子进程</tspan></tspan></text></g>
+<g id="a1:12" transform="translate(449, 335.4115)"><text font-size="9" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="58"><tspan x="58" y="10.589"><tspan x="-4.94" text-anchor="start">spawn · argv + stdout · 本地</tspan></tspan></text></g>
+<g id="o1:10" transform="translate(620, 306)"><rect x="0" y="0" width="130" height="54" fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:13" transform="translate(652.5, 317.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="32.5"><tspan x="32.5" y="11.765"><tspan x="7.5" text-anchor="start">共同本质：</tspan></tspan></text></g>
+<g id="a1:14" transform="translate(665, 334.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="20"><tspan x="20" y="11.765"><tspan x="0" text-anchor="start">怎么调你</tspan></tspan></text></g>
+<g id="o1:11" transform="translate(50, 385)"><rect x="0" y="0" width="130" height="54" fill="#ffd8a8" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:15" transform="translate(79, 400.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="36"><tspan x="36" y="15.295"><tspan x="8.43" text-anchor="start">API Spec</tspan></tspan></text></g>
+<g id="o1:12" transform="translate(195, 385)"><rect x="0" y="0" width="195" height="54" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:16" transform="translate(246, 391.882)"><text font-size="12" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="46"><tspan x="46" y="14.118"><tspan x="10" text-anchor="start">运行时自描述</tspan></tspan></text></g>
+<g id="a1:17" transform="translate(224.5, 414.4115)"><text font-size="9" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="67.5"><tspan x="67.5" y="10.589"><tspan x="-2.575" text-anchor="start">tools/list → JSON Schema · 动态</tspan></tspan></text></g>
+<g id="o1:13" transform="translate(410, 385)"><rect x="0" y="0" width="195" height="54" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:18" transform="translate(468, 391.882)"><text font-size="12" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="39"><tspan x="39" y="14.118"><tspan x="9" text-anchor="start">构建时内化</tspan></tspan></text></g>
+<g id="a1:19" transform="translate(437, 414.4115)"><text font-size="9" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="70"><tspan x="70" y="10.589"><tspan x="-4.83" text-anchor="start">参数编入源码 · prompt 注入 · 静态</tspan></tspan></text></g>
+<g id="o1:14" transform="translate(620, 385)"><rect x="0" y="0" width="130" height="54" fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:20" transform="translate(652.5, 396.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="32.5"><tspan x="32.5" y="11.765"><tspan x="7.5" text-anchor="start">共同本质：</tspan></tspan></text></g>
+<g id="a1:21" transform="translate(660, 413.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="11.765"><tspan x="0" text-anchor="start">你能做什么</tspan></tspan></text></g>
+<g id="o1:15" transform="translate(50, 464)"><rect x="0" y="0" width="130" height="54" fill="#ffd8a8" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:22" transform="translate(81, 479.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="34"><tspan x="34" y="15.295"><tspan x="8" text-anchor="start">适用场景</tspan></tspan></text></g>
+<g id="o1:16" transform="translate(195, 464)"><rect x="0" y="0" width="195" height="54" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:23" transform="translate(245.5, 470.882)"><text font-size="12" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="46.5"><tspan x="46.5" y="14.118"><tspan x="7.78" text-anchor="start">多服务 · 网络</tspan></tspan></text></g>
+<g id="a1:24" transform="translate(230, 493.4115)"><text font-size="9" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="62"><tspan x="62" y="10.589"><tspan x="0.79" text-anchor="start">网关 / CDN / LB 友好 · 可缓存</tspan></tspan></text></g>
+<g id="o1:17" transform="translate(410, 464)"><rect x="0" y="0" width="195" height="54" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:25" transform="translate(460.5, 470.882)"><text font-size="12" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="46.5"><tspan x="46.5" y="14.118"><tspan x="7.78" text-anchor="start">单机 · 零基建</tspan></tspan></text></g>
+<g id="a1:26" transform="translate(447.5, 493.4115)"><text font-size="9" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="59.5"><tspan x="59.5" y="10.589"><tspan x="-3.97" text-anchor="start">无 server · 无端口 · fork 即用</tspan></tspan></text></g>
+<g id="o1:18" transform="translate(620, 464)"><rect x="0" y="0" width="130" height="54" fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:27" transform="translate(652.5, 475.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="32.5"><tspan x="32.5" y="11.765"><tspan x="7.5" text-anchor="start">共同本质：</tspan></tspan></text></g>
+<g id="a1:28" transform="translate(650, 492.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="35"><tspan x="35" y="11.765"><tspan x="1.21" text-anchor="start">薄壳套已有 API</tspan></tspan></text></g>
+<g id="o1:19" transform="translate(50, 543)"><rect x="0" y="0" width="130" height="54" fill="#ffd8a8" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:29" transform="translate(81, 558.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="34"><tspan x="34" y="15.295"><tspan x="8" text-anchor="start">发现机制</tspan></tspan></text></g>
+<g id="o1:20" transform="translate(195, 543)"><rect x="0" y="0" width="195" height="54" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:30" transform="translate(253, 549.882)"><text font-size="12" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="39"><tspan x="39" y="14.118"><tspan x="9" text-anchor="start">协议级发现</tspan></tspan></text></g>
+<g id="a1:31" transform="translate(241, 572.4115)"><text font-size="9" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="51"><tspan x="51" y="10.589"><tspan x="-0.965" text-anchor="start">调 tools/list 即知全部能力</tspan></tspan></text></g>
+<g id="o1:21" transform="translate(410, 543)"><rect x="0" y="0" width="195" height="54" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:32" transform="translate(459, 549.882)"><text font-size="12" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="48"><tspan x="48" y="14.118"><tspan x="6.865" text-anchor="start">Prompt / Help</tspan></tspan></text></g>
+<g id="a1:33" transform="translate(445.5, 572.4115)"><text font-size="9" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="61.5"><tspan x="61.5" y="10.589"><tspan x="-0.505" text-anchor="start">prompt 预置 / 解析 --help 文本</tspan></tspan></text></g>
+<g id="o1:22" transform="translate(620, 543)"><rect x="0" y="0" width="130" height="54" fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:34" transform="translate(652.5, 554.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="32.5"><tspan x="32.5" y="11.765"><tspan x="7.5" text-anchor="start">共同本质：</tspan></tspan></text></g>
+<g id="a1:35" transform="translate(660, 571.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="11.765"><tspan x="0" text-anchor="start">能力自描述</tspan></tspan></text></g>
+<g id="c1:3" transform="translate(292, 602)"><path fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-2)" stroke-dasharray="0 0 95.78293398390876 13.8" d="M 0 0 C 0 38 78 50 88 53"/></g>
+<g id="c1:4" transform="translate(420, 602)"><path fill="none" stroke="#099268" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-3)" stroke-dasharray="0 0 94.91792734819825 13.8" d="M 87 0 C 87 38 10 50 0 53"/></g>
+<g id="o1:23" transform="translate(30, 640)"><rect x="0" y="0" width="740" height="95" fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10 6" rx="6" ry="6"/></g>
+<g id="a1:36" transform="translate(45, 642.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">底层：入参契约</tspan></tspan></text></g>
+<g id="o1:24" transform="translate(100, 665)"><rect x="0" y="0" width="600" height="39" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:37" transform="translate(200.5, 673.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="199.5"><tspan x="199.5" y="15.295"><tspan x="33.69" text-anchor="start">Input Schema（JSON Schema）= 最细粒度的入参规范</tspan></tspan></text></g>
+<g id="a1:38" transform="translate(228.5, 710.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="171.5"><tspan x="171.5" y="11.765"><tspan x="0.77" text-anchor="start">严格约束每个工具调用的入参类型和结构，是 Agent 正确生成调用的唯一契约</tspan></tspan></text></g>
+<g id="a1:39" transform="translate(176.5, 749.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="223.5"><tspan x="223.5" y="12.942"><tspan x="7.41" text-anchor="start">Skill 编排意图 → API/CLI 提供原子能力（API 入口 + API Spec）→ Schema 严格规范入参</tspan></tspan></text></g>
+<g id="o1:25" transform="translate(100, 775)"><rect x="0" y="0" width="600" height="30" fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:40" transform="translate(160.5, 780.882)"><text font-size="12" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="239.5"><tspan x="239.5" y="14.118"><tspan x="42.795" text-anchor="start">MCP 和 CLI 殊途同归：薄壳 transport + 结构化 schema，编排交给 Skill</tspan></tspan></text></g>
 </svg>

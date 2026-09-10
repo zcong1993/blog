@@ -1,97 +1,57 @@
-<svg viewBox="0 0 750 520" width="750" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="790"
+     height="560"
+     viewBox="-20 -20 790 560">
   <defs>
-    <marker id="ea" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#1e1e1e"/>
-    </marker>
-    <marker id="ea-r" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#e03131"/>
-    </marker>
+<marker id="connector-arrow-0" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-1" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-2" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-3" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-4" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-5" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-6" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-7" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-8" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-9" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#e03131" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
   </defs>
-
-  <!-- Canvas -->
-  <rect width="750" height="520" fill="#fffce8"/>
-
-  <!-- Title -->
-  <text x="375" y="30" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">Eager + Skill 模式</text>
-
-  <!-- ===== Participant headers ===== -->
-  <!-- Agent: x=100 -->
-  <rect x="40" y="48" width="120" height="33" rx="6"
-        fill="#d0bfff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="100" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Agent</text>
-
-  <!-- Server A: x=280 -->
-  <rect x="220" y="48" width="120" height="33" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="280" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server A</text>
-
-  <!-- Server B: x=440 -->
-  <rect x="380" y="48" width="120" height="33" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="440" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server B</text>
-
-  <!-- Server C: x=600 -->
-  <rect x="540" y="48" width="120" height="33" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="600" y="70" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server C</text>
-
-  <!-- ===== Lifelines ===== -->
-  <line x1="100" y1="81" x2="100" y2="490" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
-  <line x1="280" y1="81" x2="280" y2="490" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
-  <line x1="440" y1="81" x2="440" y2="490" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
-  <line x1="600" y1="81" x2="600" y2="490" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="8,5" stroke-linecap="round"/>
-
-  <!-- ===== Messages ===== -->
-
-  <!-- 1. connect + tools/list (parallel) y=110 -->
-  <path d="M105,110 L 266,110" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
-  <text x="185" y="105" font-size="10" fill="#1e1e1e" text-anchor="middle">connect + tools/list</text>
-
-  <path d="M105,125 L 426,125" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
-  <text x="265" y="120" font-size="10" fill="#1e1e1e" text-anchor="middle">connect + tools/list</text>
-
-  <path d="M105,140 L 586,140" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
-  <text x="345" y="135" font-size="10" fill="#1e1e1e" text-anchor="middle">connect + tools/list</text>
-
-  <!-- 2. return schema y=165 -->
-  <path d="M266,165 L 114,165" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ea)"/>
-  <path d="M426,175 L 114,175" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ea)"/>
-  <path d="M586,185 L 114,185" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ea)"/>
-  <text x="380" y="200" font-size="10" fill="#1e1e1e" text-anchor="middle">返回全量 tool schema (并行)</text>
-
-  <!-- 3. Inject schema (activation box on Agent) y=215-250 -->
-  <rect x="88" y="218" width="24" height="35" rx="3"
-        fill="#fff3bf" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="125" y="234" font-size="10" fill="#1e1e1e">注入全量 schema</text>
-  <text x="125" y="248" font-size="10" fill="#e03131" font-weight="700">~60K tokens, 每轮携带</text>
-
-  <!-- 4. User question y=275 (self-message on Agent) -->
-  <path d="M112,280 L 150,280 L 150,295 L 114,295" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
-  <text x="170" y="290" font-size="10" fill="#1e1e1e">用户提问</text>
-
-  <!-- 5. Skill match (self-message on Agent) y=315 -->
-  <path d="M112,320 L 150,320 L 150,335 L 114,335" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
-  <text x="170" y="330" font-size="10" fill="#1e1e1e">Skill 匹配 -> 指定 Server A tool-3</text>
-
-  <!-- 6. callTool y=360 -->
-  <path d="M105,365 L 266,365" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ea)"/>
-  <text x="185" y="360" font-size="10" fill="#1e1e1e" text-anchor="middle">callTool(tool-3)</text>
-
-  <!-- 7. Return full result y=400 -->
-  <path d="M266,405 L 114,405" fill="none" stroke="#e03131" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4" marker-end="url(#ea-r)"/>
-  <text x="185" y="400" font-size="10" fill="#e03131" text-anchor="middle">全量结果灌入上下文</text>
-
-  <!-- 8. Activation box for result (red) -->
-  <rect x="88" y="415" width="24" height="30" rx="3"
-        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="125" y="428" font-size="10" fill="#e03131">不可裁剪</text>
-  <text x="125" y="442" font-size="10" fill="#e03131">server 返回多少吃多少</text>
-
-  <!-- Bottom annotation -->
-  <rect x="115" y="468" width="520" height="28" rx="6"
-        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="375" y="487" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">启动连接全部 server + 全量 schema 常驻 + response 不可控</text>
+<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="750" height="520" fill="#fffce8" stroke="none" stroke-width="0" rx="0" ry="0"/></g>
+<g id="a1:1" transform="translate(284, 8.823)"><text font-size="18" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="91"><tspan x="91" y="21.177"><tspan x="16.895" text-anchor="start">Eager + Skill 模式</tspan></tspan></text></g>
+<g id="o1:2" transform="translate(40, 48)"><rect x="0" y="0" width="120" height="33" fill="#d0bfff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:2" transform="translate(77, 54.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="23"><tspan x="23" y="15.295"><tspan x="4.395" text-anchor="start">Agent</tspan></tspan></text></g>
+<g id="o1:3" transform="translate(220, 48)"><rect x="0" y="0" width="120" height="33" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:3" transform="translate(246.5, 54.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="33.5"><tspan x="33.5" y="15.295"><tspan x="6.8" text-anchor="start">Server A</tspan></tspan></text></g>
+<g id="o1:4" transform="translate(380, 48)"><rect x="0" y="0" width="120" height="33" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:4" transform="translate(406.5, 54.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="33.5"><tspan x="33.5" y="15.295"><tspan x="6.54" text-anchor="start">Server B</tspan></tspan></text></g>
+<g id="o1:5" transform="translate(540, 48)"><rect x="0" y="0" width="120" height="33" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:5" transform="translate(566, 54.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="34"><tspan x="34" y="15.295"><tspan x="7.2" text-anchor="start">Server C</tspan></tspan></text></g>
+<g id="c1:1" transform="translate(100, 81)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-dasharray="8 5" d="M 0 0 L 0 409"/></g>
+<g id="c1:2" transform="translate(280, 81)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-dasharray="8 5" d="M 0 0 L 0 409"/></g>
+<g id="c1:3" transform="translate(440, 81)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-dasharray="8 5" d="M 0 0 L 0 409"/></g>
+<g id="c1:4" transform="translate(600, 81)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-dasharray="8 5" d="M 0 0 L 0 409"/></g>
+<g id="c1:5" transform="translate(105, 110)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-0)" stroke-dasharray="0 0 147.2 13.8" d="M 0 0 L 161 0"/></g>
+<g id="a1:6" transform="translate(143, 93.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="42"><tspan x="42" y="11.765"><tspan x="-2.225" text-anchor="start">connect + tools/list</tspan></tspan></text></g>
+<g id="c1:6" transform="translate(105, 125)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-1)" stroke-dasharray="0 0 307.2 13.8" d="M 0 0 L 321 0"/></g>
+<g id="a1:7" transform="translate(223, 108.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="42"><tspan x="42" y="11.765"><tspan x="-2.225" text-anchor="start">connect + tools/list</tspan></tspan></text></g>
+<g id="c1:7" transform="translate(105, 140)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-2)" stroke-dasharray="0 0 467.2 13.8" d="M 0 0 L 481 0"/></g>
+<g id="a1:8" transform="translate(303, 123.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="42"><tspan x="42" y="11.765"><tspan x="-2.225" text-anchor="start">connect + tools/list</tspan></tspan></text></g>
+<g id="c1:8" transform="translate(114, 165)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-dasharray="8 4" marker-end="url(#connector-arrow-3)" d="M 152 0 L 0 0"/></g>
+<g id="c1:9" transform="translate(114, 175)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-dasharray="8 4" marker-end="url(#connector-arrow-4)" d="M 312 0 L 0 0"/></g>
+<g id="c1:10" transform="translate(114, 185)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-dasharray="8 4" marker-end="url(#connector-arrow-5)" d="M 472 0 L 0 0"/></g>
+<g id="a1:9" transform="translate(316, 188.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="64"><tspan x="64" y="11.765"><tspan x="-0.17" text-anchor="start">返回全量 tool schema (并行)</tspan></tspan></text></g>
+<g id="o1:6" transform="translate(88, 218)"><rect x="0" y="0" width="24" height="35" fill="#fff3bf" stroke="#1e1e1e" stroke-width="1.5" rx="3" ry="3"/></g>
+<g id="a1:10" transform="translate(125, 222.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="11.765"><tspan x="0" text-anchor="start">注入全量 schema</tspan></tspan></text></g>
+<g id="a1:11" transform="translate(125, 236.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="bold" fill="#e03131" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="11.765"><tspan x="0" text-anchor="start">~60K tokens, 每轮携带</tspan></tspan></text></g>
+<g id="c1:11" transform="translate(112, 280)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-6)" stroke-dasharray="0 0 75.2 13.8" d="M 0 0 L 38 0 L 38 15 L 2 15"/></g>
+<g id="a1:12" transform="translate(170, 278.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="11.765"><tspan x="0" text-anchor="start">用户提问</tspan></tspan></text></g>
+<g id="c1:12" transform="translate(112, 320)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-7)" stroke-dasharray="0 0 75.2 13.8" d="M 0 0 L 38 0 L 38 15 L 2 15"/></g>
+<g id="a1:13" transform="translate(170, 318.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="11.765"><tspan x="0" text-anchor="start">Skill 匹配 -&gt; 指定 Server A tool-3</tspan></tspan></text></g>
+<g id="c1:13" transform="translate(105, 365)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-8)" stroke-dasharray="0 0 147.2 13.8" d="M 0 0 L 161 0"/></g>
+<g id="a1:14" transform="translate(151.5, 348.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="33.5"><tspan x="33.5" y="11.765"><tspan x="-1.935" text-anchor="start">callTool(tool-3)</tspan></tspan></text></g>
+<g id="c1:14" transform="translate(114, 405)"><path fill="none" stroke="#e03131" stroke-width="2" stroke-dasharray="8 4" marker-end="url(#connector-arrow-9)" d="M 152 0 L 0 0"/></g>
+<g id="a1:15" transform="translate(140, 388.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#e03131" text-anchor="middle" dominant-baseline="alphabetic" x="45"><tspan x="45" y="11.765"><tspan x="0" text-anchor="start">全量结果灌入上下文</tspan></tspan></text></g>
+<g id="o1:7" transform="translate(88, 415)"><rect x="0" y="0" width="24" height="30" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" rx="3" ry="3"/></g>
+<g id="a1:16" transform="translate(125, 416.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#e03131" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="11.765"><tspan x="0" text-anchor="start">不可裁剪</tspan></tspan></text></g>
+<g id="a1:17" transform="translate(125, 430.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#e03131" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="11.765"><tspan x="0" text-anchor="start">server 返回多少吃多少</tspan></tspan></text></g>
+<g id="o1:8" transform="translate(115, 468)"><rect x="0" y="0" width="520" height="28" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" rx="6" ry="6"/></g>
+<g id="a1:18" transform="translate(190, 474.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="185"><tspan x="185" y="12.942"><tspan x="34.34" text-anchor="start">启动连接全部 server + 全量 schema 常驻 + response 不可控</tspan></tspan></text></g>
 </svg>

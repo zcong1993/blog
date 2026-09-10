@@ -1,107 +1,48 @@
-<svg viewBox="0 0 760 400" width="760" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="800"
+     height="440"
+     viewBox="-20 -20 800 440">
   <defs>
-    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#e03131"/>
-    </marker>
-    <marker id="arrow-teal" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#099268"/>
-    </marker>
-    <marker id="arrow-gray" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#868e96"/>
-    </marker>
+<marker id="connector-arrow-0" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-1" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-2" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
   </defs>
-
-  <!-- Canvas -->
-  <rect width="760" height="400" fill="#fffce8"/>
-
-  <!-- Title -->
-  <text x="380" y="34" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">Eager Schema Loading: 上下文膨胀</text>
-
-  <!-- MCP Servers group (left) -->
-  <!-- x=25, y=55, w=190, h=210 -->
-  <rect x="25" y="55" width="190" height="210" rx="8"
-        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="35" y="70" font-size="11" fill="#1e1e1e">MCP Servers</text>
-
-  <!-- Server A: client/ordinary #a5d8ff -->
-  <rect x="42" y="84" width="156" height="39" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="120" y="108" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server A (15 tools)</text>
-
-  <!-- Server B -->
-  <rect x="42" y="133" width="156" height="39" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="120" y="157" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server B (20 tools)</text>
-
-  <!-- Server C -->
-  <rect x="42" y="182" width="156" height="39" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="120" y="206" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Server C (25 tools)</text>
-
-  <!-- ... more -->
-  <text x="120" y="248" font-size="11" fill="#1e1e1e" text-anchor="middle">... x N servers</text>
-
-  <!-- Arrows: servers -> LLM context -->
-  <!-- stroke-width 2.2, round caps, 12x12 marker, end = target left - 14 -->
-  <!-- Server A center y=103, Server B center y=152, Server C center y=201 -->
-  <!-- source right edge 198+5=203, target left 280-14=266 -->
-  <path d="M203,103 C 235,103 240,152 266,152" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-gray)"/>
-  <path d="M203,152 L 266,152" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-gray)"/>
-  <path d="M203,201 C 235,201 240,152 266,152" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-gray)"/>
-
-  <text x="243" y="126" font-size="10" fill="#1e1e1e" text-anchor="middle" transform="rotate(-90,243,126)">tools/list</text>
-
-  <!-- LLM Context (center) -->
-  <!-- gateway/key #ffc9c9, x=280, y=55, w=220, h=270 -->
-  <rect x="280" y="55" width="220" height="270" rx="8"
-        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="390" y="78" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">LLM Context Window</text>
-
-  <!-- Schema blocks stacked inside -->
-  <rect x="296" y="92" width="188" height="30" rx="5"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="390" y="112" font-size="11" fill="#1e1e1e" text-anchor="middle">Server A: 15 tool schemas</text>
-
-  <rect x="296" y="128" width="188" height="30" rx="5"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="390" y="148" font-size="11" fill="#1e1e1e" text-anchor="middle">Server B: 20 tool schemas</text>
-
-  <rect x="296" y="164" width="188" height="30" rx="5"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="390" y="184" font-size="11" fill="#1e1e1e" text-anchor="middle">Server C: 25 tool schemas</text>
-
-  <rect x="296" y="200" width="188" height="22" rx="5"
-        fill="#fff3bf" stroke="#1e1e1e" stroke-width="1" stroke-linejoin="round" opacity="0.6"/>
-  <text x="390" y="216" font-size="10" fill="#1e1e1e" text-anchor="middle">... 更多 tool schemas</text>
-
-  <!-- Divider -->
-  <line x1="296" y1="230" x2="484" y2="230" stroke="#1e1e1e" stroke-width="1" stroke-dasharray="6,4" stroke-linecap="round"/>
-
-  <!-- User message squeezed -->
-  <rect x="296" y="238" width="188" height="30" rx="5"
-        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="390" y="258" font-size="11" fill="#1e1e1e" text-anchor="middle">用户消息</text>
-
-  <!-- Conversation history squeezed -->
-  <rect x="296" y="274" width="188" height="30" rx="5"
-        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1" stroke-linejoin="round" opacity="0.5"/>
-  <text x="390" y="294" font-size="11" fill="#1e1e1e" text-anchor="middle">对话历史 (被压缩)</text>
-
-  <!-- Annotation: schema overhead (right brace) -->
-  <path d="M508,92 L 520,92 L 520,220 L 508,220" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="530" y="148" font-size="11" font-weight="700" fill="#1e1e1e">~50K-70K tokens</text>
-  <text x="530" y="164" font-size="10" fill="#1e1e1e">每轮重复携带</text>
-
-  <!-- Annotation: useful content -->
-  <path d="M508,238 L 520,238 L 520,304 L 508,304" fill="none" stroke="#099268" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="530" y="268" font-size="11" font-weight="700" fill="#1e1e1e">有效信息空间</text>
-  <text x="530" y="284" font-size="10" fill="#1e1e1e">被大幅挤压</text>
-
-  <!-- Bottom annotation -->
-  <rect x="100" y="348" width="560" height="34" rx="6"
-        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="380" y="370" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">100 个 tool 的 schema 占据上下文 50K-70K tokens, 10 轮对话累计消耗 ~600K tokens</text>
+<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="760" height="400" fill="#fffce8" stroke="none" stroke-width="0" rx="0" ry="0"/></g>
+<g id="a1:1" transform="translate(200.5, 12.823)"><text font-size="18" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="179.5"><tspan x="179.5" y="21.177"><tspan x="29.33" text-anchor="start">Eager Schema Loading: 上下文膨胀</tspan></tspan></text></g>
+<g id="o1:2" transform="translate(25, 55)"><rect x="0" y="0" width="190" height="210" fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10 6" rx="8" ry="8"/></g>
+<g id="a1:2" transform="translate(35, 57.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">MCP Servers</tspan></tspan></text></g>
+<g id="o1:3" transform="translate(42, 84)"><rect x="0" y="0" width="156" height="39" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:3" transform="translate(50, 92.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="70"><tspan x="70" y="15.295"><tspan x="11.745" text-anchor="start">Server A (15 tools)</tspan></tspan></text></g>
+<g id="o1:4" transform="translate(42, 133)"><rect x="0" y="0" width="156" height="39" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:4" transform="translate(50, 141.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="70"><tspan x="70" y="15.295"><tspan x="11.485" text-anchor="start">Server B (20 tools)</tspan></tspan></text></g>
+<g id="o1:5" transform="translate(42, 182)"><rect x="0" y="0" width="156" height="39" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:5" transform="translate(50, 190.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="70"><tspan x="70" y="15.295"><tspan x="11.645" text-anchor="start">Server C (25 tools)</tspan></tspan></text></g>
+<g id="a1:6" transform="translate(85, 235.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="35"><tspan x="35" y="12.942"><tspan x="1.51" text-anchor="start">... x N servers</tspan></tspan></text></g>
+<g id="c1:1" transform="translate(203, 103)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-0)" stroke-dasharray="0 0 69.58091734610615 13.8" d="M 0 0 C 32 0 37 49 63 49"/></g>
+<g id="c1:2" transform="translate(203, 152)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-1)" stroke-dasharray="0 0 49.2 13.8" d="M 0 0 L 63 0"/></g>
+<g id="c1:3" transform="translate(203, 152)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-2)" stroke-dasharray="0 0 69.58091734610615 13.8" d="M 0 49 C 32 49 37 0 63 0"/></g>
+<g id="a1:7" transform="translate(231.235, 144.5) rotate(-90)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="18.5"><tspan x="18.5" y="11.765"><tspan x="-2" text-anchor="start">tools/list</tspan></tspan></text></g>
+<g id="o1:6" transform="translate(280, 55)"><rect x="0" y="0" width="220" height="270" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" rx="8" ry="8"/></g>
+<g id="a1:8" transform="translate(311.5, 62.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="78.5"><tspan x="78.5" y="15.295"><tspan x="11.61" text-anchor="start">LLM Context Window</tspan></tspan></text></g>
+<g id="o1:7" transform="translate(296, 92)"><rect x="0" y="0" width="188" height="30" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="1.5" rx="5" ry="5"/></g>
+<g id="a1:9" transform="translate(324, 99.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="66"><tspan x="66" y="12.942"><tspan x="0.705" text-anchor="start">Server A: 15 tool schemas</tspan></tspan></text></g>
+<g id="o1:8" transform="translate(296, 128)"><rect x="0" y="0" width="188" height="30" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="1.5" rx="5" ry="5"/></g>
+<g id="a1:10" transform="translate(324, 135.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="66"><tspan x="66" y="12.942"><tspan x="0.435" text-anchor="start">Server B: 20 tool schemas</tspan></tspan></text></g>
+<g id="o1:9" transform="translate(296, 164)"><rect x="0" y="0" width="188" height="30" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="1.5" rx="5" ry="5"/></g>
+<g id="a1:11" transform="translate(323.5, 171.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="66.5"><tspan x="66.5" y="12.942"><tspan x="1.04" text-anchor="start">Server C: 25 tool schemas</tspan></tspan></text></g>
+<g id="o1:10" transform="translate(296, 200)" fill-opacity="0.6" stroke-opacity="0.6"><rect x="0" y="0" width="188" height="22" fill="#fff3bf" stroke="#1e1e1e" stroke-width="1" rx="5" ry="5"/></g>
+<g id="a1:12" transform="translate(342.5, 204.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="47.5"><tspan x="47.5" y="11.765"><tspan x="0.2" text-anchor="start">... 更多 tool schemas</tspan></tspan></text></g>
+<g id="c1:4" transform="translate(296, 230)"><path fill="none" stroke="#1e1e1e" stroke-width="1" stroke-dasharray="6 4" d="M 0 0 L 188 0"/></g>
+<g id="o1:11" transform="translate(296, 238)"><rect x="0" y="0" width="188" height="30" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1.5" rx="5" ry="5"/></g>
+<g id="a1:13" transform="translate(368, 245.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="22"><tspan x="22" y="12.942"><tspan x="0" text-anchor="start">用户消息</tspan></tspan></text></g>
+<g id="o1:12" transform="translate(296, 274)" fill-opacity="0.5" stroke-opacity="0.5"><rect x="0" y="0" width="188" height="30" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="1" rx="5" ry="5"/></g>
+<g id="a1:14" transform="translate(345.5, 281.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="44.5"><tspan x="44.5" y="12.942"><tspan x="1.05" text-anchor="start">对话历史 (被压缩)</tspan></tspan></text></g>
+<g id="c1:5" transform="translate(508, 92)"><path fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 12 0 L 12 128 L 0 128"/></g>
+<g id="a1:15" transform="translate(530, 135.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">~50K-70K tokens</tspan></tspan></text></g>
+<g id="a1:16" transform="translate(530, 152.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="11.765"><tspan x="0" text-anchor="start">每轮重复携带</tspan></tspan></text></g>
+<g id="c1:6" transform="translate(508, 238)"><path fill="none" stroke="#099268" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 12 0 L 12 66 L 0 66"/></g>
+<g id="a1:17" transform="translate(530, 255.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">有效信息空间</tspan></tspan></text></g>
+<g id="a1:18" transform="translate(530, 272.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="11.765"><tspan x="0" text-anchor="start">被大幅挤压</tspan></tspan></text></g>
+<g id="o1:13" transform="translate(100, 348)"><rect x="0" y="0" width="560" height="34" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" rx="6" ry="6"/></g>
+<g id="a1:19" transform="translate(119, 357.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="261"><tspan x="261" y="12.942"><tspan x="44.98" text-anchor="start">100 个 tool 的 schema 占据上下文 50K-70K tokens, 10 轮对话累计消耗 ~600K tokens</tspan></tspan></text></g>
 </svg>

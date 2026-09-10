@@ -1,53 +1,25 @@
-<svg viewBox="0 0 580 420" width="580" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
-  </style>
-
-  <!-- Canvas -->
-  <rect width="580" height="420" fill="#fffce8"/>
-
-  <!-- Title -->
-  <text x="290" y="30" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">Response 陷阱: 三方权衡</text>
-
-  <!-- Triangle edges -->
-  <path d="M290,68 L 88,310 L 492,310 Z" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
-
-  <!-- Vertex nodes -->
-  <!-- Top: Token 效率 -->
-  <rect x="218" y="48" width="144" height="39" rx="6"
-        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="290" y="72" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">Token 效率</text>
-
-  <!-- Bottom-left: 服务端复杂度 -->
-  <rect x="18" y="298" width="150" height="39" rx="6"
-        fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="93" y="322" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">服务端复杂度</text>
-
-  <!-- Bottom-right: 客户端易用性 -->
-  <rect x="412" y="298" width="150" height="39" rx="6"
-        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="487" y="322" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">客户端易用性</text>
-
-  <!-- Edge labels -->
-  <!-- Left edge: Token 效率 <-> 服务端复杂度 -->
-  <text x="155" y="183" font-size="10" fill="#1e1e1e" text-anchor="middle" transform="rotate(-54,155,183)">要省 token</text>
-  <text x="165" y="200" font-size="10" fill="#1e1e1e" text-anchor="middle" transform="rotate(-54,165,200)">就得拆精细接口</text>
-
-  <!-- Right edge: Token 效率 <-> 客户端易用性 -->
-  <text x="420" y="183" font-size="10" fill="#1e1e1e" text-anchor="middle" transform="rotate(54,420,183)">接口越精细</text>
-  <text x="410" y="200" font-size="10" fill="#1e1e1e" text-anchor="middle" transform="rotate(54,410,200)">client 选择越难</text>
-
-  <!-- Bottom edge: 服务端复杂度 <-> 客户端易用性 -->
-  <text x="290" y="290" font-size="10" fill="#1e1e1e" text-anchor="middle">大而全的接口: 简单易用但 token 爆炸</text>
-
-  <!-- Center label -->
-  <rect x="195" y="195" width="190" height="50" rx="6"
-        fill="#fff3bf" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="290" y="216" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">MCP 协议内部</text>
-  <text x="290" y="234" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">无法同时满足三者</text>
-
-  <!-- Bottom annotation -->
-  <text x="290" y="365" font-size="11" fill="#1e1e1e" text-anchor="middle">拆精细接口 = 在 MCP server 层重新实现 GraphQL</text>
-  <text x="290" y="383" font-size="11" fill="#1e1e1e" text-anchor="middle">精细化 tool 越多, LLM 选择越难 -> schema 膨胀恶性循环</text>
-  <text x="290" y="405" font-size="11" font-weight="700" fill="#e03131" text-anchor="middle">本质是转移复杂度, 不是消除复杂度</text>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="620"
+     height="460"
+     viewBox="-20 -20 620 460">
+<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="580" height="420" fill="#fffce8" stroke="none" stroke-width="0" rx="0" ry="0"/></g>
+<g id="a1:1" transform="translate(162.5, 8.823)"><text font-size="18" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="127.5"><tspan x="127.5" y="21.177"><tspan x="23.89" text-anchor="start">Response 陷阱: 三方权衡</tspan></tspan></text></g>
+<g id="o1:2" transform="translate(88, 68)"><path fill="none" stroke="#1e1e1e" stroke-width="2" d="M 202 242 L 7.37913363186281 242 Q 0 242 4.274046904221481 236.87962522204504 L 198.89561432150066 3.7199553865957102 Q 202.00071199372053 0 205.1057951201433 3.7199641840864306 L 399.72599056865556 236.87963401953573 Q 404 242 396.6208964976542 242 Z"/></g>
+<g id="o1:3" transform="translate(218, 48)"><rect x="0" y="0" width="144" height="39" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:2" transform="translate(247, 56.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="43"><tspan x="43" y="15.295"><tspan x="9.25" text-anchor="start">Token 效率</tspan></tspan></text></g>
+<g id="o1:4" transform="translate(18, 298)"><rect x="0" y="0" width="150" height="39" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:3" transform="translate(43, 306.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="50"><tspan x="50" y="15.295"><tspan x="11" text-anchor="start">服务端复杂度</tspan></tspan></text></g>
+<g id="o1:5" transform="translate(412, 298)"><rect x="0" y="0" width="150" height="39" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:4" transform="translate(437, 306.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="50"><tspan x="50" y="15.295"><tspan x="11" text-anchor="start">客户端易用性</tspan></tspan></text></g>
+<g id="a1:5" transform="translate(131.37508, 195.50111) rotate(-54)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="24"><tspan x="24" y="11.765"><tspan x="-0.44" text-anchor="start">要省 token</tspan></tspan></text></g>
+<g id="a1:6" transform="translate(134.90942, 221.4003) rotate(-54)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="35"><tspan x="35" y="11.765"><tspan x="0" text-anchor="start">就得拆精细接口</tspan></tspan></text></g>
+<g id="a1:7" transform="translate(414.82346, 155.85928) rotate(54)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="25"><tspan x="25" y="11.765"><tspan x="0" text-anchor="start">接口越精细</tspan></tspan></text></g>
+<g id="a1:8" transform="translate(399.82727, 165.98264) rotate(54)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="33.5"><tspan x="33.5" y="11.765"><tspan x="-0.67" text-anchor="start">client 选择越难</tspan></tspan></text></g>
+<g id="a1:9" transform="translate(206, 278.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="84"><tspan x="84" y="11.765"><tspan x="0.93" text-anchor="start">大而全的接口: 简单易用但 token 爆炸</tspan></tspan></text></g>
+<g id="o1:6" transform="translate(195, 195)"><rect x="0" y="0" width="190" height="50" fill="#fff3bf" stroke="#1e1e1e" stroke-width="1.5" rx="6" ry="6"/></g>
+<g id="a1:10" transform="translate(243.5, 203.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="46.5"><tspan x="46.5" y="12.942"><tspan x="11.285" text-anchor="start">MCP 协议内部</tspan></tspan></text></g>
+<g id="a1:11" transform="translate(234, 221.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="56"><tspan x="56" y="12.942"><tspan x="12" text-anchor="start">无法同时满足三者</tspan></tspan></text></g>
+<g id="a1:12" transform="translate(165, 352.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="125"><tspan x="125" y="12.942"><tspan x="3.98" text-anchor="start">拆精细接口 = 在 MCP server 层重新实现 GraphQL</tspan></tspan></text></g>
+<g id="a1:13" transform="translate(149, 370.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="141"><tspan x="141" y="12.942"><tspan x="2.78" text-anchor="start">精细化 tool 越多, LLM 选择越难 -&gt; schema 膨胀恶性循环</tspan></tspan></text></g>
+<g id="a1:14" transform="translate(183, 392.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#e03131" text-anchor="middle" dominant-baseline="alphabetic" x="107"><tspan x="107" y="12.942"><tspan x="21.465" text-anchor="start">本质是转移复杂度, 不是消除复杂度</tspan></tspan></text></g>
 </svg>
