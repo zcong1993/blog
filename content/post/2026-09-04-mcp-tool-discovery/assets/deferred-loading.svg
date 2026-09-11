@@ -1,84 +1,40 @@
-<svg viewBox="0 0 750 400" width="750" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    text { font-family: 'Patrick Hand', 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', cursive; }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="790"
+     height="440"
+     viewBox="-20 -20 790 440">
   <defs>
-    <marker id="dl" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#1e1e1e"/>
-    </marker>
-    <marker id="dl-r" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#e03131"/>
-    </marker>
-    <marker id="dl-t" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L12,6 L0,12 L3,6 z" fill="#099268"/>
-    </marker>
+<marker id="connector-arrow-0" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-1" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-2" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
+<marker id="connector-arrow-3" markerUnits="userSpaceOnUse" markerWidth="40" markerHeight="40" refX="13.8" refY="0" orient="auto" overflow="visible"><path fill="#1e1e1e" stroke="none" d="M -1.2 0 L 7.5 -5 L 15 0 L 7.5 5 Z"/></marker>
   </defs>
-
-  <!-- Canvas -->
-  <rect width="750" height="400" fill="#fffce8"/>
-
-  <!-- Title -->
-  <text x="375" y="30" font-size="18" font-weight="700" fill="#1e1e1e" text-anchor="middle">Eager vs Deferred Loading: 顺序倒置</text>
-
-  <!-- ===== Left: Eager (normal order) ===== -->
-  <rect x="25" y="50" width="330" height="280" rx="8"
-        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="35" y="65" font-size="11" fill="#1e1e1e">Eager Loading</text>
-
-  <!-- Step 1 -->
-  <rect x="50" y="80" width="280" height="39" rx="6"
-        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="190" y="104" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">1. 读取全部 tool description</text>
-
-  <path d="M190,124 L 190,138" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dl)"/>
-
-  <!-- Step 2 -->
-  <rect x="50" y="152" width="280" height="39" rx="6"
-        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="190" y="176" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">2. 基于描述选择 tool</text>
-
-  <path d="M190,196 L 190,210" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dl)"/>
-
-  <!-- Step 3 -->
-  <rect x="50" y="224" width="280" height="39" rx="6"
-        fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="190" y="248" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">3. 调用 tool</text>
-
-  <!-- Verdict -->
-  <text x="190" y="292" font-size="11" fill="#099268" text-anchor="middle" font-weight="700">信息完整, 选择准确</text>
-  <text x="190" y="310" font-size="10" fill="#e03131" text-anchor="middle">但 schema 常驻上下文 (~60K tok)</text>
-
-  <!-- ===== Right: Deferred (inverted order) ===== -->
-  <rect x="395" y="50" width="330" height="280" rx="8"
-        fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="405" y="65" font-size="11" fill="#1e1e1e">Deferred Loading</text>
-
-  <!-- Step 1 -->
-  <rect x="420" y="80" width="280" height="39" rx="6"
-        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="560" y="104" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">1. 只看 tool 名称列表</text>
-
-  <path d="M560,124 L 560,138" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dl)"/>
-
-  <!-- Step 2 -->
-  <rect x="420" y="152" width="280" height="39" rx="6"
-        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="560" y="176" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">2. 猜名字选择 tool</text>
-
-  <path d="M560,196 L 560,210" fill="none" stroke="#1e1e1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dl)"/>
-
-  <!-- Step 3 -->
-  <rect x="420" y="224" width="280" height="39" rx="6"
-        fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" stroke-linejoin="round"/>
-  <text x="560" y="248" font-size="13" font-weight="700" fill="#1e1e1e" text-anchor="middle">3. 再读 description + 调用</text>
-
-  <!-- Verdict -->
-  <text x="560" y="292" font-size="11" fill="#099268" text-anchor="middle" font-weight="700">节省了 schema 上下文</text>
-  <text x="560" y="310" font-size="10" fill="#e03131" text-anchor="middle">但选择准确性下降 (顺序倒置)</text>
-
-  <!-- ===== Bottom summary ===== -->
-  <rect x="70" y="348" width="610" height="36" rx="6"
-        fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="375" y="365" font-size="11" font-weight="700" fill="#1e1e1e" text-anchor="middle">Deferred Loading 只缓解了 Schema 陷阱</text>
-  <text x="375" y="379" font-size="10" fill="#e03131" text-anchor="middle">Response 陷阱依然敞着: callTool 返回值该灌多少还是灌多少</text>
+<g id="o1:1" transform="translate(0, 0)"><rect x="0" y="0" width="750" height="400" fill="#fffce8" stroke="none" stroke-width="0" rx="0" ry="0"/></g>
+<g id="a1:1" transform="translate(189, 8.823)"><text font-size="18" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="186"><tspan x="186" y="21.177"><tspan x="29.65" text-anchor="start">Eager vs Deferred Loading: 顺序倒置</tspan></tspan></text></g>
+<g id="o1:2" transform="translate(25, 50)"><rect x="0" y="0" width="330" height="280" fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10 6" rx="8" ry="8"/></g>
+<g id="a1:2" transform="translate(35, 52.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">Eager Loading</tspan></tspan></text></g>
+<g id="o1:3" transform="translate(50, 80)"><rect x="0" y="0" width="280" height="39" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:3" transform="translate(90.5, 88.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="99.5"><tspan x="99.5" y="15.295"><tspan x="13.955" text-anchor="start">1. 读取全部 tool description</tspan></tspan></text></g>
+<g id="c1:1" transform="translate(190, 124)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-0)" stroke-dasharray="0 0 0.1999999999999993 13.8" d="M 0 0 L 0 14"/></g>
+<g id="o1:4" transform="translate(50, 152)"><rect x="0" y="0" width="280" height="39" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:4" transform="translate(115.5, 160.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="74.5"><tspan x="74.5" y="15.295"><tspan x="13.8" text-anchor="start">2. 基于描述选择 tool</tspan></tspan></text></g>
+<g id="c1:2" transform="translate(190, 196)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-1)" stroke-dasharray="0 0 0.1999999999999993 13.8" d="M 0 0 L 0 14"/></g>
+<g id="o1:5" transform="translate(50, 224)"><rect x="0" y="0" width="280" height="39" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:5" transform="translate(147, 232.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="43"><tspan x="43" y="15.295"><tspan x="8.3" text-anchor="start">3. 调用 tool</tspan></tspan></text></g>
+<g id="a1:6" transform="translate(130, 279.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#099268" text-anchor="middle" dominant-baseline="alphabetic" x="60"><tspan x="60" y="12.942"><tspan x="12.965" text-anchor="start">信息完整, 选择准确</tspan></tspan></text></g>
+<g id="a1:7" transform="translate(113.5, 298.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#e03131" text-anchor="middle" dominant-baseline="alphabetic" x="76.5"><tspan x="76.5" y="11.765"><tspan x="1.345" text-anchor="start">但 schema 常驻上下文 (~60K tok)</tspan></tspan></text></g>
+<g id="o1:6" transform="translate(395, 50)"><rect x="0" y="0" width="330" height="280" fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="10 6" rx="8" ry="8"/></g>
+<g id="a1:8" transform="translate(405, 52.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="normal" fill="#1e1e1e" text-anchor="start" dominant-baseline="alphabetic" x="0"><tspan x="0" y="12.942"><tspan x="0" text-anchor="start">Deferred Loading</tspan></tspan></text></g>
+<g id="o1:7" transform="translate(420, 80)"><rect x="0" y="0" width="280" height="39" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:9" transform="translate(483, 88.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="77"><tspan x="77" y="15.295"><tspan x="14.825" text-anchor="start">1. 只看 tool 名称列表</tspan></tspan></text></g>
+<g id="c1:3" transform="translate(560, 124)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-2)" stroke-dasharray="0 0 0.1999999999999993 13.8" d="M 0 0 L 0 14"/></g>
+<g id="o1:8" transform="translate(420, 152)"><rect x="0" y="0" width="280" height="39" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:10" transform="translate(493.5, 160.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="66.5"><tspan x="66.5" y="15.295"><tspan x="12.3" text-anchor="start">2. 猜名字选择 tool</tspan></tspan></text></g>
+<g id="c1:4" transform="translate(560, 196)"><path fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" marker-end="url(#connector-arrow-3)" stroke-dasharray="0 0 0.1999999999999993 13.8" d="M 0 0 L 0 14"/></g>
+<g id="o1:9" transform="translate(420, 224)"><rect x="0" y="0" width="280" height="39" fill="#fff3bf" stroke="#1e1e1e" stroke-width="2" rx="6" ry="6"/></g>
+<g id="a1:11" transform="translate(466, 232.7055)"><text font-size="13" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="94"><tspan x="94" y="15.295"><tspan x="15.945" text-anchor="start">3. 再读 description + 调用</tspan></tspan></text></g>
+<g id="a1:12" transform="translate(489.5, 279.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#099268" text-anchor="middle" dominant-baseline="alphabetic" x="70.5"><tspan x="70.5" y="12.942"><tspan x="14.115" text-anchor="start">节省了 schema 上下文</tspan></tspan></text></g>
+<g id="a1:13" transform="translate(494.5, 298.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#e03131" text-anchor="middle" dominant-baseline="alphabetic" x="65.5"><tspan x="65.5" y="11.765"><tspan x="1" text-anchor="start">但选择准确性下降 (顺序倒置)</tspan></tspan></text></g>
+<g id="o1:10" transform="translate(70, 348)"><rect x="0" y="0" width="610" height="36" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="1.5" rx="6" ry="6"/></g>
+<g id="a1:14" transform="translate(249, 352.0585)"><text font-size="11" font-family="Noto Sans SC" font-weight="bold" fill="#1e1e1e" text-anchor="middle" dominant-baseline="alphabetic" x="126"><tspan x="126" y="12.942"><tspan x="20.935" text-anchor="start">Deferred Loading 只缓解了 Schema 陷阱</tspan></tspan></text></g>
+<g id="a1:15" transform="translate(239, 367.235)"><text font-size="10" font-family="Noto Sans SC" font-weight="normal" fill="#e03131" text-anchor="middle" dominant-baseline="alphabetic" x="136"><tspan x="136" y="11.765"><tspan x="0.475" text-anchor="start">Response 陷阱依然敞着: callTool 返回值该灌多少还是灌多少</tspan></tspan></text></g>
 </svg>

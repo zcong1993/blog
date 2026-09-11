@@ -162,18 +162,22 @@ mcp-cli call -s config dump '{}' | grep -i "database"
 
 MCP 最初试图用一个协议同时解决两个问题：让 agent 发现有哪些工具可用（工具发现），同时让 agent 自主决定用哪些工具、怎么组合（工具编排）。当工具少的时候这两件事可以合在一起做，schema 塞进上下文就行。但工具一多，上下文装不下了，两件事就必须拆开。
 
-![tool-vs-orchestration](assets/tool-vs-orchestration.svg)
-
 最终的分层是：
 
 - **工具层（MCP）解决：** 具体的工具如何使用，服务端的 input spec 是什么。本质是**服务端能力的 API spec + 调用协议**。
 - **编排层（Skill/Prompt）解决：** 如何选择工具和编排工具。基于对场景的理解，将工具组合成解决特定问题的流程。
 
-MCP 相当于断尾求生，退化到了工具调用协议层——这不是退步，而是找到了自己正确的位置。工具 spec 的维护和分发正是 MCP 协议天然包含的能力，这件事它做得很好。至于"面对一个问题该用哪些工具、按什么顺序"，这是编排层的事，不该由一个协议来承担。
+![tool-vs-orchestration](assets/tool-vs-orchestration.svg)
 
-这个分层不是理论推演，而是已经在发生的事。在真实的企业级场景下，当 tool 数量到了上千的规模，叠加 deferred loading 之后，**LLM 早已不是工具选择的决策者了**。实际的决策链是：用户触发一个特定场景，agent 匹配到对应的 Skill，Skill 精确指定该用哪个 server 的哪个 tool、参数怎么填、结果怎么处理。LLM 的角色从"面对上百个 tool 自主选择"变成了"按 Skill 指令执行"——这正是编排层在做的事。
+这不是理论推演。MCP 退化到工具调用协议层——这不是退步，而是找到了自己正确的位置。在真实的企业级场景下，当 tool 数量到了上千的规模，LLM 早已不是工具选择的决策者了：用户触发场景，agent 匹配 Skill，Skill 精确指定该用哪个 tool、参数怎么填、结果怎么处理。工具选择从模型的自由决策变成了编排层的确定性指令。
 
-越来越多的平台级 MCP server 也意识到了这一点，开始官方提供配套的 Skill。飞书的 lark-cli 就是一个典型例子：它不只是一个 MCP server，同时提供了一整套 lark-* Skill（lark-doc、lark-sheets、lark-calendar 等），每个 Skill 针对一个具体场景，内部精确指定该调用哪些 tool、以什么顺序、怎么处理返回值。agent 不需要从几百个飞书 API 里自己挑，Skill 已经替它做好了编排。
+越来越多的平台级 MCP server 也意识到了这一点，开始官方提供配套的 Skill。飞书的 lark-cli 就是典型：它同时提供一整套 lark-* Skill，每个 Skill 针对一个具体场景做好编排，agent 不需要从几百个 API 里自己挑。
+
+MCP 协议本身的演进也在印证这个方向。2026-07-28 版本做了一系列结构性调整——去 Session、去双向 RPC、引入协议级缓存、路由信息从 JSON body 提升到 HTTP 标准头——共同方向是：**协议层更薄、更无状态，复杂度显式地移至应用层**。这恰恰就是"回归更合适的位置"：协议不再试图承载编排逻辑，安心做好传输层和能力描述层的本分。具体改动对比见下图。
+
+![mcp-protocol-evolution](assets/mcp-protocol-evolution.svg)
+
+既然 MCP 的角色是传输层和能力描述层，那 agent 接入工具是否一定需要 MCP？剥开 transport 差异，MCP（HTTP 端点 + 运行时 schema）和 CLI（子进程 + prompt 注入描述）的共同本质只有两件事：**API 入口**（怎么调你）和 **API Spec**（你能做什么）。至于怎么组合这些工具，是编排层的事，跟 transport 选择无关。理解了这一点，就不会在 MCP vs CLI 之间做非此即彼的选择，而是根据场景特点选合适的 transport，把注意力放在编排层上。
 
 mcp-cli 的价值也正是在这个分层下体现的：它让工具调用层保持轻量和按需，把上下文空间留给真正需要的信息——无论是工具的 schema，还是用户的对话内容。
 
